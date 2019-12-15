@@ -1,0 +1,6 @@
+spring:
+  datasource:
+    password: Q201023aaa
+    username: ceaser
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://47.200.106.200:3306/bbs?serverTimezone=Asia/Shanghai&characterEncoding=utf8
