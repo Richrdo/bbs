@@ -15,5 +15,9 @@ import java.util.List;
 public interface TopicService {
 
     List<Topic> getAllTopic();
+
+    int insertTopic(Topic topic);
+
+
 }
 
