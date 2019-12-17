@@ -26,6 +26,8 @@ public class IDUtil {
     @Autowired
     TopicMapper topicMapper;
 
+
+
     @PostConstruct
     public void init(){
         /**
@@ -43,7 +45,7 @@ public class IDUtil {
         topicIDList=topicMapper.getTopicIdCollection();
     }
 
-    public static Long initTopicID(){
+    public static Long initID(){
         /**
          * @Author:CeaserBorgia
          * @Date:23:08 2019/12/16
@@ -75,6 +77,8 @@ public class IDUtil {
         }
         return id;
     }
+
+
 
 }
 

@@ -7,6 +7,8 @@ import com.foreverything.bbs.util.IDUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -24,32 +26,50 @@ public class TopicServiceImpl implements TopicService {
 
     @Override
     public List<Topic> getAllTopic() {
-        /**
-         * @Author:CeaserBorgia
-         * @Date:17:33 2019/12/16
-         * @param:
-         *  * @param
-         *
-         * @Desccription:
-         */
         return topicMapper.getAllTopic();
     }
 
     @Override
-    public int insertTopic(Topic topic) {
-        /**
-         * @Author:CeaserBorgia
-         * @Date:17:33 2019/12/16
-         * @param:
-         *  * @param topic
-         *
-         * @Desccription: 新建帖子
-         */
+    public Long insertTopic(Topic topic) {
 
-        topic.setId(IDUtil.initTopicID());
-        return topicMapper.insertTopic(topic);
+        topic.setId(IDUtil.initID());
+
+        SimpleDateFormat dateFormat=new SimpleDateFormat();
+        dateFormat.applyPattern("yyyy-MM-dd HH:mm:ss");
+        Date date=new Date();
+
+        topic.setCreateTime(dateFormat.format(date));
+
+        if (topicMapper.insertTopic(topic)>0){
+            return topic.getId();
+        }else
+        return 0L;
     }
 
+    @Override
+    public int updateTopic(Topic topic) {
+        return topicMapper.updateTopic(topic);
+    }
+
+    @Override
+    public int marrowTopicByID(Long id) {
+        return topicMapper.marrowTopicByID(id);
+    }
+
+    @Override
+    public int upTopicByID(Long id) {
+        return topicMapper.upTopicByID(id);
+    }
+
+    @Override
+    public int deleteTopicByID(Long id) {
+        return topicMapper.deleteTopicByID(id);
+    }
+
+    @Override
+    public Topic getTopicByID(Long id) {
+        return topicMapper.getTopicByID(id);
+    }
 
 
 }

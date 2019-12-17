@@ -11,6 +11,15 @@ public class Topic extends BaseBean{
      private boolean isMarrow=false;
      private boolean isDelete=false;
      private String title=null;
+     private boolean isTop=false;
+
+    public boolean isTop() {
+        return isTop;
+    }
+
+    public void setTop(boolean top) {
+        isTop = top;
+    }
 
     public boolean isMarrow() {
         return isMarrow;
