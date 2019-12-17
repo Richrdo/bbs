@@ -8,16 +8,25 @@ package com.foreverything.bbs.entities;
  */
 
 public class Reward extends BaseBean {
-    private boolean isMarrow=false;
     private boolean isDelete=false;
     private String title=null;
+    private String points=null;
+    private long bestreplay;
 
-    public boolean isMarrow() {
-        return isMarrow;
+    public long getBestreplay() {
+        return bestreplay;
     }
 
-    public void setMarrow(boolean marrow) {
-        isMarrow = marrow;
+    public void setBestreplay(long bestreplay) {
+        this.bestreplay = bestreplay;
+    }
+
+    public String getPoints() {
+        return points;
+    }
+
+    public void setPoints(String points) {
+        this.points = points;
     }
 
     public boolean isDelete() {
