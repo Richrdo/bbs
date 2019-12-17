@@ -6,22 +6,25 @@
 </head>
 <body>
 <div class="container-fluid">
-    <div class="row clearfix">
+
+<!--    头部导航栏-->
+    <div class="row clearfix" th:fragment="top-bar">
         <div class="col-md-12 column">
             <nav class="navbar navbar-default" role="navigation">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"> <span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button> <a class="navbar-brand" href="#">NCUBBS</a>
                 </div>
 
+<!--                三个区域板块-->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
-                        <li class="active">
-                            <a href="#">讨论区</a>
+                        <li th:class="${activeUri=='topic.html'}?'active':' '">
+                            <a href="/topic">讨论区</a>
                         </li>
-                        <li>
+                        <li th:class="${activeUri=='article.html'}?'active':' '">
                             <a href="#">文章区</a>
                         </li>
-                        <li>
+                        <li th:class="${activeUri=='reward.html'}?'active':' '">
                             <a href="#">悬赏区</a>
                         </li>
                     </ul>
@@ -36,11 +39,11 @@
                         <li>
                             <a href="#">首页</a>
                         </li>
-                        <li class="dropdown open">
+                        <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">发布/我的<strong class="caret"></strong></a>
                             <ul class="dropdown-menu">
                                 <li>
-                                    <a th:href="@{/topic.html}">发布讨论</a>
+                                    <a >发布讨论</a>
                                 </li>
                                 <li>
                                     <a href="#">发布文章</a>
@@ -67,56 +70,26 @@
             </nav>
         </div>
     </div>
-    <div class="row clearfix">
 
+
+    <div class="row clearfix">
 <!--        左侧个人信息栏-->
-        <div class="col-md-3 column">
+        <div class="col-md-3 column" th:fragment="showUserInfo">
 <!--            放个人信息-->
             <span class="text-center">个人信息展示页</span>
         </div>
 
-<!--        -->
-        <div class="col-md-7 column">
 
-<!--            置顶区-->
-            <div class="container-fluid">
-
-            </div>
-
-<!--            普通帖子区-->
-            <div class="container-fluid">
-                <div class="row clearfix">
-                    <div class="col-md-8 column">
-                        <h2 >
-                            Heading
-                        </h2>
-                        <p >
-                            Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
-                        </p>
-                        <p>
-                            <a class="btn" href="#">View details »</a>
-                        </p>
-                    </div>
-                    <div class="col-md-4 row-vertical-center">
-                        <div class="row clearfix row-vertical-center">
-                            <em >
-                                发表人
-                            </em>
-                            <p>
-                                2019-12-17 8：17
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
+<!--        展现区，切换板块只换这里的内容-->
+        <div class="col-md-7" >
+            <h1>欢迎来到BBS论坛</h1>
         </div>
 
     </div>
 </div>
 
 <link  th:href="@{/webjars/bootstrap/3.3.1/css/bootstrap.css}" rel="stylesheet">
-<link  href="/static/css/style.css">
+<link  href="/css/style.css">
 <script src="/webjars/jquery/3.3.1/jquery.min.js"></script>
 <script src="/webjars/bootstrap/3.3.1/js/bootstrap.min.js"></script>
 </body>

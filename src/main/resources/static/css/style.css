@@ -1,12 +1,6 @@
-.row-vertical-center {
-    position: relative;
-    top:40px;
-}
-
-.topic-content{
-    max-lines: 2;
-}
-
-.topic-box{
-
+.center-parent{
+    height: 180px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

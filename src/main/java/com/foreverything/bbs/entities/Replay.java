@@ -8,15 +8,16 @@ package com.foreverything.bbs.entities;
  */
 
 public class Replay extends BaseBean {
-    private boolean isMarrow=false;
-    private boolean isDelete=false;
 
-    public boolean isMarrow() {
-        return isMarrow;
+    private boolean isDelete=false;
+    private Long fromID=null;
+
+    public Long getFromID() {
+        return fromID;
     }
 
-    public void setMarrow(boolean marrow) {
-        isMarrow = marrow;
+    public void setFromID(Long fromID) {
+        this.fromID = fromID;
     }
 
     public boolean isDelete() {
