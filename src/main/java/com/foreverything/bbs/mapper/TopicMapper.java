@@ -1,10 +1,7 @@
 package com.foreverything.bbs.mapper;
 
 import com.foreverything.bbs.entities.Topic;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Result;
-import org.apache.ibatis.annotations.Results;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -29,4 +26,12 @@ public interface TopicMapper {
             @Result(property = "isDelete",column = "t_is_delete")
     })
     List<Topic> getAllTopic();
+
+    @Insert("insert into topic(t_id,t_author_id,t_title,t_content,t_create_time,t_is_marrow,t_is_delete) values(#{topic.id},#{topic.userID},#{topic.title},#{topic.content},#{topic.createTime},#{topic.isMarrow},#{topic.isDelete})")
+    public int insertTopic(@Param("topic") Topic topic);
+
+    @Select("select t_id from topic")
+    public List<Long> getTopicIdCollection();
+
+
 }

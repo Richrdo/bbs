@@ -1,0 +1,12 @@
+.row-vertical-center {
+    position: relative;
+    top:40px;
+}
+
+.topic-content{
+    max-lines: 2;
+}
+
+.topic-box{
+
+}
