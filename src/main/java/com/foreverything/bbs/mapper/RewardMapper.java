@@ -16,7 +16,7 @@ import java.util.List;
 @Mapper
 public interface RewardMapper {
 
-    @Select("select * from reward where t_is_delete=false")  //显示悬赏列表
+    @Select("select * from reward where r_is_delete=false")  //显示悬赏列表
     @Results({
             @Result(property = "id",column = "r_id",id = true),
             @Result(property = "userID",column = "r_author_id"),
@@ -29,7 +29,7 @@ public interface RewardMapper {
     })
     List<Reward> getAllReward();
 
-    @Insert("insert into reward(r_id,r_author_id,r_content,r_create_time,r_is_delete,r_title,r_point) values(#{reward.id},#{reward.userID},#{reward.content},#{reward.createTime},#{reward.isDelete},#{reward.title},#{reward.point})")
+    @Insert("insert into reward(r_id,r_author_id,r_content,r_create_time,r_title,r_point) values(#{reward.id},#{reward.userID},#{reward.content},#{reward.createTime},#{reward.title},#{reward.point})")
      int insertReward(@Param("reward") Reward reward); //发布悬赏
 
     @Select("select r_id from reward")  //查找所有悬赏的id
@@ -54,19 +54,29 @@ public interface RewardMapper {
             @Result(property = "point",column = "r_point"),
             @Result(property = "bestreplay",column = "r_best_replay")
     })
-     Reward getSpecificReward(@Param("id") Long id);
+     Reward getRewardByID(@Param("id") Long id);
 
     //插入回复
     @Insert("insert into replay(c_id,c_from_id,c_author_id,c_create_time,c_content) values(#{replay.id},#{replay.fromID},#{replay.userID},#{replay.createTime},#{replay.content})")
-    int setReplay(@Param("replay")Replay replay);
+    int insertReplay(@Param("replay")Replay replay);
 
     //设置最佳回答，//将积分给用户（不是我的事）
-    @Update("Update reward set r_best_replay=#{replay.id} where r_id=#{reward.id}")//设置最佳回答
+    @Update("update reward set r_best_replay=#{replay.id} where r_id=#{reward.id}")//设置最佳回答
      int setBestReplay(@Param("replay")Replay replay,@Param("reward")Reward reward);
 
     //创建者修改悬赏内容
-    @Update("Update reward set r_content=#{reward.content},r_title=#{reward.title},r_points=#{reward.points} where r_id=#{reward.id}")
-     int resetReward(@Param("reward")Reward reward);
+    @Update("update reward set r_content=#{reward.content},r_title=#{reward.title},r_points=#{reward.points} where r_id=#{reward.id}")
+     int putReward(@Param("reward")Reward reward);
 
-
+    //据帖子id获取回复列表
+     @Select("select * from replay where c_from_id=#{rewardId}")
+     @Results({
+             @Result(property = "id",column = "c_id",id = true),
+             @Result(property = "userID",column = "c_author_id"),
+             @Result(property = "fromID",column = "c_from_id"),
+             @Result(property = "createTime",column = "c_create_time"),
+             @Result(property = "isDelete",column = "c_is_delete"),
+             @Result(property = "content",column = "c_content"),
+     })
+     List<Replay> getAllReplayByID(@Param("rewardId") Long rewardId);
 }

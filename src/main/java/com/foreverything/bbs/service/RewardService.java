@@ -3,6 +3,7 @@ package com.foreverything.bbs.service;
 import com.foreverything.bbs.entities.Replay;
 import com.foreverything.bbs.entities.Reward;
 import com.foreverything.bbs.entities.Topic;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -18,16 +19,16 @@ public interface RewardService {
     List<Reward> getAllReward();
 
     //发布悬赏
-    int insertReward(Reward reward);
+    Long insertReward(Reward reward);
 
     //查找所有悬赏的id
-    List<Long> getRewardIdCollection();
+   // List<Long> getRewardIdCollection();
 
     //根据id查找特定的悬赏
-    Reward getSpecificReward( Long id);
+    Reward getRewardByID( Long id);
 
     //插入回复
-    int setReplay(Replay replay);
+    int insertReplay(Replay replay);
 
 
    //设置最佳回答
@@ -35,6 +36,9 @@ public interface RewardService {
 
     //创建者修改悬赏内容
 
-    int resetReward(Reward reward);
+    int putReward(Reward reward);
+
+    //据帖子id获取回复列表
+    List<Replay> getAllReplayByID( Long rewardId);
 
 }
