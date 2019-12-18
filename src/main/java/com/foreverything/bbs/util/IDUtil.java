@@ -2,6 +2,7 @@ package com.foreverything.bbs.util;
 
 import com.foreverything.bbs.mapper.ArticleMapper;
 import com.foreverything.bbs.mapper.ReplayMapper;
+import com.foreverything.bbs.mapper.RewardMapper;
 import com.foreverything.bbs.mapper.TopicMapper;
 import com.foreverything.bbs.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,13 +25,19 @@ public class IDUtil {
 
     private static IDUtil idUtil;
 
+
+    private static List<Long> rewardIDList=new ArrayList<>();
+
+
     private static List<Long> topicIDList=new ArrayList<>();
     private static List<Long> replayIDList=new ArrayList<>();
     private static List<Integer> userIDList=new ArrayList<>();
 
+
     @Autowired
     TopicMapper topicMapper;
-
+    @Autowired
+    RewardMapper rewardMapper;
     @Autowired
     ReplayMapper replayMapper;
 
@@ -53,12 +60,14 @@ public class IDUtil {
          */
         idUtil=this;
         idUtil.topicMapper=this.topicMapper; //装配Mapper后给储存topicID的List赋值
+        idUtil.rewardMapper=this.rewardMapper;
         idUtil.replayMapper=this.replayMapper;
         idUtil.userMapper=this.userMapper;
 
         userIDList=userMapper.getUserIdCollection();
         replayIDList=replayMapper.getReplayIDList();
         topicIDList=topicMapper.getTopicIdCollection();
+
     }
 
     public static Long initID(){
@@ -70,9 +79,12 @@ public class IDUtil {
          *
          * @Desccription: 生成不重复的12位ID
          */
+
         Long id;
         id=randomALongID();
-        while(topicIDList.contains(id)||replayIDList.contains(id)){
+
+        while(topicIDList.contains(id)||replayIDList.contains(id)||rewardIDList.contains(id)||articleIDList.contains(id)){
+
             id=randomALongID();
         }
         return id;
