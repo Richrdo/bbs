@@ -26,4 +26,14 @@ public class LoginAndRegister {
     public String AdminLogin(){
         return "adminLogin";
     }
+
+    @RequestMapping("/accountUpdate")
+    public String accountUpdate(){
+        return "accountUpdate";
+    }
+
+    @RequestMapping("/userUpdate")
+    public String UserUpdate(){
+        return "userUpdate";
+    }
 }

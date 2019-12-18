@@ -25,9 +25,18 @@ public interface UserMapper {
     })
     String getPas(@Param("id") int id);
 
+
     @Insert("insert into user(u_id,u_account,u_password,u_mail,u_grade) values(#{user.userID},#{user.account},#{user.password},#{user.mail},#{user.grade})")
     public int insertUser(@Param("user") User user);
 
     @Select("select u_id from user")
     public List<Integer> getUserIdCollection();
+
+    //修改账户名
+    @Update("update user set u_account=#{new_account} where u_id=#{id}")
+    String updateAcc(@Param("id") int id,@Param("new_account") String new_account);
+
+    //更新密码
+    @Update("update user set u_password=#{newpassword} where u_id=#{id}")
+    String updatePas(@Param("id") int id,@Param("newpassword") String newpassword);
 }

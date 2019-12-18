@@ -31,14 +31,28 @@ public class UserServiceImpl implements UserService {
     public String getPas(int id){
         return userMapper.getPas(id);
     }
+
+
     @Override
     public void insertUser(String username,String password,String mail){
         User user=new User();
-        user.setUserID(IDUtil.initUserID());
+        //user.setUserID(IDUtil.initUserID());
         user.setAccount(username);
         user.setPassword(password);
         user.setMail(mail);
         user.setGrade(0);
         userMapper.insertUser(user);
+
     }
+
+    @Override
+    public void updateAcc(int id, String new_account) {
+        userMapper.updateAcc(id,new_account);
+    }
+
+    @Override
+    public void updatePas(int id,String newpassword){
+        userMapper.updatePas(id,newpassword);
+    }
+
 }

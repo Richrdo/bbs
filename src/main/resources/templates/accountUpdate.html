@@ -15,14 +15,17 @@
             <div class="col-md-4 column">
                 <div class="btn-group" style="position: absolute ;right: 35px;top:10px">
                     <button class="btn btn-default">更多</button> <button class="btn btn-default dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></button>
-                    <ul class="dropdown-menu">
-                        <li>
-                            <a th:href="@{userUpdate}">修改账户</a>
-                        </li>
-                        <li>
-                            <a th:href="@{userUpdate}">修改密码</a>
-                        </li>
-                    </ul>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="#">菜单</a>
+                            </li>>
+                            <li class="disabled">
+                                <a th:href="@{accountUpdate}">修改账户</a>
+                            </li>
+                            <li class="disabled">
+                                <a th:href="@{userUpdate}">修改密码</a>
+                            </li>
+                        </ul>
                 </div>
             </div>
         </div>
@@ -32,34 +35,26 @@
         <div class="row clearfix">
             <div class="col-md-4 column">
                 <ul class="nav nav-pills nav-stacked">
-                    <li>
-                        <a href="#">修改账户</a>
-                    </li>
                     <li class="active">
+                        <a th:href="@{accountUpdate}">修改账户</a>
+                    </li>>
+                    <li>
                         <a th:href="@{userUpdate}">修改密码</a>
-                    </li>
+                    </li>>
                 </ul>
             </div>
             <div class="col-md-8 column">
-                <form role="form" th:action="@{/userUpdate}" method="post">
-                    <div class="form-group">
-                        <label for="oldpassword">旧密码</label>
-                        <input class="form-control" id="oldpassword" name="oldpassword" type="password" required/>
-                    </div>
-                    <div class="form-group">
-                        <label for="newpassword">新密码</label>
-                        <input class="form-control" id="newpassword" name="newpassword" type="password" required/>
-                    </div>
-                    <div class="form-group">
-                        <label for="newpassword1">请确认新密码</label>
-                        <input class="form-control" id="newpassword1" name="newpassword1" type="password" required/>
-                    </div>
+                <form role="form" th:action="@{/accountUpdate}" method="post">
+                    <label class="form-group">
+                        <label for="new_account">请输入新用户名：</label><input class="form-control" id="new_account" name="new_account" type="text"/>
+                        <br>
                     <button class="btn btn-default" type="submit">提交</button>
+                    </label>
                 </form>
             </div>
         </div>
     </div>
-    </div>
+</div>
 </div>
 </body>
 <link  th:href="@{/webjars/bootstrap/3.3.1/css/bootstrap.css}" rel="stylesheet">

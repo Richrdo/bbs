@@ -15,4 +15,6 @@ public interface UserService {
      boolean getID(int id);
      String getPas(int id);
      void insertUser(String username, String password, String mail);
+     void updatePas(int id,String newpassword);
+     void updateAcc(int id,String new_account);
 }

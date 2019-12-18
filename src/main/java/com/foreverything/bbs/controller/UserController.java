@@ -6,7 +6,9 @@ import com.foreverything.bbs.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.relational.core.sql.In;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.Mapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpSession;
@@ -92,5 +94,27 @@ public class UserController {
     public String createUser(User user,@RequestParam("username") String username,@RequestParam("password") String password,@RequestParam("mail") String mail){
         userService.insertUser(username,password,mail);
         return "login";
+    }
+
+
+    @PostMapping("/accountUpdate")                            //更改用户名
+    public String accountUpdate(User user,@RequestParam("new_account")String new_account) {
+        String username = (String) session.getAttribute("name");
+        userService.updateAcc(Integer.parseInt(username), new_account);
+        return "login";
+    }
+
+
+    @PostMapping("/userUpdate")
+    public String userUpdate(@RequestParam("oldpassword") String oldpassword, @RequestParam("newpassword") String newpassword, @RequestParam("newpassword1") String newpassword1) {
+        String username = (String) session.getAttribute("name");
+        if (oldpassword.equals(userService.getPas(Integer.parseInt(username))) && newpassword.equals(newpassword1)) {
+            userService.updatePas(Integer.parseInt(username), newpassword1);
+            return "index";
+        } else if (oldpassword.equals(userService.getPas(Integer.parseInt(username))) && !newpassword.equals(newpassword1)) {
+            return "userUpdate";
+        } else
+            return "userUpdate";
+
     }
 }
