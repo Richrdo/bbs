@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<!--suppress ALL-->
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<!--帖子的详情-->
+<div class="row clearfix" th:fragment="detailPageObj(obj)">
+    <div class="col-md-offset-2 col-md-8">
+        <div class="container-fluid topic-content-box-detail " >
+            <div class="row clearfix item-vertical-middle">
+                <div class="col-md-8 column">
+                    <h2 th:text="${obj.getTitle()}"></h2>
+                    <p th:text="${obj.getContent()}"></p>
+                </div>
+                <div class="col-md-4">
+                    <em th:utext="'楼主：'+${obj.getUserID()}"></em>
+                    <p th:utext="'发表于：'+${obj.getCreateTime()}"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--回复详情-->
+<div class="container-fluid replay-in-detail" th:fragment="detailPageReplay(replays)" >
+
+    <div class="row clearfix"  th:each="replay:${replays}" >
+        <div class="col-md-offset-2 col-md-8">
+            <div class="container-fluid replay-content-box-detail " >
+                <div class="row clearfix item-vertical-middle">
+                    <div class="col-md-8 column">
+                        <p th:text="${replay.getContent()}"></p>
+                    </div>
+                    <div class="col-md-4">
+                        <p th:text="'用户：'+${replay.getUserID()}"></p>
+                        <em th:text="'回复于：'+${replay.getCreateTime()}"></em>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row replay-form-box" th:fragment="replay-form-bar(id,path_s)">
+    <div class="col-md-offset-2 col-md-8">
+        <div class="container-fluid replay-form-body">
+            <h4><strong>发表回复</strong></h4>
+            <form action="/replay/add" method="post" >
+                <textarea class="form-control" rows="4" name="content"></textarea><br>
+                <input type="submit" class="form-control" value="发表">
+                <input type="text" th:value="${id}" name="id" hidden="hidden">
+                <input type="text" th:value="${path_s}" name="path_s" hidden="hidden">
+            </form>
+        </div>
+    </div>
+</div>
+
+<link  href="/webjars/bootstrap/3.3.1/css/bootstrap.css" rel="stylesheet">
+<link href="/css/style.css" rel="stylesheet">
+<script src="/webjars/jquery/3.3.1/jquery.min.js"></script>
+<script src="/webjars/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>
