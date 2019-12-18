@@ -1,6 +1,7 @@
 package com.foreverything.bbs.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 
@@ -12,17 +13,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
  */
 @Controller
 public class LoginAndRegister {
-    @RequestMapping("/login")
+
+    @GetMapping("/login")
     public String Login(){
         return "login";
     }
 
-    @RequestMapping("/register")
+    @GetMapping("/register")
     public String Register(){
         return "register";
     }
 
-    @RequestMapping("/adminLogin")
+    @GetMapping("/adminLogin")
     public String AdminLogin(){
         return "adminLogin";
     }

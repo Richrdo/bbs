@@ -21,16 +21,12 @@ public class UserServiceImpl implements UserService {
     @Autowired
     UserMapper userMapper;
 
-    @Override
-    public  boolean getID(int id){
-        if(userMapper.getID().contains(id))
-            return true;
-        return false;
-    }
+
     @Override
     public String getPas(int id){
         return userMapper.getPas(id);
     }
+
     @Override
     public void insertUser(String username,String password,String mail){
         User user=new User();
