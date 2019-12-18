@@ -3,6 +3,8 @@ package com.foreverything.bbs.util;
 import com.foreverything.bbs.mapper.ReplayMapper;
 import com.foreverything.bbs.mapper.RewardMapper;
 import com.foreverything.bbs.mapper.TopicMapper;
+import com.foreverything.bbs.mapper.ArticleMapper;
+import com.foreverything.bbs.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -23,9 +25,18 @@ public class IDUtil {
 
     private static IDUtil idUtil;
 
+
     private static List<Long> rewardIDList=new ArrayList<>();
+
+    private static List<Integer> userIDList=new ArrayList<>();
+
     private static List<Long> topicIDList=new ArrayList<>();
     private static List<Long> replayIDList=new ArrayList<>();
+    private static List<Long> articleIDList=new ArrayList<>();
+
+
+    @Autowired
+    UserMapper userMapper;
 
 
     @Autowired
@@ -34,6 +45,9 @@ public class IDUtil {
     RewardMapper rewardMapper;
     @Autowired
     ReplayMapper replayMapper;
+
+    @Autowired
+    ArticleMapper articleMapper;
 
     @PostConstruct
     public void init(){
@@ -50,10 +64,16 @@ public class IDUtil {
         idUtil.topicMapper=this.topicMapper; //装配Mapper后给储存topicID的List赋值
         idUtil.rewardMapper=this.rewardMapper;
         idUtil.replayMapper=this.replayMapper;
-
         replayIDList=replayMapper.getReplayIDList();
         topicIDList=topicMapper.getTopicIdCollection();
+
         rewardIDList=rewardMapper.getRewardIdCollection();
+
+        idUtil.articleMapper=this.articleMapper; //装配Mapper后给储存articleID的List赋值
+        articleIDList=articleMapper.getArticleIdCollection();
+        idUtil.userMapper=this.userMapper;
+        userIDList=userMapper.getUserIdCollection();
+
     }
 
     public static Long initID(){
@@ -68,7 +88,8 @@ public class IDUtil {
 
         Long id;
         id=randomALongID();
-        while(topicIDList.contains(id)||replayIDList.contains(id)||rewardIDList.contains(id)){
+
+        while(topicIDList.contains(id)||replayIDList.contains(id)||rewardIDList.contains(id)||articleIDList.contains(id)){
             id=randomALongID();
         }
         return id;
@@ -90,8 +111,20 @@ public class IDUtil {
         }
         return id;
     }
-
-
+    public static int initUserID(){
+        int id;
+        while (userIDList.contains((id=randomID()))){
+            id=randomID();
+        }
+        return id;
+    }
+    private static int randomID(){
+        int radom = new Random().nextInt(999999);
+        if (radom < 100000) {
+            radom += 100000;
+        }
+        return radom;
+    }
 
 }
 
