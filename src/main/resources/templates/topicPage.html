@@ -20,14 +20,13 @@
             <div class="row clearfix">
                 <div class="col-md-12">
 
-                    <div class="container-fluid " th:each="topic:${topics}" th:if="${topic.isTop()}">
-                        <div class="row clearfix center-parent">
+                    <div class="container-fluid  topic-content-box-index" th:each="topic:${topics}" th:if="${topic.isTop()}">
+                        <div class="row clearfix item-vertical-middle">
                             <div class="col-md-8 ">
-                                <h2 th:text="${topic.getTitle()}"></h2>
-                                <p th:text="*{topic.getContent()}"></p>
+                                <h3 th:utext="'<strong>【顶置】</strong>'+*{topic.getTitle()}" class="text-max-line-2"></h3>
+                                <p th:text="*{topic.getContent()}" class="text-max-line-2"></p>
                                 <p>
-                                    <!--                            TODO:跳转到帖子详情页面 -->
-                                    <a class="btn" href="#">View details »</a>
+                                    <a class="btn" th:href="@{/topicDetail(id=${topic.getId()})}">View details »</a>
                                 </p>
                             </div>
                             <div class="col-md-4">
@@ -43,14 +42,13 @@
             <div class="row clearfix">
                 <div class="col-md-12">
 
-                    <div class="container-fluid " th:each="topic:${topics}" th:if="!${topic.isTop()}">
-                        <div class="row clearfix center-parent">
+                    <div class="container-fluid topic-content-box-index " th:each="topic:${topics}" th:if="!${topic.isTop()}">
+                        <div class="row clearfix item-vertical-middle">
                             <div class="col-md-8 column">
-                                <h2 th:text="${topic.getTitle()}" th:class="${topic.isMarrow()}?'text-danger':' '"></h2>
-                                <p th:text="*{topic.getContent()}" th:class="${topic.isMarrow()}?'text-danger':' '"></p>
+                                <h3 th:text="${topic.getTitle()}" th:class="${topic.isMarrow()}?'text-danger text-max-line-2 ':'text-max-line-2'" ></h3>
+                                <p th:text="*{topic.getContent()}" th:class="${topic.isMarrow()}?'text-danger text-max-line-2':'text-max-line-2'"></p>
                                 <p>
-                                    <!--                            TODO:跳转到帖子详情页面 -->
-                                    <a class="btn" href="#">View details »</a>
+                                    <a class="btn" th:href="@{/topicDetail(id=${topic.getId()})}">View details »</a>
                                 </p>
                             </div>
                             <div class="col-md-4">
@@ -69,8 +67,8 @@
 </div>
 
 
-<link  th:href="@{/webjars/bootstrap/3.3.1/css/bootstrap.css}" rel="stylesheet">
-<link th:href="@{/css/style.css}" rel="stylesheet">
+<link  href="/webjars/bootstrap/3.3.1/css/bootstrap.css" rel="stylesheet">
+<link href="/css/style.css" rel="stylesheet">
 <script src="/webjars/jquery/3.3.1/jquery.min.js"></script>
 <script src="/webjars/bootstrap/3.3.1/js/bootstrap.min.js"></script>
 </body>
