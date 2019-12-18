@@ -1,6 +1,5 @@
 package com.foreverything.bbs.util;
 
-import com.foreverything.bbs.mapper.RewardMapper;
 import com.foreverything.bbs.mapper.TopicMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -24,12 +23,15 @@ public class IDUtil {
 
     private static List<Long> rewardIDList=new ArrayList<>();
     private static List<Long> topicIDList=new ArrayList<>();
+    private static List<Long> replayIDList=new ArrayList<>();
 
     @Autowired
     TopicMapper topicMapper;
 
     @Autowired
     RewardMapper rewardMapper;
+    @Autowired
+    ReplayMapper replayMapper;
 
     @PostConstruct
     public void init(){
@@ -45,6 +47,9 @@ public class IDUtil {
         idUtil=this;
         idUtil.topicMapper=this.topicMapper; //装配Mapper后给储存topicID的List赋值
         idUtil.rewardMapper=this.rewardMapper;
+        idUtil.replayMapper=this.replayMapper;
+
+        replayIDList=replayMapper.getReplayIDList();
         topicIDList=topicMapper.getTopicIdCollection();
         rewardIDList=rewardMapper.getRewardIdCollection();
     }
@@ -60,6 +65,9 @@ public class IDUtil {
          */
         Long id=randomALongID();
         while(topicIDList.contains((id))||rewardIDList.contains(id)){
+        Long id;
+        id=randomALongID();
+        while(topicIDList.contains(id)||replayIDList.contains(id)){
             id=randomALongID();
         }
         return id;
