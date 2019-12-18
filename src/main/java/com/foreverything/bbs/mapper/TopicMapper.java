@@ -1,7 +1,7 @@
 package com.foreverything.bbs.mapper;
 
+import com.foreverything.bbs.entities.Replay;
 import com.foreverything.bbs.entities.Topic;
-import javafx.scene.layout.TilePane;
 import org.apache.ibatis.annotations.*;
 
 import java.util.List;

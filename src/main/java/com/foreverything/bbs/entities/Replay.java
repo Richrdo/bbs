@@ -7,7 +7,7 @@ package com.foreverything.bbs.entities;
  * @Description
  */
 
-public class Replay extends BaseBean {
+public class Replay extends BaseBean implements Comparable<Replay> {
 
     private boolean isDelete=false;
     private Long fromID=null;
@@ -28,5 +28,16 @@ public class Replay extends BaseBean {
         isDelete = delete;
     }
 
+    @Override
+    public String toString() {
+        return "Replay{"  +
+                ", fromID=" + fromID +
+                '}';
+    }
+
+    @Override
+    public int compareTo(Replay replay) {
+        return this.getCreateTime().compareTo(replay.getCreateTime());
+    }
 }
 
