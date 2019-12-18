@@ -24,7 +24,10 @@ public class ReplayServiceImpl implements ReplayService {
     @Autowired
     ReplayMapper replayMapper;
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> branch
     @Override
     public List<Replay> getReplayListByID(Long id) {
         return replayMapper.getReplayListByFromID(id);
