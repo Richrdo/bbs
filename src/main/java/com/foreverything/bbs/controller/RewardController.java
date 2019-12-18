@@ -38,15 +38,18 @@ public class RewardController {
         ModelAndView mv=new ModelAndView();
         if (null==reward.getTitle()||null==reward.getContent()||null==reward.getPoints()){
             mv.addObject("msg","请填写完整");
+            System.out.println("内容错误");
 //            TODO 跳转到原帖子界面
         }else{
             Long id=rewardService.insertReward(reward);
             if (id>0){
                 mv.addObject("msg","发布成功");
                 mv.addObject("newReward",rewardService.getRewardByID(id));
+                System.out.println("跳转到讨悬赏页面");
                 mv.setViewName("topicPage");//               TODO 跳转到讨悬赏页面
             }else{
                 mv.addObject("msg","创建失败");
+                System.out.println("跳转到原修改帖子页面");
                 //            TODO 跳转到原帖子界面
             }
         }
@@ -60,13 +63,16 @@ public class RewardController {
         ModelAndView mv=new ModelAndView();
         if (null==reward.getContent()||null==reward.getTitle()||null==reward.getPoints()){
             mv.addObject("msg","标题或内容为空！");
+
 //            TODO 跳转到原修改帖子界面
         }else{
             if (rewardService.putReward(reward)>0){
                 mv.addObject("msg","修改成功");
                // mv.setViewName("RewardPage");//               TODO 跳转到讨悬赏页面
+
             }else{
                 mv.addObject("msg","修改失败！");
+
 //                TODO 跳转到原修改帖子页面
             }
         }

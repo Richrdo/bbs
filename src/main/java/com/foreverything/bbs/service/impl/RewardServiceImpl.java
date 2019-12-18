@@ -61,23 +61,10 @@ public class RewardServiceImpl implements RewardService {
             return 0L;
     }
 
-
-    //查找所有悬赏的id
-    //@Override
-    //public List<Long> getRewardIdCollection(){
-     //   return rewardMapper.getRewardIdCollection();
-   // }
-
     //根据id查找特定的悬赏
     @Override
     public Reward getRewardByID( Long id){
         return rewardMapper.getRewardByID(id);
-    }
-
-    //插入回复
-    @Override
-    public int insertReplay(Replay replay){
-        return rewardMapper.insertReplay(replay);
     }
 
 
@@ -93,10 +80,10 @@ public class RewardServiceImpl implements RewardService {
         return rewardMapper.putReward(reward);
     }
 
-    //据帖子id获取回复列表
     @Override
-    public List<Replay> getAllReplayByID( Long rewardId){
-        return rewardMapper.getAllReplayByID(rewardId);
+    public int deleteReward(Reward reward){
+        return rewardMapper.deleteReward(reward);
     }
+
 
 }
