@@ -6,9 +6,12 @@ import com.foreverything.bbs.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.relational.core.sql.In;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.swing.*;
 import java.io.PrintWriter;
@@ -25,72 +28,47 @@ import java.util.List;
 public class UserController {
     @Autowired
     UserService userService;
-    @Autowired
-    HttpSession session;
 
-    /*@PostMapping("/login")
-    public String userLogin(@RequestParam("username") String username,@RequestParam("password") String password){
-        if(userService.getID(Integer.parseInt(username))){
-            if(password.equals(userService.getPas(Integer.parseInt(username)))) {
-                session.setAttribute("name", username);
-                return "index";
-            }
-            else {
-                return "login";
-            }
-        }
-        else
-            return "login";
-    }*/
-   /* @PostMapping("/topic")
-    public ModelAndView createNewTopic(Topic topic){
-        ModelAndView mv=new ModelAndView();
-
-        if (null==topic.getTitle()||null==topic.getContent()){
-            mv.addObject("msg","请填写完整");
-//            TODO 跳转到原帖子界面
-        }else{
-            Long id=topicService.insertTopic(topic);
-            if (id>0){
-                mv.addObject("msg","发布成功");
-
-                mv.addObject("newTopic",topicService.getTopicByID(id));
-//               TODO 跳转到讨论区页面
-            }else{
-                mv.addObject("msg","创建失败");
-                //            TODO 跳转到原帖子界面
-            }
-        }
-//        注意！！！！！！！！！！！！如果没写前端就测试的话，mv.setViewName()必须指向一个已经存在的template，否则会报错!!!!!!!!!
-        mv.setViewName("topicPage");
-        return mv;
-    }*/
     @PostMapping("/login")
-    public ModelAndView userLogin(@RequestParam("username") String username,@RequestParam("password") String password){
+    public ModelAndView userLogin(@RequestParam("id") String id, @RequestParam("password") String password, HttpServletRequest request){
         ModelAndView mv=new ModelAndView();
-        if(userService.getID(Integer.parseInt(username))){
-            if(password.equals(userService.getPas(Integer.parseInt(username)))) {
-                session.setAttribute("name", username);
-                mv.addObject("msg","right");
-                mv.setViewName("index");
-            }
-            else {
-                mv.addObject("msg","error1");
-                mv.setViewName("login");
-            }
-        }
-        else
-        {
-            mv.addObject("msg","error2");
+        int userID=Integer.parseInt(id);
+        String pw=userService.getPas(userID);
+
+        if (null==pw){
+            mv.addObject("msg","该用户不存在");
+            mv.setViewName("login");
+        }else if (pw.equals(password)){
+            mv.addObject("msg","登入成功");
+            request.getSession().setAttribute("userID",userID);
+            mv.setViewName("index");
+        }else{
+            mv.addObject("msg","密码错误");
             mv.setViewName("login");
         }
+
         return mv;
     }
-
 
     @PostMapping("/register")
     public String createUser(User user,@RequestParam("username") String username,@RequestParam("password") String password,@RequestParam("mail") String mail){
         userService.insertUser(username,password,mail);
         return "login";
+    }
+
+
+    @GetMapping("/quit")
+    public String quitLogin(HttpServletRequest request){
+        /**
+         * @Author: 刘光辉
+         * @Date:20:05 2019/12/18
+         * @param:
+         *  * @param request
+         *
+         * @Desccription: 退出时清空session
+         */
+        request.getSession().invalidate();
+
+        return "index";
     }
 }

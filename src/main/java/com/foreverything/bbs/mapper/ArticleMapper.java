@@ -41,12 +41,28 @@ public interface ArticleMapper {
             @Result(property = "isDelete", column = "a_is_delete")
     })
     Article getArticleByID(@Param("id")Long id);
-    @Insert("insert into article(a_id,a_author_id,a_title,a_content,a_create_time,a_is_marrow,a_is_delete) values(#{article.id},#{article.userID},#{article.title},#{article.content},#{article.createTime},#{article.isMarrow},#{article.isDelete})")
+
+    @Insert("insert into article(a_id,a_author_id,a_title,a_content,a_create_time) values(#{article.id},#{article.userID},#{article.title},#{article.content},#{article.createTime})")
     public Long insertArticle(@Param("article") Article article);
+
     @Select("select a_id from article")//查找所有文章id
     public List<Long> getArticleIdCollection();
+
     @Update("update article set a_title=#{article.title},a_content=#{article.content} where a_id=#{article.id}")
     public int updateArticle(@Param("article")Article article);
-    @Delete("delete from article where a_id=#{article.id}")
-    public int deleteArticle(@Param("article") Article article);
+
+    @Update("update article set a_is_delete=true where id=#{id}")
+    public int deleteArticleByID(@Param("id")Long id);
+
+    @Update("update article set a_is_top=false where id=#{id}")
+    public int cancelUpArticleByID(@Param("id")Long id);
+
+    @Update("update article set a_is_top=true where id=#{id}")
+    public int upArticle(@Param("id")Long id);
+
+    @Update("update article set a_is_marrow=true where id=#{id}")
+    public int marrowArticleByID(@Param("id")Long id);
+
+    @Update("update article set a_is_marrow=false where id=#{id}")
+    public int cancelMarrowArticleByID(@Param("id")Long id);
 }

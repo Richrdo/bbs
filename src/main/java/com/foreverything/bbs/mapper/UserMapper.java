@@ -13,11 +13,6 @@ import java.util.List;
  */
 @Mapper
 public interface UserMapper {
-    @Select("select u_id from user")
-    @Results({
-            @Result(property = "userID",column = "u_id",id = true),
-    })
-    List<Integer> getID();
 
     @Select("select u_password from user where u_id=#{id}")
     @Results({
@@ -30,4 +25,5 @@ public interface UserMapper {
 
     @Select("select u_id from user")
     public List<Integer> getUserIdCollection();
+
 }

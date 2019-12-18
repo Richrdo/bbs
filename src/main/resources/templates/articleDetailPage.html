@@ -8,7 +8,7 @@
 <body>
 <div class="container-fluid">
 
-    <div th:replace="~{index::top-bar(activeUri='topic.html')}"></div>
+    <div th:replace="~{index::top-bar(activeUri='article.html')}"></div>
 
     <div th:replace="~{common/temp::detailPageObj(obj=${obj})}"></div>
 
@@ -16,7 +16,7 @@
 
     <div th:replace="~{common/temp::detailPageReplay(replays=${replays})}"></div>
 
-    <div th:replace="~{common/temp::replay-form-bar(id=${obj.getId()},path_s='topicDetail')}"></div>
+    <div th:replace="~{common/temp::replay-form-bar(id=${obj.getId()},path_s='articleDetail')}"></div>
 </div>
 
 <link  href="/webjars/bootstrap/3.3.1/css/bootstrap.css" rel="stylesheet">

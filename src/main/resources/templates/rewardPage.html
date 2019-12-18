@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<!--suppress ALL-->
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>悬赏区</title>
+</head>
+<body>
+
+<div class="container-fluid">
+
+    <div th:replace="~{index::top-bar(activeUri='reward.html')}"></div>
+
+    <div class="row clearfix">
+
+        <div th:replace="~{index::showUserInfo}"></div>
+
+        <div class="col-md-7" >
+            <!--            普通帖子区-->
+            <div class="row clearfix">
+                <div class="col-md-12">
+
+                    <div class="container-fluid topic-content-box-index " th:each="reward:${rewards}">
+                        <div class="row clearfix item-vertical-middle">
+                            <div class="col-md-8 column">
+                                <h3 th:utext="'<em>【积分:'+${reward.getPoints()}+'】</em>'+${reward.getTitle()}" class="text-max-line-2" ></h3>
+                                <p th:text="*{reward.getContent()}" class="text-max-line-2"></p>
+                                <p>
+                                    <a class="btn" th:href="@{/reward(id=${reward.getId()})}">查看详情 »</a>
+                                </p>
+                            </div>
+                            <div class="col-md-4">
+                                <em th:text="${reward.getUserID()}"></em>
+                                <p th:text="${reward.getCreateTime()}"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+<link  href="/webjars/bootstrap/3.3.1/css/bootstrap.css" rel="stylesheet">
+<link href="/css/style.css" rel="stylesheet">
+<script src="/webjars/jquery/3.3.1/jquery.min.js"></script>
+<script src="/webjars/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>

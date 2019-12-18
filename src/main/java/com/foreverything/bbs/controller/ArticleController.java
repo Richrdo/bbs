@@ -24,7 +24,7 @@ import java.util.List;
         @GetMapping("/article")
         public ModelAndView getArticle(){
             ModelAndView mv = new ModelAndView();
-            mv.addObject("article", articleService.getAllArticle());
+            mv.addObject("articles", articleService.getAllArticle());
 //        setViewName()用来设置跳转页面
             mv.setViewName("articlePage");
             return mv;
@@ -56,10 +56,13 @@ import java.util.List;
             mv.setViewName("articlePage");
             return mv;
         }
+
         @DeleteMapping("/article")
-        public int deleteArticle(Article article){
-            return articleService.deleteArticle(article);
+        public int deleteArticle(Long  id){
+            return articleService.deleteArticle(id);
         }
+
+
         @PutMapping("/article")
         public ModelAndView updateArticle(Article article){
             ModelAndView mv=new ModelAndView();
