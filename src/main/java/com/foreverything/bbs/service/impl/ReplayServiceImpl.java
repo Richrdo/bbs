@@ -38,7 +38,6 @@ public class ReplayServiceImpl implements ReplayService {
         Date date=new Date();
 
         replay.setCreateTime(dateFormat.format(date));
-
         if (replayMapper.insertReplay(replay)>0){
             return  replay.getId();
         }else
