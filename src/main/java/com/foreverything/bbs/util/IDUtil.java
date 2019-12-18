@@ -1,5 +1,6 @@
 package com.foreverything.bbs.util;
 
+import com.foreverything.bbs.mapper.ReplayMapper;
 import com.foreverything.bbs.mapper.TopicMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -22,11 +23,13 @@ public class IDUtil {
     private static IDUtil idUtil;
 
     private static List<Long> topicIDList=new ArrayList<>();
+    private static List<Long> replayIDList=new ArrayList<>();
 
     @Autowired
     TopicMapper topicMapper;
 
-
+    @Autowired
+    ReplayMapper replayMapper;
 
     @PostConstruct
     public void init(){
@@ -41,7 +44,9 @@ public class IDUtil {
          */
         idUtil=this;
         idUtil.topicMapper=this.topicMapper; //装配Mapper后给储存topicID的List赋值
+        idUtil.replayMapper=this.replayMapper;
 
+        replayIDList=replayMapper.getReplayIDList();
         topicIDList=topicMapper.getTopicIdCollection();
     }
 
@@ -55,7 +60,8 @@ public class IDUtil {
          * @Desccription: 生成不重复的12位ID
          */
         Long id;
-        while(topicIDList.contains((id=randomALongID()))){
+        id=randomALongID();
+        while(topicIDList.contains(id)||replayIDList.contains(id)){
             id=randomALongID();
         }
         return id;
