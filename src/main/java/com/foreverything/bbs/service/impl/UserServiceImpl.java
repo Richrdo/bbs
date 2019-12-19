@@ -46,13 +46,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void updateAcc(int id, String new_account) {
-        userMapper.updateAcc(id,new_account);
+    public boolean updateAcc(int id, String new_account) {
+       return userMapper.updateAcc(id,new_account);
     }
 
     @Override
-    public void updatePas(int id,String newpassword){
-        userMapper.updatePas(id,newpassword);
+    public boolean updatePas(int id,String newpassword){
+       return userMapper.updatePas(id,newpassword);
     }
 
 }

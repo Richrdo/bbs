@@ -34,9 +34,9 @@ public interface UserMapper {
 
     //修改账户名
     @Update("update user set u_account=#{new_account} where u_id=#{id}")
-    String updateAcc(@Param("id") int id,@Param("new_account") String new_account);
+    boolean updateAcc(@Param("id") int id,@Param("new_account") String new_account);
 
     //更新密码
     @Update("update user set u_password=#{newpassword} where u_id=#{id}")
-    String updatePas(@Param("id") int id,@Param("newpassword") String newpassword);
+    boolean updatePas(@Param("id") int id,@Param("newpassword") String newpassword);
 }

@@ -12,19 +12,6 @@
             </div>
             <div class="col-md-6 column">
             </div>
-            <div class="col-md-4 column">
-                <div class="btn-group" style="position: absolute ;right: 35px;top:10px">
-                    <button class="btn btn-default">更多</button> <button class="btn btn-default dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></button>
-                    <ul class="dropdown-menu">
-                        <li>
-                            <a th:href="@{userUpdate}">修改账户</a>
-                        </li>
-                        <li>
-                            <a th:href="@{userUpdate}">修改密码</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
         </div>
     </div>
     <br><br><br>
@@ -33,7 +20,7 @@
             <div class="col-md-4 column">
                 <ul class="nav nav-pills nav-stacked">
                     <li>
-                        <a href="#">修改账户</a>
+                        <a th:href="@{accountUpdate}">修改账户</a>
                     </li>
                     <li class="active">
                         <a th:href="@{userUpdate}">修改密码</a>
