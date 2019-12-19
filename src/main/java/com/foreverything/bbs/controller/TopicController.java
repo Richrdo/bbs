@@ -28,33 +28,26 @@ public class TopicController {
     public ModelAndView getTopic(){
         ModelAndView mv = new ModelAndView();
         mv.addObject("topics", topicService.getAllTopic());
-//        setViewName()用来设置跳转页面
         mv.setViewName("topicPage");
         return mv;
     }
 
     @PostMapping("/topic")
-    public ModelAndView createNewTopic(Topic topic){
-        ModelAndView mv=new ModelAndView();
+    public String createNewTopic(Topic topic){
 
         if (null==topic.getTitle()||null==topic.getContent()){
-            mv.addObject("msg","请填写完整");
-//            TODO 跳转到原帖子界面
+//            失败跳转，不同区域把topic改成自己区域的名称就行
+            return "redirect:/new/topic";
         }else{
             Long id=topicService.insertTopic(topic);
             if (id>0){
-                mv.addObject("msg","发布成功");
-
-                mv.addObject("newTopic",topicService.getTopicByID(id));
-//               TODO 跳转到讨论区页面
+//                成功跳转，同样只改topic
+                return "redirect:/topic";
             }else{
-                mv.addObject("msg","创建失败");
-                //            TODO 跳转到原帖子界面
+                //            失败跳转，不同区域把topic改成自己区域的名称就行
+                return "redirect:/new/topic";
             }
         }
-//        注意！！！！！！！！！！！！如果没写前端就测试的话，mv.setViewName()必须指向一个已经存在的template，否则会报错!!!!!!!!!
-        mv.setViewName("topicPage");
-        return mv;
     }
 
     @PutMapping("/topic")

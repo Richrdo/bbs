@@ -23,10 +23,10 @@
                             <a href="/topic">讨论区</a>
                         </li>
                         <li th:class="${activeUri}=='article.html'?'active':' '">
-                            <a href="#">文章区</a>
+                            <a href="/article">文章区</a>
                         </li>
                         <li th:class="${activeUri}=='reward.html'?'active':' '">
-                            <a href="#">悬赏区</a>
+                            <a href="/reward">悬赏区</a>
                         </li>
                     </ul>
 <!--                    搜索功能-->
@@ -37,20 +37,23 @@
                     </form>
                     <!--右侧功能-->
                     <ul class="nav navbar-nav navbar-right">
+                        <li id="admin-li" th:if="${isAdmin}">
+                            <a href="/manage">管理功能</a>
+                        </li>
                         <li>
                             <a th:href="@{/}">首页</a>
                         </li>
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">发布/我的<strong class="caret"></strong></a>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">发布<strong class="caret"></strong></a>
                             <ul class="dropdown-menu">
                                 <li>
-                                    <a >发布讨论</a>
+                                    <a href="/new/topic">发布讨论</a>
                                 </li>
                                 <li>
-                                    <a href="#">发布文章</a>
+                                    <a href="/new/article">发布文章</a>
                                 </li>
                                 <li>
-                                    <a href="#">发布悬赏</a>
+                                    <a href="/new/reward">发布悬赏</a>
                                 </li>
                                 <li class="divider">
                                 </li>
@@ -63,7 +66,10 @@
                             <a href="#">个人中心</a>
                         </li>
                         <li>
-                            <a href="#">退出</a>
+                            <a href="/login">登入/注册</a>
+                        </li>
+                        <li>
+                            <a href="/quit">退出</a>
                         </li>
                     </ul>
                 </div>
@@ -89,10 +95,13 @@
     </div>
 </div>
 
+<!--<span th:text="${isAdmin}" id="isAdmin" hidden></span>-->
+
 <link  href="/webjars/bootstrap/3.3.1/css/bootstrap.css" rel="stylesheet">
 <link href="/css/style.css" rel="stylesheet">
 <script src="/webjars/jquery/3.3.1/jquery.min.js"></script>
 <script src="/webjars/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+<script src="/js/index.js"></script>
 
 </body>
 </html>

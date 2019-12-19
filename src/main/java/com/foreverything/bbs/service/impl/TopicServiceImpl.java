@@ -13,7 +13,7 @@ import java.util.List;
 
 /**
  * @ClassName TopicServiceImpl
- * @Author CeaserBorgia
+ * @Author 刘光辉
  * @Date 11:37 2019/12/16
  * @Description
  */
@@ -69,6 +69,16 @@ public class TopicServiceImpl implements TopicService {
     @Override
     public Topic getTopicByID(Long id) {
         return topicMapper.getTopicByID(id);
+    }
+
+    @Override
+    public int cancelUpTopicByID(long id) {
+        return topicMapper.cancelUpTopicByID(id);
+    }
+
+    @Override
+    public int cancelMarrowTopicByID(long id) {
+        return topicMapper.cancelMarrowTopicByID(id);
     }
 
 

@@ -57,6 +57,27 @@
     </div>
 </div>
 
+<div class="container-fluid" th:fragment="newTopic(acturl)">
+    <div class="row">
+        <form method="post" th:action="${acturl}">
+            <div class="col-md-offset-2 col-md-8 ">
+                <input name="title" class="form-control" type="text" placeholder="标题">
+            </div>
+
+            <hr class="style-three"/>
+
+            <div class="col-md-offset-2 col-md-8">
+                <textarea class="form-control"name="content" rows="6"></textarea>
+            </div>
+
+            <div class="col-md-offset-2 col-md-2">
+                <input type="submit" class="form-control" value="提交" >
+            </div>
+        </form>
+    </div>
+</div>
+
+
 <link  href="/webjars/bootstrap/3.3.1/css/bootstrap.css" rel="stylesheet">
 <link href="/css/style.css" rel="stylesheet">
 <script src="/webjars/jquery/3.3.1/jquery.min.js"></script>

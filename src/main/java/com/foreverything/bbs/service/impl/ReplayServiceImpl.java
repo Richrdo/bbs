@@ -23,7 +23,7 @@ public class ReplayServiceImpl implements ReplayService {
 
     @Autowired
     ReplayMapper replayMapper;
-    
+
     @Override
     public List<Replay> getReplayListByID(Long id) {
         return replayMapper.getReplayListByFromID(id);

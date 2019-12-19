@@ -6,7 +6,7 @@ import java.util.List;
 
 /**
  * @ClassName TopicService
- * @Author CeaserBorgia
+ * @Author 刘光辉
  * @Date 11:35 2019/12/16
  * @Description
  */
@@ -15,7 +15,7 @@ import java.util.List;
 public interface TopicService {
 
     /**
-     * @Author:CeaserBorgia
+     * @Author:刘光辉
      * @Date:19:20 2019/12/17
      * @param:
      *  * @param null
@@ -25,7 +25,7 @@ public interface TopicService {
     List<Topic> getAllTopic();
 
     /**
-     * @Author:CeaserBorgia
+     * @Author:刘光辉
      * @Date:19:20 2019/12/17
      * @param:
      *  * @param topic
@@ -36,7 +36,7 @@ public interface TopicService {
 
 
     /**
-     * @Author:CeaserBorgia
+     * @Author:刘光辉
      * @Date:19:21 2019/12/17
      * @param:
      *  * @param topic
@@ -46,7 +46,7 @@ public interface TopicService {
     int updateTopic(Topic topic);
 
     /**
-     * @Author:CeaserBorgia
+     * @Author:刘光辉
      * @Date:19:21 2019/12/17
      * @param:
      *  * @param id
@@ -57,7 +57,7 @@ public interface TopicService {
 
 
     /**
-     * @Author:CeaserBorgia
+     * @Author:刘光辉
      * @Date:19:21 2019/12/17
      * @param:
      *  * @param null
@@ -68,7 +68,7 @@ public interface TopicService {
 
 
     /**
-     * @Author:CeaserBorgia
+     * @Author:刘光辉
      * @Date:19:21 2019/12/17
      * @param:
      *  * @param null
@@ -78,7 +78,7 @@ public interface TopicService {
     int deleteTopicByID(Long id);
 
     /**
-     * @Author:CeaserBorgia
+     * @Author:刘光辉
      * @Date:19:38 2019/12/17
      * @param:
      *  * @param null
@@ -86,5 +86,25 @@ public interface TopicService {
      * @Desccription: 通过ID获取帖子
      */
     Topic getTopicByID(Long id);
+
+    /**
+     * @Author:刘光辉
+     * @Date:19:37 2019/12/18
+     * @param:
+     *  * @param null
+     *
+     * @Desccription: 取消置顶帖子
+     */
+    int cancelUpTopicByID(long id);
+
+    /**
+     * @Author:刘光辉
+     * @Date:19:37 2019/12/18
+     * @param:
+     *  * @param null
+     *
+     * @Desccription: 取消置顶
+     */
+    int cancelMarrowTopicByID(long id);
 }
 
