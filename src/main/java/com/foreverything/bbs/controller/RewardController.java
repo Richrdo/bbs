@@ -36,31 +36,23 @@ public class RewardController {
 
   //发布新悬赏
     @PostMapping("/reward")
-    public ModelAndView createNewReward(Reward reward, HttpServletRequest request){
-        ModelAndView mv=new ModelAndView();
-        if (reward.getTitle().trim().length()==0||reward.getContent().trim().length()==0){
-            mv.addObject("msg","请填写完整");
-            System.out.println("内容错误");
-            mv.setViewName("newRewardPage");
-        }else if(!rewardService.isEnough(reward.getPoints(), (Integer) request.getSession().getAttribute("userID"))) {
-            mv.addObject("msg","积分不够");
-            mv.setViewName("newRewardPage");
-        }else{
-                Long id=rewardService.insertReward(reward);
-                if (id>0){
-                    mv.addObject("msg","发布成功");
-                    mv.addObject("newReward",rewardService.getRewardByID(id));
-                    System.out.println("跳转到讨悬赏页面");
-                    mv.setViewName("rewardPage");
-                }else{
-                    mv.addObject("msg","创建失败");
-                    System.out.println("跳转到帖子页面");
-                    mv.setViewName("newRewardPage");
-                }
-            }
+    public String createNewReward(Reward reward, HttpServletRequest request){
 
-        //mv.setViewName("topicPage");
-        return mv;
+        if (null==reward.getTitle()||null==reward.getContent()){
+//            失败跳转，不同区域把topic改成自己区域的名称就行
+            return "redirect:/new/reward";
+        }else if(!rewardService.isEnough(reward.getPoints(), (Integer) request.getSession().getAttribute("userID"))) {
+            return "redirect:/new/reward";//积分不够
+        }else{
+            Long id=rewardService.insertReward(reward);
+            if (id>0){
+//                成功跳转，同样只改topic
+                return "redirect:/reward";
+            }else{
+                //            失败跳转，不同区域把topic改成自己区域的名称就行
+                return "redirect:/new/reward";
+            }
+        }
     }
 
     @PutMapping("/reward")
