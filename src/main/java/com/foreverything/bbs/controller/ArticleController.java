@@ -35,40 +35,41 @@ import java.util.List;
             return mv;
         }
 
-        @PostMapping("/article")
-        public String createNewArticle(Article article){
-
-            if (null==article.getTitle()||null==article.getContent()){
-                return "redirect:/new/article";
+        @PostMapping("/add/article")
+        public String createNewArticle(Article article,Model model){
+            if (article.getTitle().length()==0||0==article.getContent().length()){
+                model.addAttribute("message","内容不完整");
+                return "newArticlePage";
             }else{
                 Long id=articleService.insertArticle(article);
                 if (id>0){
                     return "redirect:/article";
                 }else{
-                    return "redirect:/new/article";
+                    model.addAttribute("message","发布失败，请重试");
+                    return "newArticlePage";
                 }
             }
 
         }
 
-        @DeleteMapping("/article")
+        @DeleteMapping("/delete/article")
         public int deleteArticle(Long  id){
             return articleService.deleteArticle(id);
         }
 
 
-        @PutMapping("/article")
+        @PutMapping("/update/article")
         public ModelAndView updateArticle(Article article){
             ModelAndView mv=new ModelAndView();
             if (null==article.getContent()||null==article.getTitle()){
-                mv.addObject("msg","标题或内容为空！");
+                mv.addObject("message","标题或内容为空！");
 //            TODO 跳转到原修改帖子界面
             }else{
                 if (articleService.updateArticle(article)>0){
-                    mv.addObject("msg","修改成功");
+                    mv.addObject("message","修改成功");
 //                TODO 跳转到讨论区页面
                 }else{
-                    mv.addObject("msg","修改失败！");
+                    mv.addObject("message","修改失败！");
 //                TODO 跳转到原修改帖子页面
                 }
             }

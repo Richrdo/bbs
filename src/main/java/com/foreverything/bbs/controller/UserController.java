@@ -40,7 +40,7 @@ public class UserController {
         int userID=userService.getIDByMail(mail);
         String pw=userService.getPas(userID);
         if (null==pw){
-            mv.addObject("msg","该用户不存在");
+            mv.addObject("message","该用户不存在");
             mv.setViewName("login");
         }else if (pw.equals(password)){
             mv.addObject("isAdmin",userService.judgeUserByID(userID));
@@ -48,7 +48,7 @@ public class UserController {
             request.getSession().setAttribute("user",userService.getUserByID(userID));
             mv.setViewName("index");
         }else{
-            mv.addObject("msg","密码错误");
+            mv.addObject("message","密码错误");
             mv.setViewName("login");
         }
 
@@ -60,10 +60,10 @@ public class UserController {
         int id=userService.insertUser(name,password,mail);
         ModelAndView mv=new ModelAndView();
         if (id>0){
-            mv.addObject("msg","注册成功，您的id为："+id);
+            mv.addObject("message","注册成功，您的id为："+id);
             mv.setViewName("login");
         }else{
-            mv.addObject("msg","注册失败，您的邮箱已注册");
+            mv.addObject("message","注册失败，您的邮箱已注册");
             mv.setViewName("register");
         }
         return mv;

@@ -32,4 +32,9 @@
 <link  th:href="@{/webjars/bootstrap/3.3.1/css/bootstrap.css}" rel="stylesheet">
 <script src="/webjars/jquery/3.3.1/jquery.min.js"></script>
 <script src="/webjars/bootstrap/3.3.1/js/bootstrap.min.js"></script>
-</html>
+<script>
+    var message="[[${message}]]";
+    if (message!=""){
+        alert(message);
+    }
+</script></html>

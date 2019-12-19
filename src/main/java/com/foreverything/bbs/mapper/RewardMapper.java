@@ -71,11 +71,11 @@ public interface RewardMapper {
 
     @Select("select * from reward where r_is_delete=false and (r_title like #{str} or r_content like #{str}) ")
     @Results({
-            @Result(property = "id",column = "t_id",id = true),
-            @Result(property = "userID",column = "t_author_id"),
-            @Result(property = "createTime",column = "t_create_time"),
-            @Result(property = "content",column = "t_content"),
-            @Result(property = "title",column = "t_title"),
+            @Result(property = "id",column = "r_id",id = true),
+            @Result(property = "userID",column = "r_author_id"),
+            @Result(property = "createTime",column = "r_create_time"),
+            @Result(property = "content",column = "r_content"),
+            @Result(property = "title",column = "r_title"),
     })
     public List<Reward> searchReward(@Param("str") String str);
 }

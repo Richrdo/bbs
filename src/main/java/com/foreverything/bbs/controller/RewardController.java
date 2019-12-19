@@ -9,9 +9,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Map;
 
 /**
  * @ClassName RewardController
@@ -35,21 +37,20 @@ public class RewardController {
     }
 
   //发布新悬赏
-    @PostMapping("/reward")
-    public String createNewReward(Reward reward, HttpServletRequest request){
-
+    @PostMapping("/add/reward")
+    public String createNewReward(Reward reward, HttpServletRequest request,@RequestParam Map<String,String> map){
         if (null==reward.getTitle()||null==reward.getContent()){
-//            失败跳转，不同区域把topic改成自己区域的名称就行
+            map.put("message","信息不完整");
             return "redirect:/new/reward";
         }else if(!rewardService.isEnough(reward.getPoints(), (Integer) request.getSession().getAttribute("userID"))) {
+            map.put("message","您的积分不足");
             return "redirect:/new/reward";//积分不够
         }else{
             Long id=rewardService.insertReward(reward);
             if (id>0){
-//                成功跳转，同样只改topic
                 return "redirect:/reward";
             }else{
-                //            失败跳转，不同区域把topic改成自己区域的名称就行
+                map.put("message","发布失败，请重新登录");
                 return "redirect:/new/reward";
             }
         }
@@ -59,16 +60,16 @@ public class RewardController {
     public ModelAndView updateReward(Reward reward){
         ModelAndView mv=new ModelAndView();
         if (null==reward.getContent()||null==reward.getTitle()){
-            mv.addObject("msg","标题或内容为空！");
+            mv.addObject("message","标题或内容为空！");
 
 //            TODO 跳转到原修改帖子界面
         }else{
             if (rewardService.putReward(reward)>0){
-                mv.addObject("msg","修改成功");
+                mv.addObject("message","修改成功");
                // mv.setViewName("RewardPage");//               TODO 跳转到讨悬赏页面
 
             }else{
-                mv.addObject("msg","修改失败！");
+                mv.addObject("message","修改失败！");
 
 //                TODO 跳转到原修改帖子页面
             }

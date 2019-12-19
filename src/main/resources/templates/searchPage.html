@@ -14,89 +14,41 @@
                     <table class="table table-bordered table-hover">
                         <thead>
                         <tr>
-                            <th>
-                                编号
-                            </th>
-                            <th>
-                                产品
-                            </th>
-                            <th>
-                                交付时间
-                            </th>
-                            <th>
-                                状态
-                            </th>
+                            <th>类型</th>
+                            <th>ID</th>
+                            <th>标题</th>
+                            <th>发表时间</th>
+                            <th th:if="${isAdmin}">操作</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td>
-                                1
-                            </td>
-                            <td>
-                                TB - Monthly
-                            </td>
-                            <td>
-                                01/04/2012
-                            </td>
-                            <td>
-                                Default
+                        <tr th:each="topic:${topicList}" >
+                            <td>讨论</td>
+                            <td th:text="${topic.getId()}"></td>
+                            <td><a th:text="${topic.getTitle()}" th:href="@{/topicDetail(id=${topic.getId()})}"></a></td>
+                            <td><p th:text="${topic.getCreateTime()}"></p></td>
+                            <td th:if="${isAdmin}">
+                                <a th:class="${topic.isTop()?'btn btn-warning':'btn btn-success'}" th:text="${topic.isTop()}?'取消置顶':'置顶'"></a>
+                                <a th:class="${topic.isMarrow()?'btn btn-warning':'btn btn-primary'}" th:text="${topic.isMarrow()}?'取消加精':'加精'"></a>
                             </td>
                         </tr>
-                        <tr class="success">
-                            <td>
-                                1
-                            </td>
-                            <td>
-                                TB - Monthly
-                            </td>
-                            <td>
-                                01/04/2012
-                            </td>
-                            <td>
-                                Approved
+                        <tr th:each="article:${articleList}">
+                            <td>文章</td>
+                            <td th:text="${article.getId()}"></td>
+                            <td><a th:text="${article.getTitle()}" th:href="@{/articleDetail(id=${article.getId()})}"></a></td>
+                            <td><p th:text="${article.getCreateTime()}"></p></td>
+                            <td th:if="${isAdmin}">
+                                <a th:class="${article.isTop()?'btn btn-warning':'btn btn-success'}" th:text="${article.isTop()}?'取消置顶':'置顶'"></a>
+                                <a th:class="${article.isMarrow()?'btn btn-warning':'btn btn-primary'}" th:text="${article.isMarrow()}?'取消加精':'加精'"></a>
                             </td>
                         </tr>
-                        <tr class="error">
-                            <td>
-                                2
-                            </td>
-                            <td>
-                                TB - Monthly
-                            </td>
-                            <td>
-                                02/04/2012
-                            </td>
-                            <td>
-                                Declined
-                            </td>
-                        </tr>
-                        <tr class="warning">
-                            <td>
-                                3
-                            </td>
-                            <td>
-                                TB - Monthly
-                            </td>
-                            <td>
-                                03/04/2012
-                            </td>
-                            <td>
-                                Pending
-                            </td>
-                        </tr>
-                        <tr class="info">
-                            <td>
-                                4
-                            </td>
-                            <td>
-                                TB - Monthly
-                            </td>
-                            <td>
-                                04/04/2012
-                            </td>
-                            <td>
-                                Call in to confirm
+                        <tr th:each="reward:${rewardList}">
+                            <td>悬赏</td>
+                            <td th:text="${reward.getId()}"></td>
+                            <td><a th:text="${reward.getTitle()}" th:href="@{/rewardDetail(id=${reward.getId()})}"></a></td>
+                            <td><p th:text="${reward.getCreateTime()}"></p></td>
+                            <td th:if="${isAdmin}">
+
                             </td>
                         </tr>
                         </tbody>
@@ -111,6 +63,10 @@
 <link href="/css/style.css" rel="stylesheet">
 <script src="/webjars/jquery/3.3.1/jquery.min.js"></script>
 <script src="/webjars/bootstrap/3.3.1/js/bootstrap.min.js"></script>
-<script src="/js/index.js"></script>
-</body>
+<script>
+    var message="[[${message}]]";
+    if (message!=""){
+        alert(message);
+    }
+</script></body>
 </html>

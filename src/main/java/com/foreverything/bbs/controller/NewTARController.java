@@ -19,8 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 public class NewTARController {
 
     @RequestMapping("/article")
-    public String newArticle(Model model){
-        model.addAttribute("msg","ok");
+    public String newArticle(){
         return "newArticlePage";
     }
 

@@ -7,12 +7,17 @@
 </head>
 <body style="margin: 20px;">
 
-
 <div th:replace="common/temp::newTopic(acturl='/add/article')"></div>
+
 
 <link  href="/webjars/bootstrap/3.3.1/css/bootstrap.css" rel="stylesheet">
 <link href="/css/style.css" rel="stylesheet">
 <script src="/webjars/jquery/3.3.1/jquery.min.js"></script>
 <script src="/webjars/bootstrap/3.3.1/js/bootstrap.min.js"></script>
-</body>
+<script>
+    var message="[[${message}]]";
+    if (message!=""){
+        alert(message);
+    }
+</script></body>
 </html>

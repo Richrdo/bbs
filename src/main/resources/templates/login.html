@@ -81,9 +81,6 @@
 </div>
 
 
-<span id="message" th:text="${msg}" hidden="hidden"></span>
-<!-- Javascript -->
-
 
 <script src="/assets/js/jquery-1.11.1.min.js"></script>
 <script src="/assets/bootstrap/js/bootstrap.min.js"></script>
@@ -93,7 +90,12 @@
 <!--[if lt IE 10]>
 <script src="/assets/js/placeholder.js"></script>
 <script src="/assets/js/index.js"></script>
-<![endif]-->
+<script>
+    var message="[[${message}]]";
+    if (message!=""){
+        alert(message);
+    }
+</script><![endif]-->
 
 </body>
 

@@ -12,6 +12,7 @@ import com.foreverything.bbs.service.SearchService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -48,6 +49,7 @@ public class SearchServiceImpl implements SearchService {
 
     @Override
     public List<Reward> searchReward(String str) {
+
         return rewardMapper.searchReward(str);
     }
 
