@@ -3,10 +3,14 @@ package com.foreverything.bbs.controller;
 import com.foreverything.bbs.entities.Article;
 import com.foreverything.bbs.service.ArticleService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
     /**
@@ -15,7 +19,7 @@ import java.util.List;
      * Date 14:52 2019/12/16
      * @Description
      */
-    @RestController
+    @Controller
     public class ArticleController {
 
         @Autowired
@@ -31,30 +35,24 @@ import java.util.List;
         }
 
         @PostMapping("/article")
-        public ModelAndView createNewArticle(Article article){
-            ModelAndView mv=new ModelAndView();
-
-            if (null==article.getTitle()||null==article.getContent()){
-                mv.addObject("msg","请填写完整");
-//            TODO 跳转到原帖子界面
-                //mv.setViewName("/articlePage1");
+        public String createNewArticle(Article article, HttpServletRequest request,Model model){
+            System.out.println(article);
+            if (article.getTitle().trim().length()==0||article.getContent().trim().length()==0){
+                System.out.println("不完整");
+                model.addAttribute("msg","不完整");
+                return "redirect:/new/article";
             }else{
                 Long id=articleService.insertArticle(article);
                 if (id>0){
-                    mv.addObject("msg","发布成功");
-
-                    mv.addObject("newArticle",articleService.getArticleByID(id));
-//               TODO 跳转到文章区页面
-                    //mv.setViewName("/articlePage");
+                    System.out.println("成功");
+                    return "redirect:/article";
                 }else{
-                    mv.addObject("msg","创建失败");
-                    //            TODO 跳转到原帖子界面
-                    //mv.setViewName("/articlePage1");
+                    model.addAttribute("msg","错误");
+                    System.out.println("错误");
+                    return "redirect:/new/article";
                 }
             }
-//        注意！！！！！！！！！！！！如果没写前端就测试的话，mv.setViewName()必须指向一个已经存在的template，否则会报错!!!!!!!!!
-            mv.setViewName("articlePage");
-            return mv;
+
         }
 
         @DeleteMapping("/article")

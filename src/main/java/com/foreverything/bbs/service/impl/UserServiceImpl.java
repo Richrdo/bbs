@@ -28,13 +28,37 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void insertUser(String username,String password,String mail){
+    public int insertUser(String username,String password,String mail){
         User user=new User();
-        user.setUserID(IDUtil.initUserID());
-        user.setAccount(username);
+        user.setId(IDUtil.initUserID());
+        user.setName(username);
         user.setPassword(password);
         user.setMail(mail);
         user.setGrade(0);
-        userMapper.insertUser(user);
+        if (userMapper.insertUser(user)>0){
+            return user.getId();
+        }else
+        return 0;
     }
+
+    @Override
+    public Boolean judgeUserByID(int id) {
+        return userMapper.isAdmin(id);
+    }
+
+    @Override
+    public int getIDByMail(String mail) {
+        return userMapper.getIDByEmail(mail);
+    }
+
+    @Override
+    public String getPasswordByEmail(String mail) {
+        int id=userMapper.getIDByEmail(mail);
+        if (id>0){
+            return userMapper.getPas(id);
+        }
+        return null;
+    }
+
+
 }

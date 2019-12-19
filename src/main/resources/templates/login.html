@@ -23,6 +23,7 @@
 </head>
 
 <body>
+
 <!-- Top content -->
 <div class="top-content">
 
@@ -53,7 +54,7 @@
                         <form role="form" th:action="@{/login}" method="post" class="login-form">
                             <div class="form-group">
                                 <label class="sr-only" for="form-username">Email</label>
-                                <input type="text" name="id" placeholder="您的ID" class="form-username form-control" id="form-username" required>
+                                <input type="text" name="mail" placeholder="您的Email" class="form-username form-control" id="form-username" required>
                             </div>
                             <div class="form-group">
                                 <label class="sr-only" for="form-password">Password</label>
@@ -80,6 +81,7 @@
 </div>
 
 
+<span id="message" th:text="${msg}" hidden="hidden"></span>
 <!-- Javascript -->
 
 
@@ -90,6 +92,7 @@
 
 <!--[if lt IE 10]>
 <script src="/assets/js/placeholder.js"></script>
+<script src="/assets/js/index.js"></script>
 <![endif]-->
 
 </body>

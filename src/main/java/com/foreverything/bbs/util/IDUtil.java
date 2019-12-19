@@ -27,17 +27,17 @@ public class IDUtil {
 
 
     private static List<Long> rewardIDList=new ArrayList<>();
-
-
     private static List<Long> topicIDList=new ArrayList<>();
     private static List<Long> replayIDList=new ArrayList<>();
     private static List<Integer> userIDList=new ArrayList<>();
-
+    private static List<Long>  articleIDList=new ArrayList<>();
 
     @Autowired
     TopicMapper topicMapper;
+
     @Autowired
     RewardMapper rewardMapper;
+
     @Autowired
     ReplayMapper replayMapper;
 
@@ -63,11 +63,13 @@ public class IDUtil {
         idUtil.rewardMapper=this.rewardMapper;
         idUtil.replayMapper=this.replayMapper;
         idUtil.userMapper=this.userMapper;
+        idUtil.articleMapper=this.articleMapper;
 
         userIDList=userMapper.getUserIdCollection();
         replayIDList=replayMapper.getReplayIDList();
         topicIDList=topicMapper.getTopicIdCollection();
-
+        rewardIDList=rewardMapper.getRewardIdCollection();
+        articleIDList=articleMapper.getArticleIdCollection();
     }
 
     public static Long initID(){

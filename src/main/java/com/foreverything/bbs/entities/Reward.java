@@ -10,7 +10,7 @@ package com.foreverything.bbs.entities;
 public class Reward extends BaseBean {
     private boolean isDelete=false;
     private String title=null;
-    private String points=null;
+    private int points=0;
     private long bestreplay;
 
     public long getBestreplay() {
@@ -21,11 +21,11 @@ public class Reward extends BaseBean {
         this.bestreplay = bestreplay;
     }
 
-    public String getPoints() {
+    public int getPoints() {
         return points;
     }
 
-    public void setPoints(String points) {
+    public void setPoints(int points) {
         this.points = points;
     }
 
