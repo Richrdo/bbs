@@ -34,11 +34,13 @@ public class UserServiceImpl implements UserService {
     @Override
     public void insertUser(String username,String password,String mail){
         User user=new User();
-        user.setUserID(IDUtil.initUserID());
+
         user.setAccount(username);
         user.setPassword(password);
         user.setMail(mail);
         user.setGrade(0);
         userMapper.insertUser(user);
     }
+
+
 }
