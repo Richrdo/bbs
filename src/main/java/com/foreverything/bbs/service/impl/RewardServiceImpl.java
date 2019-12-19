@@ -91,7 +91,7 @@ public class RewardServiceImpl implements RewardService {
 
     @Override
     public boolean isEnough(int point, int id) {
-        if (point<userMapper.getPointsByID(id)){
+        if (point<=userMapper.getPointsByID(id)){
             return true;
         }else
         return false;

@@ -69,4 +69,13 @@ public interface RewardMapper {
     @Update("update reward set r_content=#{reward.content},r_title=#{reward.title},r_points=#{reward.points} where r_id=#{reward.id}")
      int putReward(@Param("reward")Reward reward);
 
+    @Select("select * from reward where r_is_delete=false and (r_title like #{str} or r_content like #{str}) ")
+    @Results({
+            @Result(property = "id",column = "t_id",id = true),
+            @Result(property = "userID",column = "t_author_id"),
+            @Result(property = "createTime",column = "t_create_time"),
+            @Result(property = "content",column = "t_content"),
+            @Result(property = "title",column = "t_title"),
+    })
+    public List<Reward> searchReward(@Param("str") String str);
 }

@@ -34,7 +34,7 @@ import java.util.List;
             return mv;
         }
 
-        @PostMapping("/article")
+        @PostMapping("/add/article")
         public String createNewArticle(Article article, HttpServletRequest request,Model model){
             System.out.println(article);
             if (article.getTitle().trim().length()==0||article.getContent().trim().length()==0){
@@ -42,6 +42,7 @@ import java.util.List;
                 model.addAttribute("msg","不完整");
                 return "redirect:/new/article";
             }else{
+                article.setUserID((Integer) request.getSession().getAttribute("userID"));
                 Long id=articleService.insertArticle(article);
                 if (id>0){
                     System.out.println("成功");
@@ -55,13 +56,13 @@ import java.util.List;
 
         }
 
-        @DeleteMapping("/article")
+        @DeleteMapping("/delete/article")
         public int deleteArticle(Long  id){
             return articleService.deleteArticle(id);
         }
 
 
-        @PutMapping("/article")
+        @PutMapping("/update/article")
         public ModelAndView updateArticle(Article article){
             ModelAndView mv=new ModelAndView();
             if (null==article.getContent()||null==article.getTitle()){

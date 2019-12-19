@@ -65,4 +65,16 @@ public interface TopicMapper {
 
     @Update("update topic set t_is_up=false where t_id=#{id}")
     public int cancelUpTopicByID(@Param("id")Long id);
+
+    @Select("select * from topic where t_is_delete=false and (t_title like #{str} or t_content like #{str}) ")
+    @Results({
+            @Result(property = "id",column = "t_id",id = true),
+            @Result(property = "userID",column = "t_author_id"),
+            @Result(property = "createTime",column = "t_create_time"),
+            @Result(property = "content",column = "t_content"),
+            @Result(property = "isMarrow",column = "t_is_marrow"),
+            @Result(property = "title",column = "t_title"),
+            @Result(property = "isTop",column = "t_is_top")
+    })
+    public List<Topic> searchTopic(@Param("str") String str);
 }

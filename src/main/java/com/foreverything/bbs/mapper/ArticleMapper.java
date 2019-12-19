@@ -66,4 +66,16 @@ public interface ArticleMapper {
 
     @Update("update article set a_is_marrow=false where id=#{id}")
     public int cancelMarrowArticleByID(@Param("id")Long id);
+
+    @Select("select * from article where a_is_delete=false and (a_title like #{str} or a_content like #{str}) ")
+    @Results({
+            @Result(property = "id",column = "a_id",id = true),
+            @Result(property = "userID",column = "a_author_id"),
+            @Result(property = "createTime",column = "a_create_time"),
+            @Result(property = "content",column = "a_content"),
+            @Result(property = "isMarrow",column = "a_is_marrow"),
+            @Result(property = "title",column = "a_title"),
+            @Result(property = "isTop",column = "a_is_top")
+    })
+    public List<Article> searchArticle(@Param("str") String str);
 }

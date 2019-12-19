@@ -35,5 +35,13 @@ public interface UserMapper {
     @Select("select u_id from user where u_mail=#{mail}")
     public int getIDByEmail(@Param("mail")String mail);
 
-
+    @Select("select * from user where u_id=#{id}")
+    @Results({
+            @Result(property = "id",column = "u_id"),
+            @Result(property = "mail",column = "u_mail"),
+            @Result(property = "grade",column = "u_grade"),
+            @Result(property = "name",column = "u_name"),
+            @Result(property = "isAdmin",column = "u_is_admin"),
+    })
+    public User getUserByID(int id);
 }

@@ -45,6 +45,7 @@ public class UserController {
         }else if (pw.equals(password)){
             mv.addObject("isAdmin",userService.judgeUserByID(userID));
             request.getSession().setAttribute("userID",userID);
+            request.getSession().setAttribute("user",userService.getUserByID(userID));
             mv.setViewName("index");
         }else{
             mv.addObject("msg","密码错误");

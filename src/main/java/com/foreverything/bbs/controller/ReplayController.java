@@ -27,7 +27,7 @@ public class ReplayController {
     @Autowired
     TopicService topicService;
 
-    @PostMapping("/replay/add")
+    @PostMapping("/add/replay")
     public String replaySomething( HttpServletRequest request){
         ModelAndView mv=new ModelAndView();
         Replay replay=new Replay();

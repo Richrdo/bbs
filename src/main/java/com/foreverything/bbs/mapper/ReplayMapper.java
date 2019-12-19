@@ -38,5 +38,14 @@ public interface ReplayMapper {
 
     @Select("select r_id from replay")
     public List<Long> getReplayIDList();
+
+    @Select("select * from replay where r_is_delete=false and (r_content like #{str}) ")
+    @Results({
+            @Result(property = "id",column = "r_id",id = true),
+            @Result(property = "userID",column = "r_author_id"),
+            @Result(property = "createTime",column = "r_create_time"),
+            @Result(property = "content",column = "r_content"),
+    })
+    public List<Replay> searchReplay(@Param("str") String str);
 }
 

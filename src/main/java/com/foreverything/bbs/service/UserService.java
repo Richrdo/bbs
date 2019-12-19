@@ -22,4 +22,6 @@ public interface UserService {
      int getIDByMail(String mail);
 
      String getPasswordByEmail(String mail);
+
+     User getUserByID(int id);
 }

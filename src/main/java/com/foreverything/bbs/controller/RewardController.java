@@ -35,17 +35,22 @@ public class RewardController {
     }
 
   //发布新悬赏
-    @PostMapping("/reward")
+    @PostMapping("/add/reward")
     public ModelAndView createNewReward(Reward reward, HttpServletRequest request){
         ModelAndView mv=new ModelAndView();
-        if (reward.getTitle().trim().length()==0||reward.getContent().trim().length()==0){
+        System.out.println(reward.getTitle()+reward.getTitle().length());
+        System.out.println(reward.getContent()+reward.getContent().length());
+        System.out.println(reward.getPoints());
+        if (reward.getTitle().length()==0||reward.getContent().length()==0){
             mv.addObject("msg","请填写完整");
             System.out.println("内容错误");
             mv.setViewName("newRewardPage");
         }else if(!rewardService.isEnough(reward.getPoints(), (Integer) request.getSession().getAttribute("userID"))) {
             mv.addObject("msg","积分不够");
+            System.out.println("积分不够");
             mv.setViewName("newRewardPage");
         }else{
+                reward.setUserID((Integer) request.getSession().getAttribute("userID"));
                 Long id=rewardService.insertReward(reward);
                 if (id>0){
                     mv.addObject("msg","发布成功");
@@ -63,7 +68,7 @@ public class RewardController {
         return mv;
     }
 
-    @PutMapping("/reward")
+    @PutMapping("/update/reward")
     public ModelAndView updateReward(Reward reward){
         ModelAndView mv=new ModelAndView();
         if (null==reward.getContent()||null==reward.getTitle()){
