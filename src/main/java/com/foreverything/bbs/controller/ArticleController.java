@@ -1,6 +1,7 @@
 package com.foreverything.bbs.controller;
 
 import com.foreverything.bbs.entities.Article;
+import com.foreverything.bbs.entities.Topic;
 import com.foreverything.bbs.service.ArticleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,11 +15,11 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
     /**
-     * @ClassName PartOne
-     * @Author ying_tie
-     * Date 14:52 2019/12/16
-     * @Description
-     */
+ * @ClassName PartOne
+ * @Author ying_tie
+ * Date 14:52 2019/12/16
+ * @Description
+ */
     @Controller
     public class ArticleController {
 
@@ -35,20 +36,15 @@ import java.util.List;
         }
 
         @PostMapping("/article")
-        public String createNewArticle(Article article, HttpServletRequest request,Model model){
-            System.out.println(article);
-            if (article.getTitle().trim().length()==0||article.getContent().trim().length()==0){
-                System.out.println("不完整");
-                model.addAttribute("msg","不完整");
+        public String createNewArticle(Article article){
+
+            if (null==article.getTitle()||null==article.getContent()){
                 return "redirect:/new/article";
             }else{
                 Long id=articleService.insertArticle(article);
                 if (id>0){
-                    System.out.println("成功");
                     return "redirect:/article";
                 }else{
-                    model.addAttribute("msg","错误");
-                    System.out.println("错误");
                     return "redirect:/new/article";
                 }
             }
