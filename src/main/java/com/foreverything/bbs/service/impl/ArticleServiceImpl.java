@@ -27,12 +27,15 @@ public class ArticleServiceImpl implements ArticleService{
         public List<Article> getAllArticle() {
             return articleMapper.getAllArticle();
         }
+
         @Override
         public Long insertArticle(Article article){
             article.setId(IDUtil.initID());
+
             SimpleDateFormat dateFormat=new SimpleDateFormat();
             dateFormat.applyPattern("yyyy-MM-dd HH:mm:ss");
             Date date=new Date();
+
             article.setCreateTime(dateFormat.format(date));
 
             if (articleMapper.insertArticle(article)>0){

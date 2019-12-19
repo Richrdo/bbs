@@ -12,8 +12,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.swing.*;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
 
@@ -29,17 +31,19 @@ public class UserController {
     @Autowired
     UserService userService;
 
-    @PostMapping("/login")
-    public ModelAndView userLogin(@RequestParam("id") String id, @RequestParam("password") String password, HttpServletRequest request){
-        ModelAndView mv=new ModelAndView();
-        int userID=Integer.parseInt(id);
-        String pw=userService.getPas(userID);
+    ModelAndView modelAndView;
 
+    @PostMapping("/login")
+    public ModelAndView userLogin(@RequestParam("mail") String mail, @RequestParam("password") String password, HttpServletRequest request){
+        ModelAndView mv=new ModelAndView();
+
+        int userID=userService.getIDByMail(mail);
+        String pw=userService.getPas(userID);
         if (null==pw){
             mv.addObject("msg","该用户不存在");
             mv.setViewName("login");
         }else if (pw.equals(password)){
-            mv.addObject("msg","登入成功");
+            mv.addObject("isAdmin",userService.judgeUserByID(userID));
             request.getSession().setAttribute("userID",userID);
             mv.setViewName("index");
         }else{
@@ -51,9 +55,17 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public String createUser(User user,@RequestParam("username") String username,@RequestParam("password") String password,@RequestParam("mail") String mail){
-        userService.insertUser(username,password,mail);
-        return "login";
+    public ModelAndView createUser(@RequestParam("name") String name, @RequestParam("password") String password, @RequestParam("mail") String mail, HttpServletResponse response){
+        int id=userService.insertUser(name,password,mail);
+        ModelAndView mv=new ModelAndView();
+        if (id>0){
+            mv.addObject("msg","注册成功，您的id为："+id);
+            mv.setViewName("login");
+        }else{
+            mv.addObject("msg","注册失败，您的邮箱已注册");
+            mv.setViewName("register");
+        }
+        return mv;
     }
 
 
@@ -70,5 +82,15 @@ public class UserController {
         request.getSession().invalidate();
 
         return "index";
+    }
+
+    @GetMapping("/login")
+    public String Login(){
+        return "login";
+    }
+
+    @GetMapping("/register")
+    public String Register(){
+        return "register";
     }
 }

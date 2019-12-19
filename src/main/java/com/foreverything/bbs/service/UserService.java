@@ -15,5 +15,11 @@ public interface UserService {
 
      String getPas(int id);
 
-     void insertUser(String username, String password, String mail);
+     int insertUser(String username, String password, String mail);
+
+     Boolean judgeUserByID(int id);
+
+     int getIDByMail(String mail);
+
+     String getPasswordByEmail(String mail);
 }

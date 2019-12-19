@@ -5,6 +5,7 @@ import com.foreverything.bbs.entities.Reward;
 import com.foreverything.bbs.entities.Topic;
 import com.foreverything.bbs.mapper.RewardMapper;
 import com.foreverything.bbs.mapper.TopicMapper;
+import com.foreverything.bbs.mapper.UserMapper;
 import com.foreverything.bbs.service.RewardService;
 import com.foreverything.bbs.util.IDUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,9 @@ public class RewardServiceImpl implements RewardService {
 
     @Autowired
     RewardMapper rewardMapper;
+
+    @Autowired
+    UserMapper userMapper;
 
     @Override
     public List<Reward> getAllReward() {
@@ -83,6 +87,14 @@ public class RewardServiceImpl implements RewardService {
     @Override
     public int deleteReward(Reward reward){
         return rewardMapper.deleteReward(reward);
+    }
+
+    @Override
+    public boolean isEnough(int point, int id) {
+        if (point<userMapper.getPointsByID(id)){
+            return true;
+        }else
+        return false;
     }
 
 

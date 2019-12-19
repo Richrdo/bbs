@@ -12,6 +12,23 @@ public class Article extends BaseBean {
     private boolean isDelete=false;
     private String title=null;
 
+    @Override
+    public String toString() {
+        return "Article{" +
+                "title='" + title + '\'' + "content="+getContent()+
+                '}';
+    }
+
+    public boolean isTop() {
+        return isTop;
+    }
+
+    public void setTop(boolean top) {
+        isTop = top;
+    }
+
+    private boolean isTop=false;
+
     public boolean isMarrow() {
         return isMarrow;
     }

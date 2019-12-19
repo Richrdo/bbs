@@ -37,7 +37,7 @@ public class RewardDetailController {
         mv.addObject("obj",reward);
         List<Replay> replayList=replayService.getReplayListByID(id);
         mv.addObject("replays",replayList);
-        mv.setViewName("topicDetailPage");
+        mv.setViewName("rewardDetailPage");
         return mv;
     }
 }

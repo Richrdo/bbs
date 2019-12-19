@@ -69,4 +69,14 @@ public interface RewardService {
     *@Descriptoon:删除悬赏
     */
     int deleteReward(Reward reward);
+
+    /**
+     * @Author:Yanlan_Li
+     * @Date:23:56 2019/12/18
+     * @param:
+     *  * @param null
+     *
+     * @Desccription:根据id判断悬赏点数是否足够。
+     */
+    boolean isEnough(int point,int id);
 }

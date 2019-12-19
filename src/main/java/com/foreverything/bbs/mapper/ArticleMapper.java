@@ -38,7 +38,8 @@ public interface ArticleMapper {
             @Result(property = "content", column = "a_content"),
             @Result(property = "createTime", column = "a_create_time"),
             @Result(property = "isMarrow", column = "a_is_marrow"),
-            @Result(property = "isDelete", column = "a_is_delete")
+            @Result(property = "isDelete", column = "a_is_delete"),
+            @Result(property = "isTop",column = "a_is_top")
     })
     Article getArticleByID(@Param("id")Long id);
 

@@ -6,18 +6,36 @@ package com.foreverything.bbs.entities;
  * @Date Created in 14:46 2019/12/17
  * @Description
  */
-public class User extends BaseBean {
-    private String account;
+public class User {
     private String password;
     private String mail;
-    private int grade;
+    private int grade=0;
+    private int id;
+    private boolean isAdmin=false;
+    private String name;
 
-    public String getAccount() {
-        return account;
+    public String getName() {
+        return name;
     }
 
-    public void setAccount(String account) {
-        this.account = account;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public boolean isAdmin() {
+        return isAdmin;
+    }
+
+    public void setAdmin(boolean admin) {
+        isAdmin = admin;
     }
 
     public String getPassword() {

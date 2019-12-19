@@ -26,7 +26,7 @@
                                 <h3 th:utext="'<em>【积分:'+${reward.getPoints()}+'】</em>'+${reward.getTitle()}" class="text-max-line-2" ></h3>
                                 <p th:text="*{reward.getContent()}" class="text-max-line-2"></p>
                                 <p>
-                                    <a class="btn" th:href="@{/reward(id=${reward.getId()})}">查看详情 »</a>
+                                    <a class="btn" th:href="@{/rewardDetail(id=${reward.getId()})}">查看详情 »</a>
                                 </p>
                             </div>
                             <div class="col-md-4">
