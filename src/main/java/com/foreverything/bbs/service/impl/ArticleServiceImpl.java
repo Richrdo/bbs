@@ -27,12 +27,15 @@ public class ArticleServiceImpl implements ArticleService{
         public List<Article> getAllArticle() {
             return articleMapper.getAllArticle();
         }
+
         @Override
         public Long insertArticle(Article article){
             article.setId(IDUtil.initID());
+
             SimpleDateFormat dateFormat=new SimpleDateFormat();
             dateFormat.applyPattern("yyyy-MM-dd HH:mm:ss");
             Date date=new Date();
+
             article.setCreateTime(dateFormat.format(date));
 
             if (articleMapper.insertArticle(article)>0){
@@ -45,12 +48,34 @@ public class ArticleServiceImpl implements ArticleService{
             return articleMapper.updateArticle(article);
         }
         @Override
-        public int deleteArticle(Article article){
-            return articleMapper.deleteArticle(article);
+        public int deleteArticle(Long id){
+            return articleMapper.deleteArticleByID(id);
         }
-        @Override
-        public Article getArticleByID(Long id) {
+
+    @Override
+    public int upArticleByID(Long id) {
+        return articleMapper.upArticle(id);
+    }
+
+    @Override
+    public int cancelUpArticleByID(Long id) {
+        return articleMapper.cancelUpArticleByID(id);
+    }
+
+    @Override
+    public int marrowArticleByID(Long id) {
+        return articleMapper.marrowArticleByID(id);
+    }
+
+    @Override
+    public int cancelMarrowArticleByID(Long id) {
+        return articleMapper.cancelMarrowArticleByID(id);
+    }
+
+    @Override
+    public Article getArticleByID(Long id) {
             return articleMapper.getArticleByID(id);
         }
-    }
+
+}
 

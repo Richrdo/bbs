@@ -34,7 +34,7 @@ public class ReplayController {
         Long fromID=Long.parseLong(request.getParameter("id"));
         replay.setFromID(fromID);
         replay.setContent(request.getParameter("content"));
-        replay.setUserID(4457);
+        replay.setUserID((Integer) request.getSession().getAttribute("userID"));
         System.out.println("获取的评论为："+replay);
         long id=replayService.insertReplay(replay);
         if (id>0){
@@ -46,9 +46,11 @@ public class ReplayController {
         }else{
             mv.addObject("msg","发表失败");
         }
-        System.out.println("跳转的path为"+request.getParameter("path_s"));
+        String path=request.getParameter("path_s");
+        System.out.println("跳转的path为"+path);
         mv.setViewName("topicDetailPage");
-        return "redirect:/topicDetail?id="+fromID;
+
+        return "redirect:/"+path+"?id="+fromID;
     }
 }
 

@@ -3,13 +3,13 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>讨论区</title>
+    <title>文章区</title>
 </head>
 <body>
 
 <div class="container-fluid">
 
-    <div th:replace="~{index::top-bar(activeUri='topic.html')}"></div>
+    <div th:replace="~{index::top-bar(activeUri='article.html')}"></div>
 
     <div class="row clearfix">
 
@@ -21,18 +21,18 @@
             <div class="row clearfix">
                 <div class="col-md-12">
 
-                    <div class="container-fluid  topic-content-box-index" th:each="topic:${topics}" th:if="${topic.isTop()}">
+                    <div class="container-fluid  topic-content-box-index" th:each="article:${articles}" th:if="${article.isTop()}">
                         <div class="row clearfix item-vertical-middle">
                             <div class="col-md-8 ">
-                                <h3 th:utext="'<strong>【顶置】</strong>'+*{topic.getTitle()}" class="text-max-line-2"></h3>
-                                <p th:text="*{topic.getContent()}" class="text-max-line-2"></p>
+                                <h3 th:utext="'<strong>【顶置】</strong>'+*{article.getTitle()}" class="text-max-line-2"></h3>
+                                <p th:text="*{article.getContent()}" class="text-max-line-2"></p>
                                 <p>
-                                    <a class="btn" th:href="@{/topicDetail(id=${topic.getId()})}">查看详情 »</a>
+                                    <a class="btn" th:href="@{/articleDetail(id=${article.getId()})}">查看详情 »</a>
                                 </p>
                             </div>
                             <div class="col-md-4">
-                                <em th:text="${topic.getUserID()}"></em>
-                                <p th:text="${topic.getCreateTime()}"></p>
+                                <em th:text="${article.getUserID()}"></em>
+                                <p th:text="${article.getCreateTime()}"></p>
                             </div>
                         </div>
                     </div>
@@ -43,18 +43,18 @@
             <div class="row clearfix">
                 <div class="col-md-12">
 
-                    <div class="container-fluid topic-content-box-index " th:each="topic:${topics}" th:if="!${topic.isTop()}">
+                    <div class="container-fluid topic-content-box-index " th:each="article:${articles}" th:if="!${article.isTop()}">
                         <div class="row clearfix item-vertical-middle">
                             <div class="col-md-8 column">
-                                <h3 th:text="${topic.getTitle()}" th:class="${topic.isMarrow()}?'text-danger text-max-line-2 ':'text-max-line-2'" ></h3>
-                                <p th:text="*{topic.getContent()}" th:class="${topic.isMarrow()}?'text-danger text-max-line-2':'text-max-line-2'"></p>
+                                <h3 th:text="${article.getTitle()}" th:class="${article.isMarrow()}?'text-danger text-max-line-2 ':'text-max-line-2'" ></h3>
+                                <p th:text="*{article.getContent()}" th:class="${article.isMarrow()}?'text-danger text-max-line-2':'text-max-line-2'"></p>
                                 <p>
-                                    <a class="btn" th:href="@{/topicDetail(id=${topic.getId()})}">查看详情 »</a>
+                                    <a class="btn" th:href="@{/articleDetail(id=${article.getId()})}">查看详情 »</a>
                                 </p>
                             </div>
                             <div class="col-md-4">
-                                <em th:text="${topic.getUserID()}"></em>
-                                <p th:text="${topic.getCreateTime()}"></p>
+                                <em th:text="${article.getUserID()}"></em>
+                                <p th:text="${article.getCreateTime()}"></p>
                             </div>
                         </div>
                     </div>

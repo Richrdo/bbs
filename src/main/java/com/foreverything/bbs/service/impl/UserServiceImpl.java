@@ -21,25 +21,43 @@ public class UserServiceImpl implements UserService {
     @Autowired
     UserMapper userMapper;
 
-    @Override
-    public  boolean getID(int id){
-        if(userMapper.getID().contains(id))
-            return true;
-        return false;
-    }
+
     @Override
     public String getPas(int id){
         return userMapper.getPas(id);
     }
-    @Override
-    public void insertUser(String username,String password,String mail){
-        User user=new User();
 
-        user.setAccount(username);
+    @Override
+    public int insertUser(String username,String password,String mail){
+        User user=new User();
+        user.setId(IDUtil.initUserID());
+        user.setName(username);
         user.setPassword(password);
         user.setMail(mail);
         user.setGrade(0);
-        userMapper.insertUser(user);
+        if (userMapper.insertUser(user)>0){
+            return user.getId();
+        }else
+        return 0;
+    }
+
+    @Override
+    public Boolean judgeUserByID(int id) {
+        return userMapper.isAdmin(id);
+    }
+
+    @Override
+    public int getIDByMail(String mail) {
+        return userMapper.getIDByEmail(mail);
+    }
+
+    @Override
+    public String getPasswordByEmail(String mail) {
+        int id=userMapper.getIDByEmail(mail);
+        if (id>0){
+            return userMapper.getPas(id);
+        }
+        return null;
     }
 
 

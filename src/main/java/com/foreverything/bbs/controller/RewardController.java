@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
+
 /**
  * @ClassName RewardController
  * @Author Yanlan_Li
@@ -28,32 +30,35 @@ public class RewardController {
         ModelAndView mv = new ModelAndView();
         mv.addObject("rewards", rewardService.getAllReward());
 //        setViewName()用来设置跳转页面
-       mv.setViewName("TopicPage");
+       mv.setViewName("rewardPage");
         return mv;
     }
 
   //发布新悬赏
     @PostMapping("/reward")
-    public ModelAndView createNewReward(Reward reward){
+    public ModelAndView createNewReward(Reward reward, HttpServletRequest request){
         ModelAndView mv=new ModelAndView();
-        if (null==reward.getTitle()||null==reward.getContent()||null==reward.getPoints()){
+        if (reward.getTitle().trim().length()==0||reward.getContent().trim().length()==0){
             mv.addObject("msg","请填写完整");
             System.out.println("内容错误");
-//            TODO 跳转到原帖子界面
+            mv.setViewName("newRewardPage");
+        }else if(!rewardService.isEnough(reward.getPoints(), (Integer) request.getSession().getAttribute("userID"))) {
+            mv.addObject("msg","积分不够");
+            mv.setViewName("newRewardPage");
         }else{
-            Long id=rewardService.insertReward(reward);
-            if (id>0){
-                mv.addObject("msg","发布成功");
-                mv.addObject("newReward",rewardService.getRewardByID(id));
-                System.out.println("跳转到讨悬赏页面");
-                mv.setViewName("topicPage");//               TODO 跳转到讨悬赏页面
-            }else{
-                mv.addObject("msg","创建失败");
-                System.out.println("跳转到原修改帖子页面");
-                //            TODO 跳转到原帖子界面
+                Long id=rewardService.insertReward(reward);
+                if (id>0){
+                    mv.addObject("msg","发布成功");
+                    mv.addObject("newReward",rewardService.getRewardByID(id));
+                    System.out.println("跳转到讨悬赏页面");
+                    mv.setViewName("rewardPage");
+                }else{
+                    mv.addObject("msg","创建失败");
+                    System.out.println("跳转到帖子页面");
+                    mv.setViewName("newRewardPage");
+                }
             }
-        }
-//        注意！！！！！！！！！！！！如果没写前端就测试的话，mv.setViewName()必须指向一个已经存在的template，否则会报错!!!!!!!!!
+
         //mv.setViewName("topicPage");
         return mv;
     }
@@ -61,7 +66,7 @@ public class RewardController {
     @PutMapping("/reward")
     public ModelAndView updateReward(Reward reward){
         ModelAndView mv=new ModelAndView();
-        if (null==reward.getContent()||null==reward.getTitle()||null==reward.getPoints()){
+        if (null==reward.getContent()||null==reward.getTitle()){
             mv.addObject("msg","标题或内容为空！");
 
 //            TODO 跳转到原修改帖子界面
