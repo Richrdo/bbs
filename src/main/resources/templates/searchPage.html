@@ -1,4 +1,6 @@
 <!DOCTYPE html>
+<!--suppress ALL-->
+
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
@@ -28,8 +30,9 @@
                             <td><a th:text="${topic.getTitle()}" th:href="@{/topicDetail(id=${topic.getId()})}"></a></td>
                             <td><p th:text="${topic.getCreateTime()}"></p></td>
                             <td th:if="${isAdmin}">
-                                <a th:class="${topic.isTop()?'btn btn-warning':'btn btn-success'}" th:text="${topic.isTop()}?'取消置顶':'置顶'"></a>
-                                <a th:class="${topic.isMarrow()?'btn btn-warning':'btn btn-primary'}" th:text="${topic.isMarrow()}?'取消加精':'加精'"></a>
+                                <a th:class=" ${topic.isTop()?'btn btn-warning col-sm-3 ':'btn btn-success col-sm-3 '}"  th:text="${topic.isTop()}?'取消置顶':'  置  顶  '" th:href="${topic.isTop()}?'/cancelup/topic?id='+${topic.getId()}:'/up/topic?id='+${topic.getId()}"></a>
+                                <a th:class=" ${topic.isMarrow()?'btn btn-warning col-sm-offset-1 col-sm-3 ':'btn btn-primary col-sm-offset-1 col-sm-3 '}" th:text="${topic.isMarrow()}?'取消加精':'  加  精  '"  th:href="${topic.isMarrow()}?'/cancelmarrow/topic?id='+${topic.getId()}:'/marrow/topic?id='+${topic.getId()}"></a>
+                                <a class="btn btn-danger col-sm-offset-1 col-sm-3" th:text="删除" th:href="@{/delete/topic(id=${topic.getId()})}"></a>
                             </td>
                         </tr>
                         <tr th:each="article:${articleList}">
@@ -38,8 +41,9 @@
                             <td><a th:text="${article.getTitle()}" th:href="@{/articleDetail(id=${article.getId()})}"></a></td>
                             <td><p th:text="${article.getCreateTime()}"></p></td>
                             <td th:if="${isAdmin}">
-                                <a th:class="${article.isTop()?'btn btn-warning':'btn btn-success'}" th:text="${article.isTop()}?'取消置顶':'置顶'"></a>
-                                <a th:class="${article.isMarrow()?'btn btn-warning':'btn btn-primary'}" th:text="${article.isMarrow()}?'取消加精':'加精'"></a>
+                                <a th:class="${article.isTop()?'btn btn-warning col-sm-3 ':'btn btn-success col-sm-3 '}" th:text="${article.isTop()}?'取消置顶':'  置  顶  '"   th:href="${article.isTop()}?'/cancelup/topic?id='+${article.getId()}:'/up/article?id='+${article.getId()}"></a>
+                                <a th:class="${article.isMarrow()?'btn btn-warning col-sm-offset-1 col-sm-3 ':'btn btn-primary  col-sm-offset-1 col-sm-3 '}" th:text="${article.isMarrow()}?'取消加精':'  加  精  '" th:href="${article.isMarrow()}?'/cancelmarrow/article?id='+${article.getId()}:'/marrow/article?id='+${article.getId()}"></a>
+                                <a class="btn btn-danger col-sm-offset-1 col-sm-3" th:text="删除" th:href="@{/delete/article(id=${article.getId()})}"></a>
                             </td>
                         </tr>
                         <tr th:each="reward:${rewardList}">
@@ -48,7 +52,16 @@
                             <td><a th:text="${reward.getTitle()}" th:href="@{/rewardDetail(id=${reward.getId()})}"></a></td>
                             <td><p th:text="${reward.getCreateTime()}"></p></td>
                             <td th:if="${isAdmin}">
-
+                                <a class="btn btn-danger" th:text="删除" th:href="@{/delete/reward(id=${reward.getId()})}"></a>
+                            </td>
+                        </tr>
+                        <tr th:each="replay:${replayList}">
+                            <td>回复</td>
+                            <td th:text="${replay.getId()}"></td>
+                            <td><a th:text="${replay.getContent()}" ></a></td>
+                            <td><p th:text="${replay.getCreateTime()}"></p></td>
+                            <td th:if="${isAdmin}">
+                                <a class="btn btn-danger" th:text="删除" th:href="@{/delete/replay(id=${replay.getId()})}"></a>
                             </td>
                         </tr>
                         </tbody>

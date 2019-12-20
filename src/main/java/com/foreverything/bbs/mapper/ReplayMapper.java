@@ -47,5 +47,11 @@ public interface ReplayMapper {
             @Result(property = "content",column = "r_content"),
     })
     public List<Replay> searchReplay(@Param("str") String str);
+
+    @Update("update replay set r_is_delete=true where r_id=#{id}")
+    public int deleteReplay(@Param("id")long id);
+
+    @Update("update replay set r_is_delete=false where r_id=#{id}")
+    public int cancelDeleteReplay(long id);
 }
 

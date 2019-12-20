@@ -47,9 +47,15 @@ public class ArticleServiceImpl implements ArticleService{
         public int updateArticle(Article article) {
             return articleMapper.updateArticle(article);
         }
+
         @Override
         public int deleteArticle(Long id){
             return articleMapper.deleteArticleByID(id);
+        }
+
+        @Override
+        public int cancelDeleteArticle(long id){
+            return articleMapper.cancelMarrowArticleByID(id);
         }
 
     @Override

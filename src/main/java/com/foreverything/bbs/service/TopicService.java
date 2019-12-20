@@ -55,6 +55,15 @@ public interface TopicService {
      */
     int marrowTopicByID(Long id);
 
+    /**
+     * @Author:CeaserBorgia
+     * @Date:10:08 2019/12/20
+     * @param:
+     *  * @param null
+     *
+     * @Desccription:   取消加精
+     */
+    int cancelMarrowTopic(long id);
 
     /**
      * @Author:刘光辉
@@ -76,6 +85,16 @@ public interface TopicService {
      * @Desccription:   删除帖子
      */
     int deleteTopicByID(Long id);
+
+    /**
+     * @Author:CeaserBorgia
+     * @Date:10:01 2019/12/20
+     * @param:
+     *  * @param null
+     *
+     * @Desccription:   取消删除帖子
+     */
+    int cancelDeleteTopicByID(long id);
 
     /**
      * @Author:刘光辉

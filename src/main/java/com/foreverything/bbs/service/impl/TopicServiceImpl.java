@@ -57,6 +57,11 @@ public class TopicServiceImpl implements TopicService {
     }
 
     @Override
+    public int cancelMarrowTopic(long id) {
+        return topicMapper.cancelMarrowTopicByID(id);
+    }
+
+    @Override
     public int upTopicByID(Long id) {
         return topicMapper.upTopicByID(id);
     }
@@ -64,6 +69,11 @@ public class TopicServiceImpl implements TopicService {
     @Override
     public int deleteTopicByID(Long id) {
         return topicMapper.deleteTopicByID(id);
+    }
+
+    @Override
+    public int cancelDeleteTopicByID(long id) {
+        return cancelDeleteTopicByID(id);
     }
 
     @Override

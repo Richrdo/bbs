@@ -43,5 +43,15 @@ public class ReplayServiceImpl implements ReplayService {
         return 0L;
     }
 
+    @Override
+    public int deleteReplay(long id) {
+        return replayMapper.deleteReplay(id);
+    }
+
+    @Override
+    public int cancelDeleteReplay(long id) {
+        return replayMapper.cancelDeleteReplay(id);
+    }
+
 }
 

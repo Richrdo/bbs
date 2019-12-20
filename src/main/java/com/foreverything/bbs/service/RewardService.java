@@ -68,7 +68,17 @@ public interface RewardService {
     *  * @param null
     *@Descriptoon:删除悬赏
     */
-    int deleteReward(Reward reward);
+    int deleteReward(long id);
+    
+    /**
+     * @Author:刘光辉
+     * @Date:10:23 2019/12/20
+     * @param:
+     *  * @param null
+     * 
+     * @Desccription:
+     */
+    int cancelDeleteReward(long id);
 
     /**
      * @Author:Yanlan_Li

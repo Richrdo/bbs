@@ -23,6 +23,8 @@ public interface ArticleService {
 
     int deleteArticle(Long id);
 
+    int cancelDeleteArticle(long id);
+
     int upArticleByID(Long id);
 
     int cancelUpArticleByID(Long id);

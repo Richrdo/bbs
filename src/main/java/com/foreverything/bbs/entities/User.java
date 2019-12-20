@@ -18,6 +18,18 @@ public class User {
         return name;
     }
 
+    @Override
+    public String toString() {
+        return "User{" +
+                "password='" + password + '\'' +
+                ", mail='" + mail + '\'' +
+                ", grade=" + grade +
+                ", id=" + id +
+                ", isAdmin=" + isAdmin +
+                ", name='" + name + '\'' +
+                '}';
+    }
+
     public void setName(String name) {
         this.name = name;
     }

@@ -62,12 +62,15 @@ public interface RewardMapper {
      int setBestReplay(@Param("replay")Replay replay,@Param("reward")Reward reward);
 
     //删除悬赏
-    @Update("update reward set r_is_delete=true where r_id=#{reward.id}")
-    int deleteReward(@Param("reward")Reward reward);
+    @Update("update reward set r_is_delete=true where r_id=#{id}")
+    int deleteReward(long id);
 
     //创建者修改悬赏内容
-    @Update("update reward set r_content=#{reward.content},r_title=#{reward.title},r_points=#{reward.points} where r_id=#{reward.id}")
+    @Update("update reward set r_content=#{reward.content},r_title=#{reward.title} where r_id=#{reward.id}")
      int putReward(@Param("reward")Reward reward);
+
+    @Update("update reward set r_is_delete=false where r_id=#{id}")
+    int cancelDeleteReward(long id);
 
     @Select("select * from reward where r_is_delete=false and (r_title like #{str} or r_content like #{str}) ")
     @Results({

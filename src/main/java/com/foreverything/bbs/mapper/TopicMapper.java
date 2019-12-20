@@ -63,7 +63,7 @@ public interface TopicMapper {
     @Update("update topic set t_is_marrow=false where t_id=#{id}")
     public int cancelMarrowTopicByID(@Param("id")Long id);
 
-    @Update("update topic set t_is_up=false where t_id=#{id}")
+    @Update("update topic set t_is_top=false where t_id=#{id}")
     public int cancelUpTopicByID(@Param("id")Long id);
 
     @Select("select * from topic where t_is_delete=false and (t_title like #{str} or t_content like #{str}) ")
