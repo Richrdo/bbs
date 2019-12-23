@@ -44,4 +44,14 @@ public interface UserMapper {
             @Result(property = "isAdmin",column = "u_is_admin"),
     })
     public User getUserByID(int id);
+
+    @Select("select u_name,u_id from user")
+    @Results({
+            @Result(property = "id",column="u_id"),
+            @Result(property = "name",column = "u_name")
+    })
+    public List<User> getUserIDMap();
+
+    @Select("select u_grade from user where u_id=#{id}")
+    public int getUserPoint(@Param("id") int id);
 }

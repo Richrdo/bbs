@@ -48,6 +48,13 @@
     padding: 0px;
 }
 
+.hr15{
+    height: 15px;
+    border: none;
+    margin: 0px;
+    padding: 0px;
+}
+
 .replay-in-detail{
     padding: 10px;
 }
@@ -93,4 +100,11 @@
     background-position: center 0;
     -webkit-background-size: cover;
     -o-background-size: cover;
+}
+
+.hr8{
+    height: 8px;
+    border: none;
+    margin: 0px;
+    padding: 0px;
 }

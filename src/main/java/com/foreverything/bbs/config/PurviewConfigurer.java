@@ -29,7 +29,7 @@ public class PurviewConfigurer implements WebMvcConfigurer {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry){
-        registry.addInterceptor(loginInterceptor).addPathPatterns("/add/**","/new/**","/delete/**","/update/**","/up/**","/marrow/**");
+        registry.addInterceptor(loginInterceptor).addPathPatterns("/add/**","/new/**","/delete/**","/update/**","/up/**","/marrow/**","/topicDetail","/articleDetail","/rewardDetail");
     }
 }
 

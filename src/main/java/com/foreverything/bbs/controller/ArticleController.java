@@ -36,11 +36,12 @@ import java.util.List;
         }
 
         @PostMapping("/add/article")
-        public String createNewArticle(Article article,Model model){
+        public String createNewArticle(Article article,Model model,HttpServletRequest request){
             if (article.getTitle().length()==0||0==article.getContent().length()){
                 model.addAttribute("message","内容不完整");
                 return "newArticlePage";
             }else{
+                article.setUserID((Integer) request.getSession().getAttribute("userID"));
                 Long id=articleService.insertArticle(article);
                 if (id>0){
                     return "redirect:/article";

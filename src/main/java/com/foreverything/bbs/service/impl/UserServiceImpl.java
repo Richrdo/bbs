@@ -8,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.swing.*;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @ClassName UserServiceImpl
@@ -63,6 +65,20 @@ public class UserServiceImpl implements UserService {
     @Override
     public User getUserByID(int id) {
         return userMapper.getUserByID(id);
+    }
+
+    @Override
+    public Map<Integer,String> getUserMap() {
+        Map<Integer,String> map=new HashMap<>();
+        userMapper.getUserIDMap().forEach(e->{
+            map.put(e.getId(),e.getName());
+        });
+        return map;
+    }
+
+    @Override
+    public int getUserPoints(int id) {
+        return userMapper.getPointsByID(id);
     }
 
 

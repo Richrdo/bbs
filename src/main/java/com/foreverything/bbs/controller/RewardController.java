@@ -6,6 +6,7 @@ import com.foreverything.bbs.service.RewardService;
 import com.foreverything.bbs.service.TopicService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -38,20 +39,21 @@ public class RewardController {
 
   //发布新悬赏
     @PostMapping("/add/reward")
-    public String createNewReward(Reward reward, HttpServletRequest request,@RequestParam Map<String,String> map){
+    public String createNewReward(Reward reward, HttpServletRequest request, Model model){
         if (null==reward.getTitle()||null==reward.getContent()){
-            map.put("message","信息不完整");
-            return "redirect:/new/reward";
+            model.addAttribute("message","信息不完整");
+            return "nweRewardPage";
         }else if(!rewardService.isEnough(reward.getPoints(), (Integer) request.getSession().getAttribute("userID"))) {
-            map.put("message","您的积分不足");
-            return "redirect:/new/reward";//积分不够
+            model.addAttribute("message","您的积分不足");
+            return "newRewardPage";//积分不够
         }else{
             Long id=rewardService.insertReward(reward);
             if (id>0){
+                model.addAttribute("message","发布成功");
                 return "redirect:/reward";
             }else{
-                map.put("message","发布失败，请重新登录");
-                return "redirect:/new/reward";
+                model.addAttribute("message","发布失败，请重新登录`");
+                return "nweRewardPage";
             }
         }
     }

@@ -4,6 +4,7 @@ import com.foreverything.bbs.entities.User;
 import org.springframework.data.relational.core.sql.In;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @ClassName UserService
@@ -24,4 +25,8 @@ public interface UserService {
      String getPasswordByEmail(String mail);
 
      User getUserByID(int id);
+
+     Map<Integer,String> getUserMap();
+
+     int getUserPoints(int id);
 }

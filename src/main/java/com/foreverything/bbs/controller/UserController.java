@@ -1,6 +1,7 @@
 package com.foreverything.bbs.controller;
 
 
+import com.foreverything.bbs.entities.User;
 import com.foreverything.bbs.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -29,16 +30,25 @@ public class UserController {
     @PostMapping("/login")
     public ModelAndView userLogin(@RequestParam("id")String id, @RequestParam("password") String password, HttpServletRequest request){
         ModelAndView mv=new ModelAndView();
-
-        Integer userID=Integer.valueOf(id);
+        Integer userID=0;
+        try{
+            userID=Integer.valueOf(id);
+        }catch (Exception e){
+            mv.addObject("message","请输入您注册时填写的六位ID");
+            mv.setViewName("loginPage");
+            return mv;
+        }
         String pw=userService.getPas(userID);
         if (null==pw){
             mv.addObject("message","该用户不存在");
             mv.setViewName("loginPage");
         }else if (pw.equals(password)){
-            mv.addObject("isAdmin",userService.judgeUserByID(userID));
+            User user=userService.getUserByID(userID);
+            request.getSession().setAttribute("isAdmin",user.isAdmin());
+            request.getSession().setAttribute("userName",user.getName());
             request.getSession().setAttribute("userID",userID);
-            request.getSession().setAttribute("user",userService.getUserByID(userID));
+            request.getSession().setAttribute("userEmail",user.getMail());
+            request.getSession().setAttribute("userPoints",user.getGrade());
             mv.setViewName("index");
         }else{
             mv.addObject("message","密码错误");
@@ -58,7 +68,7 @@ public class UserController {
             int id=userService.insertUser(name,password,mail);
 
             if (id>0){
-                mv.addObject("message","注册成功，您的id为："+id);
+                mv.addObject("message","注册成功，您的id为："+id+",请牢记");
                 mv.setViewName("loginPage");
             }else{
                 mv.addObject("message","注册失败");
