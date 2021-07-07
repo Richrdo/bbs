@@ -17,7 +17,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  */
 
 @Configuration
-public class PurviewConfigurer implements WebMvcConfigurer {
+public class PurviewConfigurer implements WebMvcConfigurer{
 
     @Autowired
     LoginInterceptor loginInterceptor;

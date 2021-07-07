@@ -3,13 +3,13 @@ package com.foreverything.bbs.service.impl;
 import com.foreverything.bbs.entities.Replay;
 import com.foreverything.bbs.mapper.ReplayMapper;
 import com.foreverything.bbs.service.ReplayService;
-import com.foreverything.bbs.util.IDUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * @ClassName ReplayServiceImpl
@@ -25,31 +25,32 @@ public class ReplayServiceImpl implements ReplayService {
     ReplayMapper replayMapper;
 
     @Override
-    public List<Replay> getReplayListByID(Long id) {
+    public List<Replay> getReplayListByID(String id) {
         return replayMapper.getReplayListByFromID(id);
     }
 
     @Override
-    public Long insertReplay(Replay replay) {
-        replay.setId(IDUtil.initID());
+    public String insertReplay(Replay replay) {
+        replay.setUuid(UUID.randomUUID().toString());
+
         SimpleDateFormat dateFormat=new SimpleDateFormat();
         dateFormat.applyPattern("yyyy-MM-dd HH:mm:ss");
         Date date=new Date();
 
         replay.setCreateTime(dateFormat.format(date));
         if (replayMapper.insertReplay(replay)>0){
-            return  replay.getId();
+            return  replay.getUuid();
         }else
-        return 0L;
+        return null;
     }
 
     @Override
-    public int deleteReplay(long id) {
+    public int deleteReplay(String id) {
         return replayMapper.deleteReplay(id);
     }
 
     @Override
-    public int cancelDeleteReplay(long id) {
+    public int cancelDeleteReplay(String id) {
         return replayMapper.cancelDeleteReplay(id);
     }
 

@@ -31,7 +31,7 @@ public interface RewardService {
     *  * @param null
     *@Descriptoon:发布悬赏
     */
-    Long insertReward(Reward reward);
+    String insertReward(Reward reward);
 
      /**
      *@Author:Yanlan_Li
@@ -40,7 +40,7 @@ public interface RewardService {
      *  * @param null
      *@Descriptoon:根据id查找特定的悬赏
      */
-    Reward getRewardByID( Long id);
+    Reward getRewardByID( String id);
 
     /**
     *@Author:Yanlan_Li
@@ -68,7 +68,7 @@ public interface RewardService {
     *  * @param null
     *@Descriptoon:删除悬赏
     */
-    int deleteReward(long id);
+    int deleteReward(String id);
     
     /**
      * @Author:刘光辉
@@ -78,7 +78,7 @@ public interface RewardService {
      * 
      * @Desccription:
      */
-    int cancelDeleteReward(long id);
+    int cancelDeleteReward(String id);
 
     /**
      * @Author:Yanlan_Li
@@ -88,5 +88,5 @@ public interface RewardService {
      *
      * @Desccription:根据id判断悬赏点数是否足够。
      */
-    boolean isEnough(int point,int id);
+    boolean isEnough(int point,String uuid);
 }

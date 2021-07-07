@@ -1,5 +1,12 @@
 package com.foreverything.bbs.entities;
 
+import com.gitee.sunchenbin.mybatis.actable.annotation.Column;
+import com.gitee.sunchenbin.mybatis.actable.constants.MySqlTypeConstant;
+import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
 /**
  * @ClassName BaseBean
  * @Author CeaserBorgia
@@ -7,43 +14,32 @@ package com.foreverything.bbs.entities;
  * @Description
  */
 
+@Data
+@ToString
 public class BaseBean {
+    @Getter
+    @Setter
+    @Column(isKey = true,isAutoIncrement = true,type = MySqlTypeConstant.BIGINT)
+    private String id;
 
-    private Long id;
-    private int userID;
+    @Getter
+    @Setter
+    @Column(type = MySqlTypeConstant.VARCHAR)
+    private String uuid;
+
+    @Getter
+    @Setter
+    @Column
+    private String userUuid;
+
+    @Getter
+    @Setter
+    @Column
     private String createTime;
+
+    @Getter
+    @Setter
+    @Column(type = MySqlTypeConstant.TEXT)
     private String content;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public int getUserID() {
-        return userID;
-    }
-
-    public void setUserID(int userID) {
-        this.userID = userID;
-    }
-
-    public String getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(String createTime) {
-        this.createTime = createTime;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
 }
 

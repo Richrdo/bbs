@@ -16,65 +16,64 @@ import java.util.List;
 @Mapper
 public interface TopicMapper {
 
-    @Select("select * from topic where t_is_delete=false")
+    @Select("select * from topic where is_delete=false")
     @Results({
-            @Result(property = "id",column = "t_id",id = true),
-            @Result(property = "userID",column = "t_author_id"),
-            @Result(property = "createTime",column = "t_create_time"),
-            @Result(property = "content",column = "t_content"),
-            @Result(property = "isMarrow",column = "t_is_marrow"),
-            @Result(property = "title",column = "t_title"),
-            @Result(property = "isDelete",column = "t_is_delete"),
-            @Result(property = "isTop",column = "t_is_top")
+            @Result(property = "uuid",column = "uuid",id = true),
+            @Result(property = "userUuid",column = "user_uuid"),
+            @Result(property = "content",column = "content"),
+            @Result(property = "createTime",column = "create_time"),
+            @Result(property = "isDelete",column = "is_delete"),
+            @Result(property = "title",column = "title"),
+            @Result(property = "points",column = "points"),
+            @Result(property = "isMarrow",column = "is_marrow")
     })
     List<Topic> getAllTopic();
 
-    @Select("select * from topic where t_id=#{id}")
+    @Select("select * from topic where uuid=#{uuid}")
     @Results({
-            @Result(property = "id",column = "t_id",id = true),
-            @Result(property = "userID",column = "t_author_id"),
-            @Result(property = "createTime",column = "t_create_time"),
-            @Result(property = "content",column = "t_content"),
-            @Result(property = "isMarrow",column = "t_is_marrow"),
-            @Result(property = "title",column = "t_title"),
-            @Result(property = "isDelete",column = "t_is_delete"),
-            @Result(property = "isTop",column = "t_is_top")
+            @Result(property = "uuid",column = "uuid",id = true),
+            @Result(property = "userUuid",column = "user_uuid"),
+            @Result(property = "content",column = "content"),
+            @Result(property = "createTime",column = "create_time"),
+            @Result(property = "isDelete",column = "is_delete"),
+            @Result(property = "title",column = "title"),
+            @Result(property = "points",column = "points"),
+            @Result(property = "isMarrow",column = "is_marrow")
     })
-    Topic getTopicByID(@Param("id")Long id);
+    Topic getTopicByID(@Param("uuid")String id);
 
-    @Insert("insert into topic(t_id,t_author_id,t_title,t_content,t_create_time) values(#{topic.id},#{topic.userID},#{topic.title},#{topic.content},#{topic.createTime})")
+    @Insert("insert into topic(uuid,user_uuid,title,content,create_time) values(#{topic.uuid},#{topic.userUuid},#{topic.title},#{topic.content},#{topic.createTime})")
     public int insertTopic(@Param("topic") Topic topic);
 
-    @Select("select t_id from topic")
-    public List<Long> getTopicIdCollection();
 
-    @Update("update topic set t_title=#{topic.title},t_content=#{topic.content} where t_id=#{topic.id}")
+    @Update("update topic set title=#{topic.title},content=#{topic.content} where uuid=#{topic.uuid}")
     public int updateTopic(@Param("topic")Topic topic);
 
-    @Update("update topic set t_is_marrow=true where t_id=#{id}")
-    public int marrowTopicByID(@Param("id")Long id);
+    @Update("update topic set is_marrow=true where uuid=#{uuid}")
+    public int marrowTopicByID(@Param("uuid")String id);
 
-    @Update("update topic set t_is_top=true where t_id=#{id}")
-    public int upTopicByID(@Param("id")Long id);
+    @Update("update topic set is_top=true where uuid=#{uuid}")
+    public int upTopicByID(@Param("uuid")String id);
 
-    @Update("update topic set t_is_delete=true where t_id=#{id}")
-    public int deleteTopicByID(@Param("id")Long id);
+    @Update("update topic set is_delete=true where uuid=#{uuid}")
+    public int deleteTopicByID(@Param("uuid")String id);
 
-    @Update("update topic set t_is_marrow=false where t_id=#{id}")
-    public int cancelMarrowTopicByID(@Param("id")Long id);
+    @Update("update topic set is_marrow=false where uuid=#{uuid}")
+    public int cancelMarrowTopicByID(@Param("uuid")String id);
 
-    @Update("update topic set t_is_top=false where t_id=#{id}")
-    public int cancelUpTopicByID(@Param("id")Long id);
+    @Update("update topic set is_top=false where uuid=#{uuid}")
+    public int cancelUpTopicByID(@Param("uuid")String id);
 
-    @Select("select * from topic where t_is_delete=false and (t_title like #{str} or t_content like #{str}) ")
+    @Select("select * from topic where is_delete=false and (title like #{str} or content like #{str}) ")
     @Results({
-            @Result(property = "id",column = "t_id",id = true),
-            @Result(property = "userID",column = "t_author_id"),
-            @Result(property = "createTime",column = "t_create_time"),
-            @Result(property = "content",column = "t_content"),
-            @Result(property = "isMarrow",column = "t_is_marrow"),
-            @Result(property = "title",column = "t_title"),
-            @Result(property = "isTop",column = "t_is_top")
+            @Result(property = "uuid",column = "uuid",id = true),
+            @Result(property = "userUuid",column = "user_uuid"),
+            @Result(property = "content",column = "content"),
+            @Result(property = "createTime",column = "create_time"),
+            @Result(property = "isDelete",column = "is_delete"),
+            @Result(property = "title",column = "title"),
+            @Result(property = "points",column = "points"),
+            @Result(property = "isMarrow",column = "is_marrow")
     })
     public List<Topic> searchTopic(@Param("str") String str);
 }

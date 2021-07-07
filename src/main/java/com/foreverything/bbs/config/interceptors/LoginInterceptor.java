@@ -36,7 +36,7 @@ public class LoginInterceptor implements HandlerInterceptor {
             return false;
         }else{
             System.out.println("更新积分");
-            session.setAttribute("userPoints",userService.getUserPoints((Integer)session.getAttribute("userID")));
+            session.setAttribute("userPoints",userService.getUserPoints((String)session.getAttribute("userID")));
             return true;
         }
     }

@@ -3,13 +3,13 @@ package com.foreverything.bbs.service.impl;
 import com.foreverything.bbs.mapper.TopicMapper;
 import com.foreverything.bbs.entities.Topic;
 import com.foreverything.bbs.service.TopicService;
-import com.foreverything.bbs.util.IDUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * @ClassName TopicServiceImpl
@@ -30,9 +30,9 @@ public class TopicServiceImpl implements TopicService {
     }
 
     @Override
-    public Long insertTopic(Topic topic) {
+    public String insertTopic(Topic topic) {
 
-        topic.setId(IDUtil.initID());
+        topic.setUuid(UUID.randomUUID().toString());
 
         SimpleDateFormat dateFormat=new SimpleDateFormat();
         dateFormat.applyPattern("yyyy-MM-dd HH:mm:ss");
@@ -41,9 +41,9 @@ public class TopicServiceImpl implements TopicService {
         topic.setCreateTime(dateFormat.format(date));
 
         if (topicMapper.insertTopic(topic)>0){
-            return topic.getId();
+            return topic.getUuid();
         }else
-        return 0L;
+        return null;
     }
 
     @Override
@@ -52,42 +52,42 @@ public class TopicServiceImpl implements TopicService {
     }
 
     @Override
-    public int marrowTopicByID(Long id) {
+    public int marrowTopicByID(String id) {
         return topicMapper.marrowTopicByID(id);
     }
 
     @Override
-    public int cancelMarrowTopic(long id) {
+    public int cancelMarrowTopic(String id) {
         return topicMapper.cancelMarrowTopicByID(id);
     }
 
     @Override
-    public int upTopicByID(Long id) {
+    public int upTopicByID(String id) {
         return topicMapper.upTopicByID(id);
     }
 
     @Override
-    public int deleteTopicByID(Long id) {
+    public int deleteTopicByID(String id) {
         return topicMapper.deleteTopicByID(id);
     }
 
     @Override
-    public int cancelDeleteTopicByID(long id) {
+    public int cancelDeleteTopicByID(String id) {
         return cancelDeleteTopicByID(id);
     }
 
     @Override
-    public Topic getTopicByID(Long id) {
+    public Topic getTopicByID(String id) {
         return topicMapper.getTopicByID(id);
     }
 
     @Override
-    public int cancelUpTopicByID(long id) {
+    public int cancelUpTopicByID(String id) {
         return topicMapper.cancelUpTopicByID(id);
     }
 
     @Override
-    public int cancelMarrowTopicByID(long id) {
+    public int cancelMarrowTopicByID(String id) {
         return topicMapper.cancelMarrowTopicByID(id);
     }
 

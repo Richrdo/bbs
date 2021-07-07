@@ -3,13 +3,13 @@ package com.foreverything.bbs.service.impl;
 import com.foreverything.bbs.entities.Article;
 import com.foreverything.bbs.mapper.ArticleMapper;
 import com.foreverything.bbs.service.ArticleService;
-import com.foreverything.bbs.util.IDUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * @ClassName ArticleServiceImpl
@@ -29,8 +29,9 @@ public class ArticleServiceImpl implements ArticleService{
         }
 
         @Override
-        public Long insertArticle(Article article){
-            article.setId(IDUtil.initID());
+        public String insertArticle(Article article){
+
+            article.setUuid(UUID.randomUUID().toString());
 
             SimpleDateFormat dateFormat=new SimpleDateFormat();
             dateFormat.applyPattern("yyyy-MM-dd HH:mm:ss");
@@ -39,9 +40,9 @@ public class ArticleServiceImpl implements ArticleService{
             article.setCreateTime(dateFormat.format(date));
 
             if (articleMapper.insertArticle(article)>0){
-                return article.getId();
+                return article.getUuid();
             }else
-                return 0L;
+                return null;
         }
         @Override
         public int updateArticle(Article article) {
@@ -49,37 +50,37 @@ public class ArticleServiceImpl implements ArticleService{
         }
 
         @Override
-        public int deleteArticle(Long id){
+        public int deleteArticle(String id){
             return articleMapper.deleteArticleByID(id);
         }
 
         @Override
-        public int cancelDeleteArticle(long id){
+        public int cancelDeleteArticle(String id){
             return articleMapper.cancelMarrowArticleByID(id);
         }
 
     @Override
-    public int upArticleByID(Long id) {
+    public int upArticleByID(String id) {
         return articleMapper.upArticle(id);
     }
 
     @Override
-    public int cancelUpArticleByID(Long id) {
+    public int cancelUpArticleByID(String id) {
         return articleMapper.cancelUpArticleByID(id);
     }
 
     @Override
-    public int marrowArticleByID(Long id) {
+    public int marrowArticleByID(String id) {
         return articleMapper.marrowArticleByID(id);
     }
 
     @Override
-    public int cancelMarrowArticleByID(Long id) {
+    public int cancelMarrowArticleByID(String id) {
         return articleMapper.cancelMarrowArticleByID(id);
     }
 
     @Override
-    public Article getArticleByID(Long id) {
+    public Article getArticleByID(String id) {
             return articleMapper.getArticleByID(id);
         }
 

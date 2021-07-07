@@ -1,5 +1,16 @@
 package com.foreverything.bbs.entities;
 
+import com.gitee.sunchenbin.mybatis.actable.annotation.Column;
+import com.gitee.sunchenbin.mybatis.actable.annotation.TableCharset;
+import com.gitee.sunchenbin.mybatis.actable.constants.MySqlCharsetConstant;
+import com.gitee.sunchenbin.mybatis.actable.constants.MySqlTypeConstant;
+import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
+import javax.persistence.Table;
+
 /**
  * @ClassName Topic
  * @Author CeaserBorgia
@@ -7,52 +18,31 @@ package com.foreverything.bbs.entities;
  * @Description
  */
 
+@Data
+@ToString
+@Table(name = "topic")
+@TableCharset(MySqlCharsetConstant.UTF8MB4)
 public class Topic extends BaseBean{
+
+    @Getter
+    @Setter
+    @Column(type = MySqlTypeConstant.BLOB)
      private boolean isMarrow=false;
+
+    @Getter
+    @Setter
+    @Column(type = MySqlTypeConstant.BLOB)
      private boolean isDelete=false;
+
+    @Getter
+    @Setter
+    @Column(type = MySqlTypeConstant.VARCHAR)
      private String title=null;
+
+    @Getter
+    @Setter
+    @Column(type = MySqlTypeConstant.BLOB)
      private boolean isTop=false;
 
-    public boolean isTop() {
-        return isTop;
-    }
-
-    public void setTop(boolean top) {
-        isTop = top;
-    }
-
-    public boolean isMarrow() {
-        return isMarrow;
-    }
-
-    public void setMarrow(boolean marrow) {
-        isMarrow = marrow;
-    }
-
-    public boolean isDelete() {
-        return isDelete;
-    }
-
-    public void setDelete(boolean delete) {
-        isDelete = delete;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    @Override
-    public String toString() {
-        return "Topic{" +
-                "isMarrow=" + isMarrow +
-                ", isDelete=" + isDelete +
-                ", title='" + title + '\'' +
-                ", isTop=" + isTop +
-                '}';
-    }
 }
 

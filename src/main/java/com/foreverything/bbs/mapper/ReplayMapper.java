@@ -15,43 +15,41 @@ import java.util.List;
 @Mapper
 public interface ReplayMapper {
 
-    @Select("select * from replay where r_from_id=#{id} and r_is_delete=false")
+    @Select("select * from replay where from_id=#{user_uuid} and is_delete=false")
     @Results({
-            @Result(property = "id",column = "r_id",id = true),
-            @Result(property = "userID",column = "r_author_id"),
-            @Result(property = "createTime",column = "r_create_time"),
-            @Result(property = "content",column = "r_content")
+            @Result(property = "uuid",column = "uuid"),
+            @Result(property = "userUuid",column = "user_uuid"),
+            @Result(property = "createTime",column = "create_time"),
+            @Result(property = "content",column = "content")
     })
-    public List<Replay> getReplayListByFromID(@Param("id")Long id);
+    public List<Replay> getReplayListByFromID(@Param("uuid")String id);
 
-    @Select("select * from replay where r_id=#{id} and r_is_delete=false")
+    @Select("select * from replay where uuid=#{uuid} and is_delete=false")
     @Results({
-            @Result(property = "id",column = "r_id",id = true),
-            @Result(property = "userID",column = "r_author_id"),
-            @Result(property = "createTime",column = "r_create_time"),
-            @Result(property = "content",column = "r_content")
+            @Result(property = "uuid",column = "uuid"),
+            @Result(property = "userUuid",column = "user_uuid"),
+            @Result(property = "createTime",column = "create_time"),
+            @Result(property = "content",column = "content")
     })
-    public Replay getReplayByID(@Param("id")Long id);
+    public Replay getReplayByID(@Param("uuid")String id);
 
-    @Insert("insert into replay(r_id,r_from_id,r_author_id,r_create_time,r_content) values(#{replay.id},#{replay.fromID},#{replay.userID},#{replay.createTime},#{replay.content})")
+    @Insert("insert into replay(uuid,from_id,author_id,create_time,content) values(#{replay.uuid},#{replay.fromId},#{replay.userId},#{replay.createTime},#{replay.content})")
     public int insertReplay(@Param("replay")Replay replay);
 
-    @Select("select r_id from replay")
-    public List<Long> getReplayIDList();
 
-    @Select("select * from replay where r_is_delete=false and (r_content like #{str}) ")
+    @Select("select * from replay where is_delete=false and (content like #{str}) ")
     @Results({
-            @Result(property = "id",column = "r_id",id = true),
-            @Result(property = "userID",column = "r_author_id"),
-            @Result(property = "createTime",column = "r_create_time"),
-            @Result(property = "content",column = "r_content"),
+            @Result(property = "uuid",column = "uuid"),
+            @Result(property = "userUuid",column = "user_uuid"),
+            @Result(property = "createTime",column = "create_time"),
+            @Result(property = "content",column = "content"),
     })
     public List<Replay> searchReplay(@Param("str") String str);
 
-    @Update("update replay set r_is_delete=true where r_id=#{id}")
-    public int deleteReplay(@Param("id")long id);
+    @Update("update replay set is_delete=true where uuid=#{uuid}")
+    public int deleteReplay(@Param("uuid")String id);
 
-    @Update("update replay set r_is_delete=false where r_id=#{id}")
-    public int cancelDeleteReplay(long id);
+    @Update("update replay set is_delete=false where uuid=#{uuid}")
+    public int cancelDeleteReplay(String uuid);
 }
 

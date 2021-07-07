@@ -32,7 +32,7 @@ public interface TopicService {
      *
      * @Desccription: 创建新的帖子
      */
-    Long insertTopic(Topic topic);
+    String insertTopic(Topic topic);
 
 
     /**
@@ -53,7 +53,7 @@ public interface TopicService {
      *
      * @Desccription: 加精帖子
      */
-    int marrowTopicByID(Long id);
+    int marrowTopicByID(String id);
 
     /**
      * @Author:CeaserBorgia
@@ -63,7 +63,7 @@ public interface TopicService {
      *
      * @Desccription:   取消加精
      */
-    int cancelMarrowTopic(long id);
+    int cancelMarrowTopic(String id);
 
     /**
      * @Author:刘光辉
@@ -73,7 +73,7 @@ public interface TopicService {
      *
      * @Desccription: 置顶帖子
      */
-    int upTopicByID(Long id);
+    int upTopicByID(String id);
 
 
     /**
@@ -84,7 +84,7 @@ public interface TopicService {
      *
      * @Desccription:   删除帖子
      */
-    int deleteTopicByID(Long id);
+    int deleteTopicByID(String id);
 
     /**
      * @Author:CeaserBorgia
@@ -94,7 +94,7 @@ public interface TopicService {
      *
      * @Desccription:   取消删除帖子
      */
-    int cancelDeleteTopicByID(long id);
+    int cancelDeleteTopicByID(String id);
 
     /**
      * @Author:刘光辉
@@ -104,7 +104,7 @@ public interface TopicService {
      *
      * @Desccription: 通过ID获取帖子
      */
-    Topic getTopicByID(Long id);
+    Topic getTopicByID(String id);
 
     /**
      * @Author:刘光辉
@@ -114,7 +114,7 @@ public interface TopicService {
      *
      * @Desccription: 取消置顶帖子
      */
-    int cancelUpTopicByID(long id);
+    int cancelUpTopicByID(String id);
 
     /**
      * @Author:刘光辉
@@ -124,6 +124,6 @@ public interface TopicService {
      *
      * @Desccription: 取消置顶
      */
-    int cancelMarrowTopicByID(long id);
+    int cancelMarrowTopicByID(String id);
 }
 

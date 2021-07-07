@@ -1,0 +1,41 @@
+/*设置背景图片*/
+body {
+    background: url("/image/background.jpg") no-repeat;
+    background-size:cover;font-size: 15px;
+}
+/*给表单的边框设置大小,颜色和不透明度*/
+.form {
+    background: rgba(255,255,255,0.7);
+    width:400px;margin:50px auto;
+}
+/*设置字体和大小*/
+label {
+    font-family: Arial;font-size: 15px
+}
+/*当输入正确时,给输入框设置浅绿色*/
+input.form-control:valid{
+    background-color: mintcream;
+}
+/*当输入正确时,给输入框设置浅红色*/
+input.form-control:invalid{
+    background-color: #ffeeed;
+}
+/*设置图标为行内元素，并设置大小和颜色*/
+.fa{
+    display: inline-block;
+    top: 27px;
+    left: 6px;
+    position: relative;
+    color: #575757;
+}
+/*为几个输入框设置padding,防止和图标重合*/
+input[type="text"],input[type="password"],input[type="email"]{
+    padding-left:26px;
+}
+.form-title{
+    padding-top:20px;
+}
+#button{
+    padding-bottom: 50px;
+}
+

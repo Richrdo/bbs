@@ -1,11 +1,7 @@
 package com.foreverything.bbs.controller;
 
-import com.foreverything.bbs.entities.Article;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import javax.servlet.http.HttpServletRequest;
 
 /**
  * @ClassName NewTARController

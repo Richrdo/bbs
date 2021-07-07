@@ -1,5 +1,16 @@
 package com.foreverything.bbs.entities;
 
+import com.gitee.sunchenbin.mybatis.actable.annotation.Column;
+import com.gitee.sunchenbin.mybatis.actable.annotation.TableCharset;
+import com.gitee.sunchenbin.mybatis.actable.constants.MySqlCharsetConstant;
+import com.gitee.sunchenbin.mybatis.actable.constants.MySqlTypeConstant;
+import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
+import javax.persistence.Table;
+
 /**
  * @ClassName Replay
  * @Author CeaserBorgia
@@ -7,33 +18,21 @@ package com.foreverything.bbs.entities;
  * @Description
  */
 
+@Data
+@ToString
+@Table(name = "replay")
+@TableCharset(MySqlCharsetConstant.UTF8MB4)
 public class Replay extends BaseBean implements Comparable<Replay> {
 
+    @Getter
+    @Setter
+    @Column(type = MySqlTypeConstant.BLOB)
     private boolean isDelete=false;
-    private Long fromID=null;
 
-    public Long getFromID() {
-        return fromID;
-    }
-
-    public void setFromID(Long fromID) {
-        this.fromID = fromID;
-    }
-
-    public boolean isDelete() {
-        return isDelete;
-    }
-
-    public void setDelete(boolean delete) {
-        isDelete = delete;
-    }
-
-    @Override
-    public String toString() {
-        return "Replay{"  +
-                ", fromID=" + fromID +
-                '}';
-    }
+    @Getter
+    @Setter
+    @Column(type = MySqlTypeConstant.VARCHAR)
+    private String fromId=null;
 
     @Override
     public int compareTo(Replay replay) {

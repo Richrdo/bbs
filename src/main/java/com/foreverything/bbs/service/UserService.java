@@ -14,19 +14,19 @@ import java.util.Map;
  */
 public interface UserService {
 
-     String getPas(int id);
+     String getPas(String id);
 
-     int insertUser(String username, String password, String mail);
+     String insertUser(String username, String password, String mail);
 
-     Boolean judgeUserByID(int id);
+     Boolean judgeUserByID(String uuid);
 
-     int getIDByMail(String mail);
+     String getIDByMail(String mail);
 
      String getPasswordByEmail(String mail);
 
-     User getUserByID(int id);
+     User getUserByEmail(String email);
 
      Map<Integer,String> getUserMap();
 
-     int getUserPoints(int id);
+     int getUserPoints(String uuid);
 }

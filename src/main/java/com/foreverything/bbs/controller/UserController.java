@@ -28,48 +28,42 @@ public class UserController {
     ModelAndView modelAndView;
 
     @PostMapping("/login")
-    public ModelAndView userLogin(@RequestParam("id")String id, @RequestParam("password") String password, HttpServletRequest request){
+    public ModelAndView userLogin(@RequestParam("email")String email, @RequestParam("password") String password, HttpServletRequest request){
         ModelAndView mv=new ModelAndView();
-        Integer userID=0;
-        try{
-            userID=Integer.valueOf(id);
-        }catch (Exception e){
-            mv.addObject("message","请输入您注册时填写的六位ID");
-            mv.setViewName("loginPage");
-            return mv;
-        }
-        String pw=userService.getPas(userID);
+
+        String pw=userService.getPas(email);
         if (null==pw){
             mv.addObject("message","该用户不存在");
             mv.setViewName("loginPage");
         }else if (pw.equals(password)){
-            User user=userService.getUserByID(userID);
+            User user=userService.getUserByEmail(email);
             request.getSession().setAttribute("isAdmin",user.isAdmin());
             request.getSession().setAttribute("userName",user.getName());
-            request.getSession().setAttribute("userID",userID);
-            request.getSession().setAttribute("userEmail",user.getMail());
+            request.getSession().setAttribute("userUuid",user.getUuid());
+            request.getSession().setAttribute("userEmail",user.getEmail());
             request.getSession().setAttribute("userPoints",user.getGrade());
             mv.setViewName("index");
         }else{
             mv.addObject("message","密码错误");
-            mv.setViewName("loginPage");
+            mv.setViewName("login");
         }
 
         return mv;
     }
 
     @PostMapping("/register")
-    public ModelAndView createUser(@RequestParam("name") String name, @RequestParam("repassword")String repassword,@RequestParam("password") String password, @RequestParam("mail") String mail, HttpServletResponse response){
+    public ModelAndView createUser(@RequestParam("name") String name, @RequestParam("repassword")String repassword,@RequestParam("password") String password, @RequestParam("email") String mail, HttpServletResponse response){
         ModelAndView mv=new ModelAndView();
-        if (null==password||null==repassword||!password.equals(repassword)){
+        System.out.println("接收到post请求");
+        if (null==password||!password.equals(repassword)){
             mv.addObject("message","两次密码不一致");
             mv.setViewName("register");
         }else{
-            int id=userService.insertUser(name,password,mail);
+            String uuid=userService.insertUser(name,password,mail);
 
-            if (id>0){
-                mv.addObject("message","注册成功，您的id为："+id+",请牢记");
-                mv.setViewName("loginPage");
+            if (uuid!=null){
+                mv.addObject("message","注册成功，您的id为："+uuid+",请牢记");
+                mv.setViewName("login");
             }else{
                 mv.addObject("message","注册失败");
                 mv.setViewName("register");
@@ -78,17 +72,17 @@ public class UserController {
         return mv;
     }
 
-
+    /**
+     * @Author: 刘光辉
+     * @Date:20:05 2019/12/18
+     * @param:
+     *  * @param request
+     *
+     * @Desccription: 退出时清空session
+     */
     @GetMapping("/quit")
     public String quitLogin(HttpServletRequest request){
-        /**
-         * @Author: 刘光辉
-         * @Date:20:05 2019/12/18
-         * @param:
-         *  * @param request
-         *
-         * @Desccription: 退出时清空session
-         */
+
         request.getSession().invalidate();
 
         return "index";
@@ -96,11 +90,14 @@ public class UserController {
 
     @GetMapping("/login")
     public String Login(){
-        return "loginPage";
+        System.out.println("接收到get login方法");
+        return "login";
     }
 
     @GetMapping("/register")
     public String Register(){
+
+        System.out.println("接收到register get 请求");
         return "register";
     }
 }

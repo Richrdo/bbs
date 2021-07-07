@@ -14,44 +14,41 @@ import java.util.List;
 @Mapper
 public interface UserMapper {
 
-    @Select("select u_password from user where u_id=#{id}")
+    @Select("select password from user where email=#{email}")
     @Results({
-            @Result(property = "password",column = "u_password",id = true),
+            @Result(property = "password",column = "password"),
     })
-    String getPas(@Param("id") int id);
+    String getPas(@Param("email") String email);
 
-    @Insert("insert into user(u_id,u_name,u_password,u_mail,u_grade) values(#{user.id},#{user.name},#{user.password},#{user.mail},#{user.grade})")
+    @Insert("insert into user(uuid,name,password,email,grade) values(#{user.uuid},#{user.name},#{user.password},#{user.email},#{user.grade})")
     public int insertUser(@Param("user") User user);
 
-    @Select("select u_id from user")
-    public List<Integer> getUserIdCollection();
+    @Select("select grade from user where email=#{email}")
+    public int getPointsByEmail(@Param("email")String email);
 
-    @Select("select u_grade from user where u_id=#{id}")
-    public int getPointsByID(@Param("id")int id);
+    @Select("select is_admin from user where uuid=#{uuid}")
+    public boolean isAdmin(@Param("uuid")String id);
 
-    @Select("select u_is_admin from user where u_id=#{id}")
-    public boolean isAdmin(@Param("id")int id);
+    @Select("select uuid from user where email=#{email}")
+    public String getUUIDByEmail(@Param("email")String mail);
 
-    @Select("select u_id from user where u_mail=#{mail}")
-    public int getIDByEmail(@Param("mail")String mail);
-
-    @Select("select * from user where u_id=#{id}")
+    @Select("select * from user where email=#{email}")
     @Results({
-            @Result(property = "id",column = "u_id"),
-            @Result(property = "mail",column = "u_mail"),
-            @Result(property = "grade",column = "u_grade"),
-            @Result(property = "name",column = "u_name"),
-            @Result(property = "isAdmin",column = "u_is_admin"),
+            @Result(property = "uuid",column = "uuid"),
+            @Result(property = "mail",column = "mail"),
+            @Result(property = "grade",column = "grade"),
+            @Result(property = "name",column = "name"),
+            @Result(property = "isAdmin",column = "is_admin"),
     })
-    public User getUserByID(int id);
+    public User getUserByEmail(String email);
 
-    @Select("select u_name,u_id from user")
+    @Select("select name,uuid from user")
     @Results({
-            @Result(property = "id",column="u_id"),
-            @Result(property = "name",column = "u_name")
+            @Result(property = "uuid",column="uuid"),
+            @Result(property = "name",column = "name")
     })
     public List<User> getUserIDMap();
 
-    @Select("select u_grade from user where u_id=#{id}")
-    public int getUserPoint(@Param("id") int id);
+    @Select("select grade from user where uuid=#{uuid}")
+    public int getUserPoint(@Param("uuid") String uuid);
 }

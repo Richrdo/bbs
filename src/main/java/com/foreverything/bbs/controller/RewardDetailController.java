@@ -2,10 +2,8 @@ package com.foreverything.bbs.controller;
 
 import com.foreverything.bbs.entities.Replay;
 import com.foreverything.bbs.entities.Reward;
-import com.foreverything.bbs.entities.Topic;
 import com.foreverything.bbs.service.ReplayService;
 import com.foreverything.bbs.service.RewardService;
-import com.foreverything.bbs.service.TopicService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,7 +28,7 @@ public class RewardDetailController {
     RewardService rewardService;
 
     @GetMapping("/rewardDetail")
-    public ModelAndView getRewardDetail(@RequestParam(value = "id") Long id){
+    public ModelAndView getRewardDetail(@RequestParam(value = "id") String id){
         ModelAndView mv=new ModelAndView();
         Reward reward = rewardService.getRewardByID(id);
         System.out.println("点击的reward："+reward);

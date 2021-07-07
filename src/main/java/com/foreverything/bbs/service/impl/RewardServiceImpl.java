@@ -2,18 +2,16 @@ package com.foreverything.bbs.service.impl;
 
 import com.foreverything.bbs.entities.Replay;
 import com.foreverything.bbs.entities.Reward;
-import com.foreverything.bbs.entities.Topic;
 import com.foreverything.bbs.mapper.RewardMapper;
-import com.foreverything.bbs.mapper.TopicMapper;
 import com.foreverything.bbs.mapper.UserMapper;
 import com.foreverything.bbs.service.RewardService;
-import com.foreverything.bbs.util.IDUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * @ClassName RewardServiceImpl
@@ -43,7 +41,7 @@ public class RewardServiceImpl implements RewardService {
     }
 
     @Override
-    public Long insertReward(Reward reward) {
+    public String insertReward(Reward reward) {
        /**
        *@Author:Yanlan_Li
        *@Date:11:22 2019/12/17
@@ -51,7 +49,7 @@ public class RewardServiceImpl implements RewardService {
        *  * @param topic
        *@Descriptoon:
        */
-        reward.setId(IDUtil.initID());
+        reward.setUuid(UUID.randomUUID().toString());
 
         SimpleDateFormat dateFormat=new SimpleDateFormat();
         dateFormat.applyPattern("yyyy-MM-dd HH:mm:ss");
@@ -60,14 +58,14 @@ public class RewardServiceImpl implements RewardService {
         reward.setCreateTime(dateFormat.format(date));
 
         if (rewardMapper.insertReward(reward)>0){
-            return reward.getId();
+            return reward.getUuid();
         }else
-            return 0L;
+            return null;
     }
 
     //根据id查找特定的悬赏
     @Override
-    public Reward getRewardByID( Long id){
+    public Reward getRewardByID( String id){
         return rewardMapper.getRewardByID(id);
     }
 
@@ -85,21 +83,18 @@ public class RewardServiceImpl implements RewardService {
     }
 
     @Override
-    public int deleteReward(long id){
+    public int deleteReward(String id){
         return rewardMapper.deleteReward(id);
     }
 
     @Override
-    public int cancelDeleteReward(long id){
+    public int cancelDeleteReward(String id){
         return rewardMapper.cancelDeleteReward(id);
     }
 
     @Override
-    public boolean isEnough(int point, int id) {
-        if (point<=userMapper.getPointsByID(id)){
-            return true;
-        }else
-        return false;
+    public boolean isEnough(int point, String uuid) {
+        return point <= userMapper.getUserPoint(uuid);
     }
 
 
