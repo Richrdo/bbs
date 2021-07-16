@@ -18,46 +18,46 @@ import java.util.UUID;
  * @Description
  */
 @Service
-public class ArticleServiceImpl implements ArticleService{
+public class ArticleServiceImpl implements ArticleService {
 
-        @Autowired
-        ArticleMapper articleMapper;
+    @Autowired
+    ArticleMapper articleMapper;
 
-        @Override
-        public List<Article> getAllArticle() {
-            return articleMapper.getAllArticle();
-        }
+    @Override
+    public List<Article> getAllArticle() {
+        return articleMapper.getAllArticle();
+    }
 
-        @Override
-        public String insertArticle(Article article){
+    @Override
+    public String insertArticle(Article article) {
 
-            article.setUuid(UUID.randomUUID().toString());
+        article.setUuid(UUID.randomUUID().toString());
 
-            SimpleDateFormat dateFormat=new SimpleDateFormat();
-            dateFormat.applyPattern("yyyy-MM-dd HH:mm:ss");
-            Date date=new Date();
+        SimpleDateFormat dateFormat = new SimpleDateFormat();
+        dateFormat.applyPattern("yyyy-MM-dd HH:mm:ss");
+        Date date = new Date();
 
-            article.setCreateTime(dateFormat.format(date));
+        article.setCreateTime(dateFormat.format(date));
+        if (articleMapper.insertArticle(article) > 0) {
+            return article.getUuid();
+        } else
+            return null;
+    }
 
-            if (articleMapper.insertArticle(article)>0){
-                return article.getUuid();
-            }else
-                return null;
-        }
-        @Override
-        public int updateArticle(Article article) {
-            return articleMapper.updateArticle(article);
-        }
+    @Override
+    public int updateArticle(Article article) {
+        return articleMapper.updateArticle(article);
+    }
 
-        @Override
-        public int deleteArticle(String id){
-            return articleMapper.deleteArticleByID(id);
-        }
+    @Override
+    public int deleteArticle(String id) {
+        return articleMapper.deleteArticleByID(id);
+    }
 
-        @Override
-        public int cancelDeleteArticle(String id){
-            return articleMapper.cancelMarrowArticleByID(id);
-        }
+    @Override
+    public int cancelDeleteArticle(String id) {
+        return articleMapper.cancelMarrowArticleByID(id);
+    }
 
     @Override
     public int upArticleByID(String id) {
@@ -81,8 +81,8 @@ public class ArticleServiceImpl implements ArticleService{
 
     @Override
     public Article getArticleByID(String id) {
-            return articleMapper.getArticleByID(id);
-        }
+        return articleMapper.getArticleByID(id);
+    }
 
 }
 

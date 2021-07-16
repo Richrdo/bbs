@@ -18,7 +18,7 @@ import java.util.List;
 @Mapper
 @Service
 public interface ArticleMapper {
-    @Select("select * from article where is_delete=false")
+    @Select("select * from article")
     @Results({
             @Result(property = "uuid", column = "uuid"),
             @Result(property = "userUuid", column = "user_uuid"),
@@ -44,7 +44,7 @@ public interface ArticleMapper {
     Article getArticleByID(@Param("uuid")String id);
 
     @Insert("insert into article(uuid,user_uuid,title,content,create_time) values(#{article.uuid},#{article.userUuid},#{article.title},#{article.content},#{article.createTime})")
-    public Long insertArticle(@Param("article") Article article);
+    public int insertArticle(@Param("article") Article article);
 
 
     @Update("update article set title=#{article.title},content=#{article.content} where uuid=#{article.uuid}")

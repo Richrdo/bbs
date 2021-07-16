@@ -27,6 +27,7 @@ import javax.servlet.http.HttpServletRequest;
         public ModelAndView getArticle(){
             ModelAndView mv = new ModelAndView();
             mv.addObject("articles", articleService.getAllArticle());
+            System.out.println("查询到的所有文章是: "+articleService.getAllArticle().toString());
 //        setViewName()用来设置跳转页面
             mv.setViewName("articlePage");
             return mv;

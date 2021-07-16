@@ -4,10 +4,7 @@ import com.gitee.sunchenbin.mybatis.actable.annotation.Column;
 import com.gitee.sunchenbin.mybatis.actable.annotation.TableCharset;
 import com.gitee.sunchenbin.mybatis.actable.constants.MySqlCharsetConstant;
 import com.gitee.sunchenbin.mybatis.actable.constants.MySqlTypeConstant;
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.Table;
 
@@ -18,8 +15,9 @@ import javax.persistence.Table;
  * @Description
  */
 
+@EqualsAndHashCode(callSuper = true)
 @Data
-@ToString
+@ToString(callSuper = true)
 @Table(name = "topic")
 @TableCharset(MySqlCharsetConstant.UTF8MB4)
 public class Topic extends BaseBean{

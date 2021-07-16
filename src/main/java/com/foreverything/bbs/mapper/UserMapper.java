@@ -47,7 +47,7 @@ public interface UserMapper {
             @Result(property = "uuid",column="uuid"),
             @Result(property = "name",column = "name")
     })
-    public List<User> getUserIDMap();
+    public List<User> getUserUuidMap();
 
     @Select("select grade from user where uuid=#{uuid}")
     public int getUserPoint(@Param("uuid") String uuid);
