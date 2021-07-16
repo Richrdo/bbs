@@ -15,7 +15,7 @@ import java.util.List;
 @Mapper
 public interface ReplayMapper {
 
-    @Select("select * from replay where from_id=#{user_uuid} and is_delete=false")
+    @Select("select * from replay where from_id=#{uuid} and is_delete=false")
     @Results({
             @Result(property = "uuid",column = "uuid"),
             @Result(property = "userUuid",column = "user_uuid"),
@@ -33,7 +33,7 @@ public interface ReplayMapper {
     })
     public Replay getReplayByID(@Param("uuid")String id);
 
-    @Insert("insert into replay(uuid,from_id,author_id,create_time,content) values(#{replay.uuid},#{replay.fromId},#{replay.userId},#{replay.createTime},#{replay.content})")
+    @Insert("insert into replay(uuid,from_id,user_uuid,create_time,content) values(#{replay.uuid},#{replay.fromId},#{replay.userUuid},#{replay.createTime},#{replay.content})")
     public int insertReplay(@Param("replay")Replay replay);
 
 

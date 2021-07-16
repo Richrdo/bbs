@@ -22,7 +22,7 @@ import javax.persistence.Table;
 public class Reward extends BaseBean {
     @Getter
     @Setter
-    @Column(type = MySqlTypeConstant.BLOB)
+    @Column(type = MySqlTypeConstant.TINYINT, defaultValue = "0")
     private boolean isDelete=false;
 
     @Getter

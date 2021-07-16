@@ -24,12 +24,12 @@ public class Article extends BaseBean {
 
     @Getter
     @Setter
-    @Column(type = MySqlTypeConstant.BLOB)
+    @Column(type = MySqlTypeConstant.VARCHAR)
     private boolean isMarrow=false;
 
     @Getter
     @Setter
-    @Column(type = MySqlTypeConstant.BLOB)
+    @Column(type = MySqlTypeConstant.TINYINT, defaultValue = "0")
     private boolean isDelete=false;
 
     @Getter
@@ -39,7 +39,7 @@ public class Article extends BaseBean {
 
     @Getter
     @Setter
-    @Column(type = MySqlTypeConstant.BLOB)
+    @Column(type = MySqlTypeConstant.TINYINT, defaultValue = "0")
     private boolean isTop=false;
 
     @Getter

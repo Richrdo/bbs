@@ -24,7 +24,7 @@ public class Replay extends BaseBean implements Comparable<Replay> {
 
     @Getter
     @Setter
-    @Column(type = MySqlTypeConstant.BLOB)
+    @Column(type = MySqlTypeConstant.TINYINT, defaultValue = "0")
     private boolean isDelete=false;
 
     @Getter

@@ -45,7 +45,7 @@ public class User {
 
     @Getter
     @Setter
-    @Column(type = MySqlTypeConstant.BLOB)
+    @Column(type = MySqlTypeConstant.TINYINT, defaultValue = "0")
     private boolean isAdmin=false;
 
     @Getter

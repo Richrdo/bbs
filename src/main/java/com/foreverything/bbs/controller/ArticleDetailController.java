@@ -33,6 +33,7 @@ public class ArticleDetailController {
         System.out.println("点击的article："+article);
         mv.addObject("obj",article);
         List<Replay> replayList=replayService.getReplayListByID(id);
+        System.out.println("该文章的评论有"+replayList.toString());
         mv.addObject("replays",replayList);
         mv.setViewName("articleDetailPage");
         return mv;
