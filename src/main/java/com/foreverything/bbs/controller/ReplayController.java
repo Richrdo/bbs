@@ -32,7 +32,7 @@ public class ReplayController {
         String fromID=String.valueOf(request.getParameter("id"));
         replay.setFromId(fromID);
         replay.setContent(request.getParameter("content"));
-        replay.setUserUuid((String) request.getSession().getAttribute("userID"));
+        replay.setUserUuid((String) request.getSession().getAttribute("userUuid"));
         System.out.println("获取的评论为："+replay);
         String id=replayService.insertReplay(replay);
         if (id!=null){

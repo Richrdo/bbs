@@ -38,7 +38,8 @@ import javax.servlet.http.HttpServletRequest;
                 model.addAttribute("message","内容不完整");
                 return "newArticlePage";
             }else{
-                article.setUserUuid((String) request.getSession().getAttribute("userID"));
+                System.out.println("后端收到的article是"+article.toString());
+                article.setUserUuid((String) request.getSession().getAttribute("userUuid"));
                 String uuid=articleService.insertArticle(article);
                 if (uuid!=null){
                     return "redirect:/article";

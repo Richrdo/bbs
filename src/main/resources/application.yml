@@ -1,9 +1,9 @@
 spring:
   datasource:
-    username: root
-    password: 11111111
+    username: ceaser
+    password: Q201023
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/bbs?serverTimezone=Asia/Shanghai&characterEncoding=utf8
+    url: jdbc:mysql://47.106.76.106:3306/bbs?serverTimezone=Asia/Shanghai&characterEncoding=utf8
     type: com.alibaba.druid.pool.DruidDataSource
   thymeleaf:
     prefix: classpath:/templates/

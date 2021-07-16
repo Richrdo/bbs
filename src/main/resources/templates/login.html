@@ -49,8 +49,8 @@
 <link rel="stylesheet" th:href="@{/css/login.css}">
 
 <script>
-    var message=[[${message}]];
-    if (message!=null){
+    var message="[[${message}]]";
+    if (message!==""){
         alert(message);
     }
 </script>

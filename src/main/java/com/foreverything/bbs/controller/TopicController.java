@@ -39,7 +39,7 @@ public class TopicController {
 //            失败跳转，不同区域把topic改成自己区域的名称就行
             return "redirect:/new/topic";
         }else{
-            topic.setUserUuid((String) request.getSession().getAttribute("userID"));
+            topic.setUserUuid((String) request.getSession().getAttribute("userUuid"));
             String id=topicService.insertTopic(topic);
             if (id!=null){
 //                成功跳转，同样只改topic

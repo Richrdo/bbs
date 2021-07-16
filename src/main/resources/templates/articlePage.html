@@ -27,7 +27,7 @@
                                 <h3 th:utext="'<strong>【顶置】</strong>'+*{article.getTitle()}" class="text-max-line-2"></h3>
                                 <p th:text="*{article.getContent()}" class="text-max-line-2"></p>
                                 <p>
-                                    <a class="btn" th:href="@{/articleDetail(id=${article.getId()})}">查看详情 »</a>
+                                    <a class="btn" th:href="@{/articleDetail(id=${article.getUuid()})}">查看详情 »</a>
                                 </p>
                             </div>
                             <div class="col-md-4">
@@ -49,7 +49,7 @@
                                 <h3 th:text="${article.getTitle()}" th:class="${article.isMarrow()}?'text-danger text-max-line-2 ':'text-max-line-2'" ></h3>
                                 <p th:text="*{article.getContent()}" th:class="${article.isMarrow()}?'text-danger text-max-line-2':'text-max-line-2'"></p>
                                 <p>
-                                    <a class="btn" th:href="@{/articleDetail(id=${article.getId()})}">查看详情 »</a>
+                                    <a class="btn" th:href="@{/articleDetail(id=${article.getUuid()})}">查看详情 »</a>
                                 </p>
                             </div>
                             <div class="col-md-4">
@@ -73,8 +73,8 @@
 <script src="/webjars/jquery/3.3.1/jquery.min.js"></script>
 <script src="/webjars/bootstrap/3.3.1/js/bootstrap.min.js"></script>
 <script>
-    var message=[[${message}]];
-    if (message!=""){
+    var message="[[${message}]]";
+    if (message!==""){
         alert(message);
     }
 </script></body>

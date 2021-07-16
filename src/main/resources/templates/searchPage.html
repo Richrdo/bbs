@@ -26,42 +26,42 @@
                         <tbody>
                         <tr th:each="topic:${topicList}" >
                             <td>讨论</td>
-                            <td th:text="${topic.getId()}"></td>
-                            <td><a th:text="${topic.getTitle()}" th:href="@{/topicDetail(id=${topic.getId()})}"></a></td>
+                            <td th:text="${topic.getUuid()}"></td>
+                            <td><a th:text="${topic.getTitle()}" th:href="@{/topicDetail(id=${topic.getUuid()})}"></a></td>
                             <td><p th:text="${topic.getCreateTime()}"></p></td>
                             <td th:if="${session.isAdmin}">
-                                <a th:class=" ${topic.isTop()?'btn btn-warning col-sm-3 ':'btn btn-success col-sm-3 '}"  th:text="${topic.isTop()}?'取消置顶':'  置  顶  '" th:href="${topic.isTop()}?'/cancelup/topic?id='+${topic.getId()}:'/up/topic?id='+${topic.getId()}"></a>
-                                <a th:class=" ${topic.isMarrow()?'btn btn-warning col-sm-offset-1 col-sm-3 ':'btn btn-primary col-sm-offset-1 col-sm-3 '}" th:text="${topic.isMarrow()}?'取消加精':'  加  精  '"  th:href="${topic.isMarrow()}?'/cancelmarrow/topic?id='+${topic.getId()}:'/marrow/topic?id='+${topic.getId()}"></a>
-                                <a class="btn btn-danger col-sm-offset-1 col-sm-3" th:text="删除" th:href="@{/delete/topic(id=${topic.getId()})}"></a>
+                                <a th:class=" ${topic.isTop()?'btn btn-warning col-sm-3 ':'btn btn-success col-sm-3 '}"  th:text="${topic.isTop()}?'取消置顶':'  置  顶  '" th:href="${topic.isTop()}?'/cancelup/topic?id='+${topic.getUuid()}:'/up/topic?id='+${topic.getUuid()}"></a>
+                                <a th:class=" ${topic.isMarrow()?'btn btn-warning col-sm-offset-1 col-sm-3 ':'btn btn-primary col-sm-offset-1 col-sm-3 '}" th:text="${topic.isMarrow()}?'取消加精':'  加  精  '"  th:href="${topic.isMarrow()}?'/cancelmarrow/topic?id='+${topic.getUuid()}:'/marrow/topic?id='+${topic.getUuid()}"></a>
+                                <a class="btn btn-danger col-sm-offset-1 col-sm-3" th:text="删除" th:href="@{/delete/topic(id=${topic.getUuid()})}"></a>
                             </td>
                         </tr>
                         <tr th:each="article:${articleList}">
                             <td>文章</td>
-                            <td th:text="${article.getId()}"></td>
-                            <td><a th:text="${article.getTitle()}" th:href="@{/articleDetail(id=${article.getId()})}"></a></td>
+                            <td th:text="${article.getUuid()}"></td>
+                            <td><a th:text="${article.getTitle()}" th:href="@{/articleDetail(id=${article.getUuid()})}"></a></td>
                             <td><p th:text="${article.getCreateTime()}"></p></td>
                             <td th:if="${session.isAdmin}">
-                                <a th:class="${article.isTop()?'btn btn-warning col-sm-3 ':'btn btn-success col-sm-3 '}" th:text="${article.isTop()}?'取消置顶':'  置  顶  '"   th:href="${article.isTop()}?'/cancelup/topic?id='+${article.getId()}:'/up/article?id='+${article.getId()}"></a>
-                                <a th:class="${article.isMarrow()?'btn btn-warning col-sm-offset-1 col-sm-3 ':'btn btn-primary  col-sm-offset-1 col-sm-3 '}" th:text="${article.isMarrow()}?'取消加精':'  加  精  '" th:href="${article.isMarrow()}?'/cancelmarrow/article?id='+${article.getId()}:'/marrow/article?id='+${article.getId()}"></a>
-                                <a class="btn btn-danger col-sm-offset-1 col-sm-3" th:text="删除" th:href="@{/delete/article(id=${article.getId()})}"></a>
+                                <a th:class="${article.isTop()?'btn btn-warning col-sm-3 ':'btn btn-success col-sm-3 '}" th:text="${article.isTop()}?'取消置顶':'  置  顶  '"   th:href="${article.isTop()}?'/cancelup/topic?id='+${article.getUuid()}:'/up/article?id='+${article.getUuid()}"></a>
+                                <a th:class="${article.isMarrow()?'btn btn-warning col-sm-offset-1 col-sm-3 ':'btn btn-primary  col-sm-offset-1 col-sm-3 '}" th:text="${article.isMarrow()}?'取消加精':'  加  精  '" th:href="${article.isMarrow()}?'/cancelmarrow/article?id='+${article.getUuid()}:'/marrow/article?id='+${article.getUuid()}"></a>
+                                <a class="btn btn-danger col-sm-offset-1 col-sm-3" th:text="删除" th:href="@{/delete/article(id=${article.getUuid()})}"></a>
                             </td>
                         </tr>
                         <tr th:each="reward:${rewardList}">
                             <td>悬赏</td>
-                            <td th:text="${reward.getId()}"></td>
-                            <td><a th:text="${reward.getTitle()}" th:href="@{/rewardDetail(id=${reward.getId()})}"></a></td>
+                            <td th:text="${reward.getUuid()}"></td>
+                            <td><a th:text="${reward.getTitle()}" th:href="@{/rewardDetail(id=${reward.getUuid()})}"></a></td>
                             <td><p th:text="${reward.getCreateTime()}"></p></td>
                             <td th:if="${session.isAdmin}">
-                                <a class="btn btn-danger" th:text="删除" th:href="@{/delete/reward(id=${reward.getId()})}"></a>
+                                <a class="btn btn-danger" th:text="删除" th:href="@{/delete/reward(id=${reward.getUuid()})}"></a>
                             </td>
                         </tr>
                         <tr th:each="replay:${replayList}">
                             <td>回复</td>
-                            <td th:text="${replay.getId()}"></td>
+                            <td th:text="${replay.getUuid()}"></td>
                             <td><a th:text="${replay.getContent()}" ></a></td>
                             <td><p th:text="${replay.getCreateTime()}"></p></td>
                             <td th:if="${session.isAdmin}">
-                                <a class="btn btn-danger" th:text="删除" th:href="@{/delete/replay(id=${replay.getId()})}"></a>
+                                <a class="btn btn-danger" th:text="删除" th:href="@{/delete/replay(id=${replay.getUuid()})}"></a>
                             </td>
                         </tr>
                         </tbody>
@@ -77,8 +77,8 @@
 <script src="/webjars/jquery/3.3.1/jquery.min.js"></script>
 <script src="/webjars/bootstrap/3.3.1/js/bootstrap.min.js"></script>
 <script>
-    var message=[[${message}]];
-    if (message!=""){
+    var message="[[${message}]]";
+    if (message!==""){
         alert(message);
     }
 </script></body>

@@ -26,7 +26,6 @@ public interface UserService {
 
      User getUserByEmail(String email);
 
-     Map<Integer,String> getUserMap();
 
      int getUserPoints(String uuid);
 }

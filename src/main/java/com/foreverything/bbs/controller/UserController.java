@@ -30,13 +30,14 @@ public class UserController {
     @PostMapping("/login")
     public ModelAndView userLogin(@RequestParam("email")String email, @RequestParam("password") String password, HttpServletRequest request){
         ModelAndView mv=new ModelAndView();
-
+        System.out.println("进入login post . email ："+email+" pwd: "+password);
         String pw=userService.getPas(email);
         if (null==pw){
             mv.addObject("message","该用户不存在");
-            mv.setViewName("loginPage");
+            mv.setViewName("login");
         }else if (pw.equals(password)){
             User user=userService.getUserByEmail(email);
+            System.out.println("登入用户是: "+user.toString());
             request.getSession().setAttribute("isAdmin",user.isAdmin());
             request.getSession().setAttribute("userName",user.getName());
             request.getSession().setAttribute("userUuid",user.getUuid());

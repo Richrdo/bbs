@@ -61,14 +61,6 @@ public class UserServiceImpl implements UserService {
         return userMapper.getUserByEmail(email);
     }
 
-    @Override
-    public Map<Integer,String> getUserMap() {
-        Map<Integer,String> map=new HashMap<>();
-        userMapper.getUserIDMap().forEach(e->{
-            map.put(e.getId(),e.getName());
-        });
-        return map;
-    }
 
     @Override
     public int getUserPoints(String uuid) {

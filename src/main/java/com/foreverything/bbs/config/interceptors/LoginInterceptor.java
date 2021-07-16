@@ -28,15 +28,12 @@ public class LoginInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response,Object handler) throws  Exception{
         HttpSession session=request.getSession();
-        if (session.getAttribute("idToNameMap")==null){
-            session.setAttribute("idToNameMap",userService.getUserMap());
-        }
-        if (null==session.getAttribute("userID")){
+        if (null==session.getAttribute("userUuid")){
             response.sendRedirect("/login");
             return false;
         }else{
             System.out.println("更新积分");
-            session.setAttribute("userPoints",userService.getUserPoints((String)session.getAttribute("userID")));
+            session.setAttribute("userPoints",userService.getUserPoints((String)session.getAttribute("userUuid")));
             return true;
         }
     }
