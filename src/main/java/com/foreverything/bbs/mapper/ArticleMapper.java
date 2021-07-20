@@ -18,7 +18,7 @@ import java.util.List;
 @Mapper
 @Service
 public interface ArticleMapper {
-    @Select("select * from article")
+    @Select("select * from article where is_delete=false")
     @Results({
             @Result(property = "uuid", column = "uuid"),
             @Result(property = "userUuid", column = "user_uuid"),
