@@ -20,7 +20,8 @@ public interface ReplayMapper {
             @Result(property = "uuid",column = "uuid"),
             @Result(property = "userUuid",column = "user_uuid"),
             @Result(property = "createTime",column = "create_time"),
-            @Result(property = "content",column = "content")
+            @Result(property = "content",column = "content"),
+            @Result(property = "fromType",column = "from_type")
     })
     public List<Replay> getReplayListByFromID(@Param("uuid")String id);
 
@@ -29,11 +30,12 @@ public interface ReplayMapper {
             @Result(property = "uuid",column = "uuid"),
             @Result(property = "userUuid",column = "user_uuid"),
             @Result(property = "createTime",column = "create_time"),
-            @Result(property = "content",column = "content")
+            @Result(property = "content",column = "content"),
+            @Result(property = "fromType",column = "from_type")
     })
     public Replay getReplayByID(@Param("uuid")String id);
 
-    @Insert("insert into replay(uuid,from_id,user_uuid,create_time,content) values(#{replay.uuid},#{replay.fromId},#{replay.userUuid},#{replay.createTime},#{replay.content})")
+    @Insert("insert into replay(uuid,from_id,user_uuid,create_time,content,from_type) values(#{replay.uuid},#{replay.fromId},#{replay.userUuid},#{replay.createTime},#{replay.content},#{replay.fromType})")
     public int insertReplay(@Param("replay")Replay replay);
 
 
@@ -43,6 +45,7 @@ public interface ReplayMapper {
             @Result(property = "userUuid",column = "user_uuid"),
             @Result(property = "createTime",column = "create_time"),
             @Result(property = "content",column = "content"),
+            @Result(property = "fromType",column = "from_type")
     })
     public List<Replay> searchReplay(@Param("str") String str);
 
@@ -51,5 +54,6 @@ public interface ReplayMapper {
 
     @Update("update replay set is_delete=false where uuid=#{uuid}")
     public int cancelDeleteReplay(String uuid);
+
 }
 

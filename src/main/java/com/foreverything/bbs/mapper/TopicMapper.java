@@ -25,6 +25,7 @@ public interface TopicMapper {
             @Result(property = "isDelete",column = "is_delete"),
             @Result(property = "title",column = "title"),
             @Result(property = "points",column = "points"),
+            @Result(property = "isTop",column = "is_top"),
             @Result(property = "isMarrow",column = "is_marrow")
     })
     List<Topic> getAllTopic();
@@ -38,6 +39,7 @@ public interface TopicMapper {
             @Result(property = "isDelete",column = "is_delete"),
             @Result(property = "title",column = "title"),
             @Result(property = "points",column = "points"),
+            @Result(property = "isTop",column = "is_top"),
             @Result(property = "isMarrow",column = "is_marrow")
     })
     Topic getTopicByID(@Param("uuid")String id);
@@ -73,7 +75,8 @@ public interface TopicMapper {
             @Result(property = "isDelete",column = "is_delete"),
             @Result(property = "title",column = "title"),
             @Result(property = "points",column = "points"),
-            @Result(property = "isMarrow",column = "is_marrow")
+            @Result(property = "isMarrow",column = "is_marrow"),
+            @Result(property = "isTop",column = "is_top"),
     })
     public List<Topic> searchTopic(@Param("str") String str);
 }

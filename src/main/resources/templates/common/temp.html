@@ -44,7 +44,7 @@
     </div>
 </div>
 
-<div class="row replay-form-box" th:fragment="replay-form-bar(id,path_s)">
+<div class="row replay-form-box" th:fragment="replay-form-bar(id,path_s,type)">
     <div class="col-md-offset-2 col-md-8">
         <div class="container-fluid replay-form-body">
             <h4><strong>发表回复</strong></h4>
@@ -53,6 +53,7 @@
                 <input type="submit" class="form-control" value="发表">
                 <input type="text" th:value="${id}" name="id" hidden="hidden">
                 <input type="text" th:value="${path_s}" name="path_s" hidden="hidden">
+                <input type="text" th:value="${type}" name="type" hidden="hidden">
             </form>
         </div>
     </div>

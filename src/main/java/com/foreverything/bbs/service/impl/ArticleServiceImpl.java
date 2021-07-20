@@ -66,6 +66,7 @@ public class ArticleServiceImpl implements ArticleService {
 
     @Override
     public int cancelUpArticleByID(String id) {
+        System.out.println("开始撤回article: "+id);
         return articleMapper.cancelUpArticleByID(id);
     }
 
