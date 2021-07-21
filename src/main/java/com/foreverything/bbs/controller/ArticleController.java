@@ -27,7 +27,6 @@ import javax.servlet.http.HttpServletRequest;
         public ModelAndView getArticle(){
             ModelAndView mv = new ModelAndView();
             mv.addObject("articles", articleService.getAllArticle());
-            System.out.println("查询到的所有文章是: "+articleService.getAllArticle().toString());
 //        setViewName()用来设置跳转页面
             mv.setViewName("articlePage");
             return mv;
@@ -39,7 +38,6 @@ import javax.servlet.http.HttpServletRequest;
                 model.addAttribute("message","内容不完整");
                 return "newArticlePage";
             }else{
-                System.out.println("后端收到的article是"+article.toString());
                 article.setUserUuid((String) request.getSession().getAttribute("userUuid"));
                 String uuid=articleService.insertArticle(article);
                 if (uuid!=null){

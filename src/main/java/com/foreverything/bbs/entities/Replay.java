@@ -32,6 +32,11 @@ public class Replay extends BaseBean implements Comparable<Replay> {
     @Column(type = MySqlTypeConstant.VARCHAR)
     private String fromId=null;
 
+    @Setter
+    @Getter
+    @Column(type = MySqlTypeConstant.VARCHAR)
+    private String fromType;
+
     @Override
     public int compareTo(Replay replay) {
         return this.getCreateTime().compareTo(replay.getCreateTime());

@@ -51,7 +51,7 @@ public interface RewardMapper {
             @Result(property = "points",column = "points"),
             @Result(property = "bestReplay",column = "best_replay")
     })
-     Reward getRewardByID(@Param("id") String id);
+     Reward getRewardByID(@Param("uuid") String id);
 
 
     //设置最佳回答

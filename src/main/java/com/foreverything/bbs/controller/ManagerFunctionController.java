@@ -37,84 +37,84 @@ public class ManagerFunctionController {
     @RequestMapping("/up/article")
     public String upArticle(@Param("id")String id, HttpServletRequest request){
         articleService.upArticleByID(id);
-        System.out.println("加精的帖子为+"+id);
+        System.out.println("置顶的帖子为+"+id);
         return "redirect:/search?str="+request.getSession().getAttribute("searchStr");
     }
 
     @RequestMapping("/up/topic")
     public String upTopic(@Param("id")String id,HttpServletRequest request){
         topicService.upTopicByID(id);
-        System.out.println("uptop"+id);
+        System.out.println("置顶的帖子为"+id);
         return "redirect:/search?str="+request.getSession().getAttribute("searchStr");
     }
 
     @RequestMapping("/delete/article")
     public String deleteArticle(@Param("id")String id ,HttpServletRequest request){
         articleService.deleteArticle(id);
-        System.out.println("delart"+id);
+        System.out.println("删除的帖子为"+id);
         return "redirect:/search?str="+request.getSession().getAttribute("searchStr");
     }
 
     @RequestMapping("/delete/topic")
-    public String deleteTopic(String id,HttpServletRequest request){
+    public String deleteTopic(@Param("id")String id,HttpServletRequest request){
         topicService.deleteTopicByID(id);
-        System.out.println("del top"+id);
+        System.out.println("删除的帖子为"+id);
         return "redirect:/search?str="+request.getSession().getAttribute("searchStr");
     }
 
     @RequestMapping("/delete/replay")
-    public String deleteReplay(String id,HttpServletRequest request){
+    public String deleteReplay(@Param("id")String id,HttpServletRequest request){
         replayService.deleteReplay(id);
-        System.out.println("del replay"+id);
+        System.out.println("删除的回复为"+id);
         return "redirect:/search?str="+request.getSession().getAttribute("searchStr");
     }
 
     @RequestMapping("/delete/reward")
-    public String deleteReward(String id,HttpServletRequest request){
+    public String deleteReward(@Param("id")String id,HttpServletRequest request){
         rewardService.deleteReward(id);
-        System.out.println("del reward"+id);
+        System.out.println("删除的帖子为"+id);
         return "redirect:/search?str="+request.getSession().getAttribute("searchStr");
     }
 
     @RequestMapping("/cancelup/topic")
-    public String cancelUpTopic(String id,HttpServletRequest request){
+    public String cancelUpTopic(@Param("id")String id,HttpServletRequest request){
         topicService.cancelUpTopicByID(id);
-        System.out.println("cancel id"+id);
+        System.out.println("取消置顶的帖子为"+id);
         return "redirect:/search?str="+request.getSession().getAttribute("searchStr");
     }
 
     @RequestMapping("/cancelup/article")
-    public String cancelUpArticle(String id,HttpServletRequest request){
+    public String cancelUpArticle(@Param("id")String id,HttpServletRequest request){
         articleService.cancelUpArticleByID(id);
-        System.out.println("cancel up article"+id);
+        System.out.println("取消置顶的帖子为"+id);
         return "redirect:/search?str="+request.getSession().getAttribute("searchStr");
     }
 
     @RequestMapping("/marrow/article")
-    public String marrowArticle(String id,HttpServletRequest request){
+    public String marrowArticle(@Param("id")String id,HttpServletRequest request){
         articleService.marrowArticleByID(id);
-        System.out.println("marrow id by"+id);
+        System.out.println("加精的帖子为"+id);
         return "redirect:/search?str="+request.getSession().getAttribute("searchStr");
     }
 
     @RequestMapping("/marrow/topic")
-    public String marrowTopic(String id,HttpServletRequest request){
+    public String marrowTopic(@Param("id")String id,HttpServletRequest request){
         topicService.marrowTopicByID(id);
-        System.out.println("marrow topic "+id);
+        System.out.println("加精的帖子为"+id);
         return "redirect:/search?str="+request.getSession().getAttribute("searchStr");
     }
 
     @RequestMapping("/cancelmarrow/topic")
     public String cancelMarrowTopic(String id,HttpServletRequest request){
         topicService.cancelMarrowTopicByID(id);
-        System.out.println("cancel marrow topic by id"+id);
+        System.out.println("取消加精的帖子为"+id);
         return "redirect:/search?str="+request.getSession().getAttribute("searchStr");
     }
 
     @RequestMapping("/cancelmarrow/article")
     public String cancelMarrowArtic(String id,HttpServletRequest request){
         articleService.cancelMarrowArticleByID(id);
-        System.out.println("cancel marrow artic "+id);
+        System.out.println("取消加精的帖子为"+id);
         return "redirect:/search?str="+request.getSession().getAttribute("searchStr");
     }
 

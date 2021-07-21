@@ -26,7 +26,8 @@ public interface ArticleMapper {
             @Result(property = "content", column = "content"),
             @Result(property = "createTime", column = "create_time"),
             @Result(property = "isMarrow", column = "is_marrow"),
-            @Result(property = "isDelete", column = "is_delete")
+            @Result(property = "isDelete", column = "is_delete"),
+            @Result(property = "isTop",column = "is_top")
     })
     abstract List<Article> getAllArticle();
 

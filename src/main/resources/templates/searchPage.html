@@ -41,7 +41,7 @@
                             <td><a th:text="${article.getTitle()}" th:href="@{/articleDetail(id=${article.getUuid()})}"></a></td>
                             <td><p th:text="${article.getCreateTime()}"></p></td>
                             <td th:if="${session.isAdmin}">
-                                <a th:class="${article.isTop()?'btn btn-warning col-sm-3 ':'btn btn-success col-sm-3 '}" th:text="${article.isTop()}?'取消置顶':'  置  顶  '"   th:href="${article.isTop()}?'/cancelup/topic?id='+${article.getUuid()}:'/up/article?id='+${article.getUuid()}"></a>
+                                <a th:class="${article.isTop()?'btn btn-warning col-sm-3 ':'btn btn-success col-sm-3 '}" th:text="${article.isTop()}?'取消置顶':'  置  顶  '"   th:href="${article.isTop()}?'/cancelup/article?id='+${article.getUuid()}:'/up/article?id='+${article.getUuid()}"></a>
                                 <a th:class="${article.isMarrow()?'btn btn-warning col-sm-offset-1 col-sm-3 ':'btn btn-primary  col-sm-offset-1 col-sm-3 '}" th:text="${article.isMarrow()}?'取消加精':'  加  精  '" th:href="${article.isMarrow()}?'/cancelmarrow/article?id='+${article.getUuid()}:'/marrow/article?id='+${article.getUuid()}"></a>
                                 <a class="btn btn-danger col-sm-offset-1 col-sm-3" th:text="删除" th:href="@{/delete/article(id=${article.getUuid()})}"></a>
                             </td>
@@ -58,7 +58,7 @@
                         <tr th:each="replay:${replayList}">
                             <td>回复</td>
                             <td th:text="${replay.getUuid()}"></td>
-                            <td><a th:text="${replay.getContent()}" ></a></td>
+                            <td><a th:text="${replay.getContent()}" th:href="@{${'/'+replay.getFromType()+'Detail'}(id=${replay.getFromId()})}"></a></td>
                             <td><p th:text="${replay.getCreateTime()}"></p></td>
                             <td th:if="${session.isAdmin}">
                                 <a class="btn btn-danger" th:text="删除" th:href="@{/delete/replay(id=${replay.getUuid()})}"></a>
