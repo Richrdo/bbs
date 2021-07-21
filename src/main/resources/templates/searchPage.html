@@ -58,7 +58,7 @@
                         <tr th:each="replay:${replayList}">
                             <td>回复</td>
                             <td th:text="${replay.getUuid()}"></td>
-                            <td><a th:text="${replay.getContent()}" th:href="@{${'/'+replay.getFromType()+'Details'}(id=${replay.getFromId()})}"></a></td>
+                            <td><a th:text="${replay.getContent()}" th:href="@{${'/'+replay.getFromType()+'Detail'}(id=${replay.getFromId()})}"></a></td>
                             <td><p th:text="${replay.getCreateTime()}"></p></td>
                             <td th:if="${session.isAdmin}">
                                 <a class="btn btn-danger" th:text="删除" th:href="@{/delete/replay(id=${replay.getUuid()})}"></a>

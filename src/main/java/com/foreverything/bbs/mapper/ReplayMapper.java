@@ -21,7 +21,8 @@ public interface ReplayMapper {
             @Result(property = "userUuid",column = "user_uuid"),
             @Result(property = "createTime",column = "create_time"),
             @Result(property = "content",column = "content"),
-            @Result(property = "fromType",column = "from_type")
+            @Result(property = "fromType",column = "from_type"),
+            @Result(property = "fromId",column = "from_id"),
     })
     public List<Replay> getReplayListByFromID(@Param("uuid")String id);
 
@@ -31,6 +32,7 @@ public interface ReplayMapper {
             @Result(property = "userUuid",column = "user_uuid"),
             @Result(property = "createTime",column = "create_time"),
             @Result(property = "content",column = "content"),
+            @Result(property = "fromId",column = "from_id"),
             @Result(property = "fromType",column = "from_type")
     })
     public Replay getReplayByID(@Param("uuid")String id);
@@ -45,6 +47,7 @@ public interface ReplayMapper {
             @Result(property = "userUuid",column = "user_uuid"),
             @Result(property = "createTime",column = "create_time"),
             @Result(property = "content",column = "content"),
+            @Result(property = "fromId",column = "from_id"),
             @Result(property = "fromType",column = "from_type")
     })
     public List<Replay> searchReplay(@Param("str") String str);
