@@ -1,0 +1,5 @@
+spring:
+  rabbitmq:
+    host: 47.106.76.106
+    port: 5672
+    virtual-host: /bbs
