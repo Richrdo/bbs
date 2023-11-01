@@ -4,10 +4,12 @@ package com.foreverything.bbs.controller;
 import com.foreverything.bbs.entities.User;
 import com.foreverything.bbs.feign.CaptchaFeign;
 import com.foreverything.bbs.service.UserService;
+import com.foreverything.bbs.service.VerificationService;
 import com.timegoesby.bbscommon.constant.CodeEnums;
 import com.timegoesby.bbscommon.constant.R;
 import com.timegoesby.bbscommon.vo.CaptchaVo;
 import com.timegoesby.bbscommon.vo.EmailVo;
+import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -29,7 +31,7 @@ public class UserController {
     UserService userService;
 
     @Autowired
-    CaptchaFeign captchaFeign;
+    VerificationService verificationService;
 
     @PostMapping("/login")
     public ModelAndView userLogin(@RequestParam("email") String email, @RequestParam("password") String password, HttpServletRequest request) {
@@ -61,7 +63,7 @@ public class UserController {
     @RequestMapping("/verification/captcha/send")
     @ResponseBody
     public R<String> send(@RequestBody EmailVo emailVo) {
-        return captchaFeign.sendCaptcha(emailVo);
+        return verificationService.sendCaptcha(emailVo);
     }
 
     @PostMapping("/register")
@@ -74,7 +76,7 @@ public class UserController {
 
         } else if (userService.getUserByEmail(email) != null) {
             mv.addObject("message", "该邮箱已注册");
-        } else if (captchaFeign.verify(new CaptchaVo(email, captcha)).getCode() != CodeEnums.SUCCESS.getCode()) {
+        } else if (verificationService.verifyCaptcha(new CaptchaVo(email, captcha)).getCode() != CodeEnums.SUCCESS.getCode()) {
             mv.addObject("message", "验证码错误");
         } else {
             String uuid = userService.insertUser(name, password, email);
