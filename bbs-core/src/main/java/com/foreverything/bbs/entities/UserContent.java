@@ -8,26 +8,19 @@ import lombok.Data;
 import lombok.ToString;
 
 import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
 
 @Data
 @ToString
-@Table(name = "user", uniqueConstraints = @UniqueConstraint(columnNames = "email"))
+@Table(name = "user_content")
 @TableCharset(MySqlCharsetConstant.UTF8MB4)
-public class User {
+public class UserContent {
 
-    @Column(isKey = true, isAutoIncrement = true, type = MySqlTypeConstant.INT)
-    private int id;
+    @Column(type = MySqlTypeConstant.INT, isNull = false)
+    private int content_id;
 
-    @Column(type = MySqlTypeConstant.VARCHAR, isNull = false)
-    private String email;
-
-    @Column(type = MySqlTypeConstant.VARCHAR, isNull = false)
-    private String name;
+    @Column(type = MySqlTypeConstant.INT, isNull = false)
+    private int user_id;
 
     @Column(type = MySqlTypeConstant.VARCHAR, isNull = false)
-    private String password;
-
-    @Column(type = MySqlTypeConstant.INT)
-    private int points = 0;
+    private String content_type;
 }

@@ -41,15 +41,7 @@ public class RewardServiceImpl implements RewardService {
     }
 
     @Override
-    public String insertReward(Reward reward) {
-       /**
-       *@Author:Yanlan_Li
-       *@Date:11:22 2019/12/17
-       *@param:
-       *  * @param topic
-       *@Descriptoon:
-       */
-        reward.setUuid(UUID.randomUUID().toString());
+    public int insertReward(Reward reward) {
 
         SimpleDateFormat dateFormat=new SimpleDateFormat();
         dateFormat.applyPattern("yyyy-MM-dd HH:mm:ss");
@@ -58,16 +50,18 @@ public class RewardServiceImpl implements RewardService {
         reward.setCreateTime(dateFormat.format(date));
 
         if (rewardMapper.insertReward(reward)>0){
-            return reward.getUuid();
-        }else
-            return null;
+            reward.setId(rewardMapper.getContentId());
+            return reward.getId();
+        }
+            return -1;
     }
 
     //根据id查找特定的悬赏
     @Override
-    public Reward getRewardByID( String id){
+    public Reward getRewardByID( int id){
         return rewardMapper.getRewardByID(id);
     }
+
 
 
     //设置最佳回答
@@ -83,18 +77,18 @@ public class RewardServiceImpl implements RewardService {
     }
 
     @Override
-    public int deleteReward(String id){
+    public int deleteReward(int id){
         return rewardMapper.deleteReward(id);
     }
 
     @Override
-    public int cancelDeleteReward(String id){
+    public int cancelDeleteReward(int id){
         return rewardMapper.cancelDeleteReward(id);
     }
 
     @Override
-    public boolean isEnough(int point, String uuid) {
-        return point <= userMapper.getUserPoint(uuid);
+    public boolean isEnough(int point, int id) {
+        return point <= userMapper.getPointsById(id);
     }
 
 

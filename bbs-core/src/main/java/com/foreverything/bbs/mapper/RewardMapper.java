@@ -18,8 +18,8 @@ public interface RewardMapper {
 
     @Select("select * from reward where is_delete=false")  //显示悬赏列表
     @Results({
-            @Result(property = "uuid",column = "uuid",id = true),
-            @Result(property = "userUuid",column = "user_uuid"),
+            @Result(property = "id",column = "id",id = true),
+            @Result(property = "userId",column = "user_id"),
             @Result(property = "content",column = "content"),
             @Result(property = "createTime",column = "create_time"),
             @Result(property = "isDelete",column = "is_delete"),
@@ -29,7 +29,7 @@ public interface RewardMapper {
     })
     List<Reward> getAllReward();
 
-    @Insert("insert into reward(uuid,user_uuid,content,create_time,title,points) values(#{reward.uuid},#{reward.userUuid},#{reward.content},#{reward.createTime},#{reward.title},#{reward.points})")
+    @Insert("insert into reward(user_uuid,content,create_time,title,points) values(#{reward.userId},#{reward.content},#{reward.createTime},#{reward.title},#{reward.points})")
      int insertReward(@Param("reward") Reward reward); //发布悬赏
 
     /**
@@ -40,10 +40,10 @@ public interface RewardMapper {
     *@Descriptoon:
     */
     //根据id查找特定的悬赏
-    @Select("select * from reward where uuid=#{uuid}")
+    @Select("select * from reward where id=#{id}")
     @Results({
-            @Result(property = "uuid",column = "uuid",id = true),
-            @Result(property = "userUuid",column = "user_uuid"),
+            @Result(property = "id",column = "id",id = true),
+            @Result(property = "userId",column = "user_id"),
             @Result(property = "content",column = "content"),
             @Result(property = "createTime",column = "create_time"),
             @Result(property = "isDelete",column = "is_delete"),
@@ -51,28 +51,31 @@ public interface RewardMapper {
             @Result(property = "points",column = "points"),
             @Result(property = "bestReplay",column = "best_replay")
     })
-     Reward getRewardByID(@Param("uuid") String id);
+     Reward getRewardByID(@Param("id") int id);
 
 
     //设置最佳回答
-    @Update("update reward set best_replay=#{replay.uuid} where uuid=#{reward.uuid}")
+    @Update("update reward set best_replay=#{replay.id} where id=#{reward.id}")
      int setBestReplay(@Param("replay")Replay replay,@Param("reward")Reward reward);
 
     //删除悬赏
-    @Update("update reward set is_delete=true where uuid=#{uuid}")
-    int deleteReward(String uuid);
+    @Update("update reward set is_delete=true where id=#{id}")
+    int deleteReward(int id);
+
+    @Select("SELECT LAST_INSERT_ID()")
+    public int getContentId();
 
     //创建者修改悬赏内容
-    @Update("update reward set content=#{reward.content},title=#{reward.title} where uuid=#{reward.uuid}")
+    @Update("update reward set content=#{reward.content},title=#{reward.title} where uuid=#{reward.id}")
      int putReward(@Param("reward")Reward reward);
 
-    @Update("update reward set is_delete=false where uuid=#{uuid}")
-    int cancelDeleteReward(String uuid);
+    @Update("update reward set is_delete=false where uuid=#{id}")
+    int cancelDeleteReward(int id);
 
     @Select("select * from reward where is_delete=false and (title like #{str} or content like #{str}) ")
     @Results({
-            @Result(property = "uuid",column = "uuid",id = true),
-            @Result(property = "userUuid",column = "user_uuid"),
+            @Result(property = "id",column = "id",id = true),
+            @Result(property = "userId",column = "user_id"),
             @Result(property = "content",column = "content"),
             @Result(property = "createTime",column = "create_time"),
             @Result(property = "isDelete",column = "is_delete"),

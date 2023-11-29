@@ -29,9 +29,7 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
-    public String insertArticle(Article article) {
-
-        article.setUuid(UUID.randomUUID().toString());
+    public int insertArticle(Article article) {
 
         SimpleDateFormat dateFormat = new SimpleDateFormat();
         dateFormat.applyPattern("yyyy-MM-dd HH:mm:ss");
@@ -39,9 +37,10 @@ public class ArticleServiceImpl implements ArticleService {
 
         article.setCreateTime(dateFormat.format(date));
         if (articleMapper.insertArticle(article) > 0) {
-            return article.getUuid();
-        } else
-            return null;
+            article.setId(articleMapper.getContentId());
+            return article.getId();
+        }
+        return -1;
     }
 
     @Override
@@ -50,38 +49,38 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
-    public int deleteArticle(String id) {
+    public int deleteArticle(int id) {
         return articleMapper.deleteArticleByID(id);
     }
 
     @Override
-    public int cancelDeleteArticle(String id) {
+    public int cancelDeleteArticle(int id) {
         return articleMapper.cancelMarrowArticleByID(id);
     }
 
     @Override
-    public int upArticleByID(String id) {
+    public int upArticleByID(int id) {
         return articleMapper.upArticle(id);
     }
 
     @Override
-    public int cancelUpArticleByID(String id) {
-        System.out.println("开始撤回article: "+id);
+    public int cancelUpArticleByID(int id) {
+        System.out.println("开始撤回article: " + id);
         return articleMapper.cancelUpArticleByID(id);
     }
 
     @Override
-    public int marrowArticleByID(String id) {
+    public int marrowArticleByID(int id) {
         return articleMapper.marrowArticleByID(id);
     }
 
     @Override
-    public int cancelMarrowArticleByID(String id) {
+    public int cancelMarrowArticleByID(int id) {
         return articleMapper.cancelMarrowArticleByID(id);
     }
 
     @Override
-    public Article getArticleByID(String id) {
+    public Article getArticleByID(int id) {
         return articleMapper.getArticleByID(id);
     }
 

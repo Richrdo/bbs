@@ -30,9 +30,7 @@ public class TopicServiceImpl implements TopicService {
     }
 
     @Override
-    public String insertTopic(Topic topic) {
-
-        topic.setUuid(UUID.randomUUID().toString());
+    public int insertTopic(Topic topic) {
 
         SimpleDateFormat dateFormat=new SimpleDateFormat();
         dateFormat.applyPattern("yyyy-MM-dd HH:mm:ss");
@@ -41,9 +39,10 @@ public class TopicServiceImpl implements TopicService {
         topic.setCreateTime(dateFormat.format(date));
 
         if (topicMapper.insertTopic(topic)>0){
-            return topic.getUuid();
-        }else
-        return null;
+            topic.setId(topicMapper.getContentId());
+            return topic.getId();
+        }
+        return -1;
     }
 
     @Override
@@ -52,42 +51,42 @@ public class TopicServiceImpl implements TopicService {
     }
 
     @Override
-    public int marrowTopicByID(String id) {
+    public int marrowTopicByID(int id) {
         return topicMapper.marrowTopicByID(id);
     }
 
     @Override
-    public int cancelMarrowTopic(String id) {
+    public int cancelMarrowTopic(int id) {
         return topicMapper.cancelMarrowTopicByID(id);
     }
 
     @Override
-    public int upTopicByID(String id) {
+    public int upTopicByID(int id) {
         return topicMapper.upTopicByID(id);
     }
 
     @Override
-    public int deleteTopicByID(String id) {
+    public int deleteTopicByID(int id) {
         return topicMapper.deleteTopicByID(id);
     }
 
     @Override
-    public int cancelDeleteTopicByID(String id) {
+    public int cancelDeleteTopicByID(int id) {
         return cancelDeleteTopicByID(id);
     }
 
     @Override
-    public Topic getTopicByID(String id) {
+    public Topic getTopicByID(int id) {
         return topicMapper.getTopicByID(id);
     }
 
     @Override
-    public int cancelUpTopicByID(String id) {
+    public int cancelUpTopicByID(int id) {
         return topicMapper.cancelUpTopicByID(id);
     }
 
     @Override
-    public int cancelMarrowTopicByID(String id) {
+    public int cancelMarrowTopicByID(int id) {
         return topicMapper.cancelMarrowTopicByID(id);
     }
 

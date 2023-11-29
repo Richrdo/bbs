@@ -41,10 +41,5 @@ public class Article extends BaseBean {
     @Setter
     @Column(type = MySqlTypeConstant.TINYINT, defaultValue = "0")
     private boolean isTop=false;
-
-    @Getter
-    @Setter
-    @Column(type = MySqlTypeConstant.VARCHAR)
-    private String uuid;
 }
 

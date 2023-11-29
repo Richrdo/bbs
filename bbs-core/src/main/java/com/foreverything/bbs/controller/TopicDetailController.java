@@ -30,7 +30,7 @@ public class TopicDetailController {
     TopicService topicService;
 
     @GetMapping("/topicDetail")
-    public ModelAndView getTopicDetail(@RequestParam(value = "id") String id){
+    public ModelAndView getTopicDetail(@RequestParam(value = "id") int id){
         ModelAndView mv=new ModelAndView();
         Topic topic = topicService.getTopicByID(id);
         System.out.println("点击的topic："+topic);

@@ -16,7 +16,9 @@
                     <p th:text="${obj.getContent()}"></p>
                 </div>
                 <div class="col-md-4">
-                    <em th:utext="'楼主：'+${obj.getUserUuid()}"></em>
+<!--                    <em th:utext="'楼主：'+${obj.getUserUuid()}"></em>-->
+<!--                    TODO 这里需要根据楼主显示其ID-->
+                    <em th:utext="'楼主：'+' TODO '"></em>
                     <p th:utext="'发表于：'+${obj.getCreateTime()}"></p>
                 </div>
             </div>
@@ -34,7 +36,9 @@
                         <p th:text="${replay.getContent()}"></p>
                     </div>
                     <div class="col-md-4">
-                        <p th:text="'用户：'+${replay.getUserUuid()}"></p>
+                        <!--                    <em th:utext="'楼主：'+${replay.getUserUuid()}"></em>-->
+                        <!--                    TODO 这里需要根据楼主显示其ID-->
+                        <em th:utext="'楼主：'+' TODO '"></em>
 <!--                            <p th:text="'用户：'+${session.idToNameMap.get(111111)}"></p>-->
                         <em th:text="'回复于：'+${replay.getCreateTime()}"></em>
                     </div>

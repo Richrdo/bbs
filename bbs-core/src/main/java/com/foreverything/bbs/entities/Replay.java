@@ -30,7 +30,7 @@ public class Replay extends BaseBean implements Comparable<Replay> {
     @Getter
     @Setter
     @Column(type = MySqlTypeConstant.VARCHAR)
-    private String fromId=null;
+    private int fromId;
 
     @Setter
     @Getter

@@ -34,13 +34,13 @@ import javax.servlet.http.HttpServletRequest;
 
         @PostMapping("/add/article")
         public String createNewArticle(Article article,Model model,HttpServletRequest request){
-            if (article.getTitle().length()==0||0==article.getContent().length()){
+            if (article.getTitle().isEmpty() || article.getContent().isEmpty()){
                 model.addAttribute("message","内容不完整");
                 return "newArticlePage";
             }else{
-                article.setUserUuid((String) request.getSession().getAttribute("userUuid"));
-                String uuid=articleService.insertArticle(article);
-                if (uuid!=null){
+                article.setUserId(Integer.parseInt(request.getSession().getAttribute("userId").toString().trim()));
+                int id=articleService.insertArticle(article);
+                if (id>0){
                     return "redirect:/article";
                 }else{
                     model.addAttribute("message","发布失败，请重试");
@@ -51,7 +51,7 @@ import javax.servlet.http.HttpServletRequest;
         }
 
         @DeleteMapping("/delete/article")
-        public int deleteArticle(String  id){
+        public int deleteArticle(int  id){
             return articleService.deleteArticle(id);
         }
 

@@ -1,13 +1,16 @@
 package com.foreverything.bbs.service.impl;
 
 import com.foreverything.bbs.entities.User;
+import com.foreverything.bbs.entities.User_old;
+import com.foreverything.bbs.mapper.LoginMapper;
 import com.foreverything.bbs.mapper.UserMapper;
+import com.foreverything.bbs.mapper.UserRoleMapper;
 import com.foreverything.bbs.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.HashMap;
-import java.util.Map;
+import javax.servlet.http.HttpSession;
+import java.beans.Transient;
 import java.util.UUID;
 
 /**
@@ -19,42 +22,27 @@ import java.util.UUID;
 @Service
 public class UserServiceImpl implements UserService {
     @Autowired
+    LoginMapper loginMapper;
+
+    @Autowired
     UserMapper userMapper;
 
+    @Autowired
+    UserRoleMapper userRoleMapper;
 
     @Override
-    public String getPas(String id){
-        return userMapper.getPas(id);
+    @Transient()
+    public boolean insertUser(String username,String password,String email){
+        User user = new User();
+        if (userMapper.insertUser(email,username,password)>0){
+            int id = userMapper.getInsertedUserId();
+            // TODO 这里写死了普通用户的role id是5，后续继续改进
+            userRoleMapper.insertUserRole(id,5);
+            return true;
+        }
+        return false;
     }
 
-    @Override
-    public String insertUser(String username,String password,String mail){
-        User user=new User();
-        user.setUuid(UUID.randomUUID().toString());
-        user.setName(username);
-        user.setPassword(password);
-        user.setEmail(mail);
-        user.setGrade(0);
-        if (userMapper.insertUser(user)>0){
-            return user.getUuid();
-        }else
-        return null;
-    }
-
-    @Override
-    public Boolean judgeUserByID(String uuid) {
-        return userMapper.isAdmin(uuid);
-    }
-
-    @Override
-    public String getIDByMail(String mail) {
-        return userMapper.getUUIDByEmail(mail);
-    }
-
-    @Override
-    public String getPasswordByEmail(String mail) {
-        return userMapper.getPas(mail);
-    }
 
     @Override
     public User getUserByEmail(String email) {
@@ -63,8 +51,8 @@ public class UserServiceImpl implements UserService {
 
 
     @Override
-    public int getUserPoints(String uuid) {
-        return userMapper.getUserPoint(uuid);
+    public int getUserPointsByEmail(String email) {
+        return userMapper.getPointsByEmail(email);
     }
 
 

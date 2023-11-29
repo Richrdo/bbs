@@ -1,6 +1,5 @@
 package com.foreverything.bbs.config.interceptors;
 
-import com.foreverything.bbs.entities.User;
 import com.foreverything.bbs.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.Nullable;
@@ -19,21 +18,21 @@ import javax.servlet.http.HttpSession;
  * @Description
  */
 
-@Service
+//@Service
 public class LoginInterceptor implements HandlerInterceptor {
 
-    @Autowired
+//    @Autowired
     UserService userService;
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response,Object handler) throws  Exception{
         HttpSession session=request.getSession();
-        if (null==session.getAttribute("userUuid")){
+        if (null==session.getAttribute("userName")){
             response.sendRedirect("/login");
             return false;
         }else{
             System.out.println("更新积分");
-            session.setAttribute("userPoints",userService.getUserPoints((String)session.getAttribute("userUuid")));
+            session.setAttribute("userPoints",userService.getUserPointsByEmail((String)session.getAttribute("userEmail")));
             return true;
         }
     }

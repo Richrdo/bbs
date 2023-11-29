@@ -1,6 +1,7 @@
 package com.foreverything.bbs.controller;
 
 import com.foreverything.bbs.entities.User;
+import com.foreverything.bbs.entities.User_old;
 import com.foreverything.bbs.service.SearchService;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 /**
@@ -31,9 +33,8 @@ public class SearchController {
 
         str="%"+str+"%";
         mv=new ModelAndView();
-        User user= (User) request.getSession().getAttribute("user");
-        System.out.println(user);
-        if (user!=null&&user.isAdmin()){
+        String roleName = request.getSession().getAttribute("roleName").toString();
+        if (roleName !=null&& roleName.equals("admin")){
             System.out.println("success");
             mv.addObject("isAdmin",true);
         }else{

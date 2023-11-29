@@ -28,7 +28,7 @@ public class RewardDetailController {
     RewardService rewardService;
 
     @GetMapping("/rewardDetail")
-    public ModelAndView getRewardDetail(@RequestParam(value = "id") String id){
+    public ModelAndView getRewardDetail(@RequestParam(value = "id") int id){
         ModelAndView mv=new ModelAndView();
         Reward reward = rewardService.getRewardByID(id);
         System.out.println("点击的reward："+reward);

@@ -13,11 +13,11 @@ import java.util.List;
 
 public interface ReplayService {
 
-    List<Replay> getReplayListByID(String id);
+    List<Replay> getReplayListByID(int id);
 
-    String insertReplay(Replay replay);
+    int insertReplay(Replay replay);
 
-    int deleteReplay(String id);
+    int deleteReplay(int id);
 
-    int cancelDeleteReplay(String id);
+    int cancelDeleteReplay(int id);
 }

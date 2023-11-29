@@ -19,23 +19,16 @@ import lombok.ToString;
 public class BaseBean {
     @Getter
     @Setter
-    @Column(isKey = true,isAutoIncrement = true,type = MySqlTypeConstant.BIGINT)
-    private String id;
-
-    @Getter
-    @Setter
-    @Column(type = MySqlTypeConstant.VARCHAR)
-    private String uuid;
-
-    @Getter
-    @Setter
-    @Column
-    private String userUuid;
+    @Column(isKey = true, isAutoIncrement = true, type = MySqlTypeConstant.BIGINT)
+    private int id;
 
     @Getter
     @Setter
     @Column
     private String createTime;
+
+    @Column(type = MySqlTypeConstant.INT, isNull = false)
+    private int userId;
 
     @Getter
     @Setter

@@ -1,10 +1,7 @@
 package com.foreverything.bbs.service;
 
 import com.foreverything.bbs.entities.User;
-import org.springframework.data.relational.core.sql.In;
-
-import java.util.List;
-import java.util.Map;
+import com.foreverything.bbs.entities.User_old;
 
 /**
  * @ClassName UserService
@@ -14,18 +11,9 @@ import java.util.Map;
  */
 public interface UserService {
 
-     String getPas(String id);
-
-     String insertUser(String username, String password, String mail);
-
-     Boolean judgeUserByID(String uuid);
-
-     String getIDByMail(String mail);
-
-     String getPasswordByEmail(String mail);
+     boolean insertUser(String username, String password, String mail);
 
      User getUserByEmail(String email);
 
-
-     int getUserPoints(String uuid);
+     int getUserPointsByEmail(String email);
 }

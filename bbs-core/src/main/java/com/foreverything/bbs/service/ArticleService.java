@@ -15,21 +15,21 @@ public interface ArticleService {
 
     List<Article> getAllArticle();
 
-    Article getArticleByID(String id);
+    Article getArticleByID(int id);
 
-    String insertArticle(Article article);
+    int insertArticle(Article article);
 
     int updateArticle(Article article);
 
-    int deleteArticle(String id);
+    int deleteArticle(int id);
 
-    int cancelDeleteArticle(String id);
+    int cancelDeleteArticle(int id);
 
-    int upArticleByID(String id);
+    int upArticleByID(int id);
 
-    int cancelUpArticleByID(String id);
+    int cancelUpArticleByID(int id);
 
-    int marrowArticleByID(String id);
+    int marrowArticleByID(int id);
 
-    int cancelMarrowArticleByID(String id);
+    int cancelMarrowArticleByID(int id);
 }

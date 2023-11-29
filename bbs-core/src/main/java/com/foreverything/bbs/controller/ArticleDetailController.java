@@ -27,7 +27,7 @@ public class ArticleDetailController {
     ArticleService articleService;
 
     @GetMapping("/articleDetail")
-    public ModelAndView getArticleDetail(@RequestParam(value = "id") String id){
+    public ModelAndView getArticleDetail(@RequestParam(value = "id") int id){
         ModelAndView mv=new ModelAndView();
         Article article = articleService.getArticleByID(id);
         System.out.println("点击的article："+article);

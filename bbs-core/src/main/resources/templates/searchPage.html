@@ -26,8 +26,8 @@
                         <tbody>
                         <tr th:each="topic:${topicList}" >
                             <td>讨论</td>
-                            <td th:text="${topic.getUuid()}"></td>
-                            <td><a th:text="${topic.getTitle()}" th:href="@{/topicDetail(id=${topic.getUuid()})}"></a></td>
+                            <td th:text="${topic.getId()()}"></td>
+                            <td><a th:text="${topic.getTitle()}" th:href="@{/topicDetail(id=${topic.getId()})}"></a></td>
                             <td><p th:text="${topic.getCreateTime()}"></p></td>
                             <td th:if="${session.isAdmin}">
                                 <a th:class=" ${topic.isTop()?'btn btn-warning col-sm-3 ':'btn btn-success col-sm-3 '}"  th:text="${topic.isTop()}?'取消置顶':'  置  顶  '" th:href="${topic.isTop()}?'/cancelup/topic?id='+${topic.getUuid()}:'/up/topic?id='+${topic.getUuid()}"></a>
@@ -37,8 +37,8 @@
                         </tr>
                         <tr th:each="article:${articleList}">
                             <td>文章</td>
-                            <td th:text="${article.getUuid()}"></td>
-                            <td><a th:text="${article.getTitle()}" th:href="@{/articleDetail(id=${article.getUuid()})}"></a></td>
+                            <td th:text="${article.getId()()}"></td>
+                            <td><a th:text="${article.getTitle()}" th:href="@{/articleDetail(id=${article.getId()})}"></a></td>
                             <td><p th:text="${article.getCreateTime()}"></p></td>
                             <td th:if="${session.isAdmin}">
                                 <a th:class="${article.isTop()?'btn btn-warning col-sm-3 ':'btn btn-success col-sm-3 '}" th:text="${article.isTop()}?'取消置顶':'  置  顶  '"   th:href="${article.isTop()}?'/cancelup/article?id='+${article.getUuid()}:'/up/article?id='+${article.getUuid()}"></a>
@@ -48,20 +48,20 @@
                         </tr>
                         <tr th:each="reward:${rewardList}">
                             <td>悬赏</td>
-                            <td th:text="${reward.getUuid()}"></td>
-                            <td><a th:text="${reward.getTitle()}" th:href="@{/rewardDetail(id=${reward.getUuid()})}"></a></td>
+                            <td th:text="${reward.getId()}"></td>
+                            <td><a th:text="${reward.getTitle()}" th:href="@{/rewardDetail(id=${reward.getId()})}"></a></td>
                             <td><p th:text="${reward.getCreateTime()}"></p></td>
                             <td th:if="${session.isAdmin}">
-                                <a class="btn btn-danger" th:text="删除" th:href="@{/delete/reward(id=${reward.getUuid()})}"></a>
+                                <a class="btn btn-danger" th:text="删除" th:href="@{/delete/reward(id=${reward.getId()})}"></a>
                             </td>
                         </tr>
                         <tr th:each="replay:${replayList}">
                             <td>回复</td>
-                            <td th:text="${replay.getUuid()}"></td>
+                            <td th:text="${replay.getId()}"></td>
                             <td><a th:text="${replay.getContent()}" th:href="@{${'/'+replay.getFromType()+'Detail'}(id=${replay.getFromId()})}"></a></td>
                             <td><p th:text="${replay.getCreateTime()}"></p></td>
                             <td th:if="${session.isAdmin}">
-                                <a class="btn btn-danger" th:text="删除" th:href="@{/delete/replay(id=${replay.getUuid()})}"></a>
+                                <a class="btn btn-danger" th:text="删除" th:href="@{/delete/replay(id=${replay.getId()})}"></a>
                             </td>
                         </tr>
                         </tbody>

@@ -2,14 +2,13 @@ package com.foreverything.bbs.controller;
 
 
 import com.foreverything.bbs.entities.User;
-import com.foreverything.bbs.feign.CaptchaFeign;
+import com.foreverything.bbs.entities.User_old;
 import com.foreverything.bbs.service.UserService;
 import com.foreverything.bbs.service.VerificationService;
 import com.timegoesby.bbscommon.constant.CodeEnums;
 import com.timegoesby.bbscommon.constant.R;
 import com.timegoesby.bbscommon.vo.CaptchaVo;
 import com.timegoesby.bbscommon.vo.EmailVo;
-import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -34,30 +33,9 @@ public class UserController {
     VerificationService verificationService;
 
     @PostMapping("/login")
-    public ModelAndView userLogin(@RequestParam("email") String email, @RequestParam("password") String password, HttpServletRequest request) {
-
-
-        ModelAndView mv = new ModelAndView();
+    public String userLogin(@RequestParam("email") String email, @RequestParam("password") String password, HttpServletRequest request) {
         System.out.println("进入login post . email ：" + email + " pwd: " + password);
-        String pw = userService.getPas(email);
-        if (null == pw) {
-            mv.addObject("message", "该用户不存在");
-            mv.setViewName("login");
-        } else if (pw.equals(password)) {
-            User user = userService.getUserByEmail(email);
-            System.out.println("登入用户是: " + user.toString());
-            request.getSession().setAttribute("isAdmin", user.isAdmin());
-            request.getSession().setAttribute("userName", user.getName());
-            request.getSession().setAttribute("userUuid", user.getUuid());
-            request.getSession().setAttribute("userEmail", user.getEmail());
-            request.getSession().setAttribute("userPoints", user.getGrade());
-            mv.setViewName("index");
-        } else {
-            mv.addObject("message", "密码错误");
-            mv.setViewName("login");
-        }
-
-        return mv;
+        return "login";
     }
 
     @RequestMapping("/verification/captcha/send")
@@ -79,10 +57,8 @@ public class UserController {
         } else if (verificationService.verifyCaptcha(new CaptchaVo(email, captcha)).getCode() != CodeEnums.SUCCESS.getCode()) {
             mv.addObject("message", "验证码错误");
         } else {
-            String uuid = userService.insertUser(name, password, email);
-
-            if (uuid != null) {
-                mv.addObject("message", "注册成功，您的id为：" + uuid + ",请牢记");
+            if (userService.insertUser(name, password, email)) {
+                mv.addObject("message", "注册成功");
                 mv.setViewName("login");
             } else {
                 mv.addObject("message", "注册失败");

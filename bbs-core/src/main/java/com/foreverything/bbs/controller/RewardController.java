@@ -39,12 +39,12 @@ public class RewardController {
         if (null==reward.getTitle()||null==reward.getContent()){
             model.addAttribute("message","信息不完整");
             return "newRewardPage";
-        }else if(!rewardService.isEnough(reward.getPoints(), (String) request.getSession().getAttribute("userUuid"))) {
+        }else if(!rewardService.isEnough(reward.getPoints(), (Integer) request.getSession().getAttribute("userId"))) {
             model.addAttribute("message","您的积分不足");
             return "newRewardPage";//积分不够
         }else{
-            String id=rewardService.insertReward(reward);
-            if (id!=null){
+            int id=rewardService.insertReward(reward);
+            if (id>0){
                 model.addAttribute("message","发布成功");
                 return "redirect:/reward";
             }else{

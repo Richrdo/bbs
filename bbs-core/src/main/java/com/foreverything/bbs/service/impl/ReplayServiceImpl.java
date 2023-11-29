@@ -25,32 +25,31 @@ public class ReplayServiceImpl implements ReplayService {
     ReplayMapper replayMapper;
 
     @Override
-    public List<Replay> getReplayListByID(String id) {
+    public List<Replay> getReplayListByID(int id) {
         return replayMapper.getReplayListByFromID(id);
     }
 
     @Override
-    public String insertReplay(Replay replay) {
-        replay.setUuid(UUID.randomUUID().toString());
-
+    public int insertReplay(Replay replay) {
         SimpleDateFormat dateFormat=new SimpleDateFormat();
         dateFormat.applyPattern("yyyy-MM-dd HH:mm:ss");
         Date date=new Date();
 
         replay.setCreateTime(dateFormat.format(date));
         if (replayMapper.insertReplay(replay)>0){
-            return  replay.getUuid();
-        }else
-        return null;
+            replay.setId(replayMapper.getContentId());
+            return  replay.getId();
+        }
+        return -1;
     }
 
     @Override
-    public int deleteReplay(String id) {
+    public int deleteReplay(int id) {
         return replayMapper.deleteReplay(id);
     }
 
     @Override
-    public int cancelDeleteReplay(String id) {
+    public int cancelDeleteReplay(int id) {
         return replayMapper.cancelDeleteReplay(id);
     }
 
